@@ -18,6 +18,7 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/backend/city")
 public class CityController {
+    // I love you 123
     @Autowired
     CityService cityService;
 
@@ -26,10 +27,10 @@ public class CityController {
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
-                      Model model){
+            Model model) {
         Object danhsach = cityService.getAll(name);
         model.addAttribute("list", danhsach);
-        return"/backend/city/listCity.html";
+        return "/backend/city/listCity.html";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -46,28 +47,28 @@ public class CityController {
         return "/backend/city/create.html";
     }
 
-
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String save(@Valid @ModelAttribute CityDto cityDto, BindingResult bindingResult,
-                     Model model,
-                     RedirectAttributes redirectAttributes) throws IOException {
+            Model model,
+            RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
 
-        if (bindingResult.hasErrors()) return "/backend/city/create.html";
+        if (bindingResult.hasErrors())
+            return "/backend/city/create.html";
         Long id = cityDto.getId();
 
-        //LƯU TÊN ẢNH
+        // LƯU TÊN ẢNH
         if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
-            cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(),"city\\"));
+            cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(), "city\\"));
         }
-        
+
         if (cityDto.getId() == null) {
-//            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
-//            if (produceDto != null) {
-//                model.addAttribute("message", "đã tồn tại");
-//                return "/products/create.html";
-//            }
+            // ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
+            // if (produceDto != null) {
+            // model.addAttribute("message", "đã tồn tại");
+            // return "/products/create.html";
+            // }
             cityService.add(cityDto);
             id = cityDto.getId();
             msg = " tao moi";
