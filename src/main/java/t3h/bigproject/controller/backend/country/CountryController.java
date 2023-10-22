@@ -56,6 +56,10 @@ public class CountryController {
         Object result = null;
         String msg = "";
 
+        int a = 1;
+        int b = 2;
+        int c = a + b;
+
         if (bindingResult.hasErrors()) return "/backend/country/create.html";
         Long id = countryDto.getId();
 
