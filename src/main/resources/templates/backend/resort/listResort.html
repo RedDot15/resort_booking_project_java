@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Danh sách Resort')">
+</head>
+<body>
+<th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+    <h1 style="color: red">
+        Danh sách Products</h1>
+    <a th:href="@{/backend/resort/new}"  class="btn btn-success">Tạo </a>
+    <br/>
+    <div class="table-responsive">
+        <table class="table table-striped" style="margin-top: 10px;">
+            <thead>
+            <th>ID</th>
+            <th>CITY_ID</th>
+            <th>NAME</th>
+            <th>INFO_HTML</th>
+            <th>INFO_MARKDOWN</th>
+            <th>POINT</th>
+            </thead>
+            <tbody class="table-group-divider">
+            <th:block th:each="resortDto : ${list}">
+                <tr th:object="${resortDto}">
+                    <!-- khi co th:object -->
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{cityId}"></td>
+                    <td th:text="*{name}"></td>
+                    <td th:text="*{infoHTML}"></td>
+                    <td th:text="*{infoMarkDown}"></td>
+                    <td th:text="*{point}"></td>
+                </tr>
+            </th:block>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--        <h1>[[${time}]]</h1>-->
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

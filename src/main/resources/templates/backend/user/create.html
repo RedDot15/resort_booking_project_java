@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Tạo mới user')">
+<body>
+    <th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+    <h1 style="color: red">
+        <th:block th:if="${userDto.id == null}">
+            Tạo mới User
+        </th:block>
+        <th:block th:unless="${userDto.id == null}">
+            Cập nhật User
+        </th:block>
+    </h1>
+    <h2 style="color: red" th:text="${message}"></h2>
+    <form th:action="@{/backend/user/save}" enctype="multipart/form-data"
+          th:object="${userDto}" th:method="post">
+        <input hidden th:field="*{id}"/>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="email" class="col-sm-2 col-form-label">email:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{email}" id="email"/>
+                </div>
+                <label th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></label>
+            </div>
+            <div class="col">
+                <label for="formFile" class="form-label">Avatar Image:</label>
+                <input onchange="readURL(this)" class="form-control" type="file" th:field="*{fileImage}" id="formFile">
+                <img id="imagePreview" src="#" alt="your image" width="100px"/>
+                <input hidden th:field="*{avatarImg}" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="password" class="col-sm-2 col-form-label">password:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{password}" id="password"/>
+                </div>
+                <label th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></label>
+            </div>
+            <div class="col">
+                <label for="rePassword" class="col-sm-2 col-form-label">rePassword:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{rePassword}" id="rePassword"/>
+                </div>
+                <label th:if="${#fields.hasErrors('rePassword')}" class="error" th:errors="*{rePassword}"></label>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="roleId" class="col-sm-2 col-form-label">roleId:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{roleId}" id="roleId"/>
+                </div>
+                <label th:if="${#fields.hasErrors('roleId')}" class="error" th:errors="*{roleId}"></label>
+            </div>
+            <div class="col">
+                <label for="genderId" class="col-sm-2 col-form-label">genderId:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{genderId}" id="genderId"/>
+                </div>
+                <label th:if="${#fields.hasErrors('genderId')}" class="error" th:errors="*{genderId}"></label>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="usercol" class="col-sm-2 col-form-label">usercol:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{usercol}" id="usercol"/>
+                </div>
+                <label th:if="${#fields.hasErrors('usercol')}" class="error" th:errors="*{usercol}"></label>
+            </div>
+            <div class="col">
+                <label for="phone" class="col-sm-2 col-form-label">phone:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{phone}" id="phone"/>
+                </div>
+                <label th:if="${#fields.hasErrors('phone')}" class="error" th:errors="*{phone}"></label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <th:block th:if="*{id == null}">
+                Tạo mới
+            </th:block>
+            <th:block th:unless="*{id == null}">
+                Cập nhật
+            </th:block>
+        </button>
+    </form>
+</div>
+</body>
+</html>
+<script>
+    function readURL(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function (e){
+                document.getElementById('imagePreview').setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>

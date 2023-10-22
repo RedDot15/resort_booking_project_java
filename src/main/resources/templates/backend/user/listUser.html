@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Danh sách Room')">
+</head>
+<body>
+<th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+    <h1 style="color: red">
+        Danh sách Products</h1>
+    <a th:href="@{/backend/user/new}"  class="btn btn-success">Tạo </a>
+    <br/>
+    <div class="table-responsive">
+        <table class="table table-striped" style="margin-top: 10px;">
+            <thead>
+            <th>ID</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>AVATAR IMAGE</th>
+            <th>PHONE</th>
+            <th>ROLE ID</th>
+            <th>GENDER ID</th>
+            <th>USERCOL</th>
+            </thead>
+            <tbody class="table-group-divider">
+            <th:block th:each="userDto : ${list}">
+                <tr th:object="${userDto}">
+                    <!-- khi co th:object -->
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{email}"></td>
+                    <td th:text="*{password}"></td>
+                    <td th:text="*{avatarImg}"></td>
+                    <td th:text="*{phone}"></td>
+                    <td th:text="*{roleId}"></td>
+                    <td th:text="*{genderId}"></td>
+                    <td th:text="*{usercol}"></td>
+                </tr>
+            </th:block>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--        <h1>[[${time}]]</h1>-->
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Tạo mới Resort')">
+</head>
+<body>
+<th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+  <h1 style="color: red">
+    <th:block th:if="${resortDto.id == null}">
+      Tạo mới Resort
+    </th:block>
+    <th:block th:unless="${resortDto.id == null}">
+      Cập nhật Resort
+    </th:block>
+  </h1>
+  <h2 style="color: red" th:text="${message}"></h2>
+  <form th:action="@{/backend/resort/save}" enctype="multipart/form-data"
+        th:object="${resortDto}" th:method="post">
+    <input hidden th:field="*{id}"/>
+    <div class="row mb-3">
+
+      <div class="col">
+        <label for="cityId" class="col-sm-2 col-form-label">city Id:</label>
+        <div class="col-sm-10">
+          <input class="form-control form-control-lg"  th:field="*{cityId}" id="cityId"/>
+        </div>
+        <label th:if="${#fields.hasErrors('cityId')}" class="error" th:errors="*{cityId}"></label>
+      </div>
+
+      <div class="col">
+        <label for="name" class="col-sm-2 col-form-label">name:</label>
+        <div class="col-sm-10">
+          <input class="form-control form-control-lg"  th:field="*{name}" id="name"/>
+        </div>
+        <label th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></label>
+      </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col">
+        <label for="infoHTML" class="col-sm-2 col-form-label">infoHTML:</label>
+        <div class="col-sm-10">
+          <input class="form-control form-control-lg"  th:field="*{infoHTML}" id="infoHTML"/>
+        </div>
+        <label th:if="${#fields.hasErrors('infoHTML')}" class="error" th:errors="*{infoHTML}"></label>
+      </div>
+
+      <div class="col">
+        <label for="infoMarkDown" class="col-sm-2 col-form-label">infoMarkDown:</label>
+        <div class="col-sm-10">
+          <input class="form-control form-control-lg"  th:field="*{infoMarkDown}" id="infoMarkDown"/>
+        </div>
+        <label th:if="${#fields.hasErrors('infoMarkDown')}" class="error" th:errors="*{infoMarkDown}"></label>
+      </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col">
+        <label for="point" class="col-sm-2 col-form-label">point:</label>
+        <div class="col-sm-10">
+          <input class="form-control form-control-lg"  th:field="*{point}" id="point"/>
+        </div>
+        <label th:if="${#fields.hasErrors('point')}" class="error" th:errors="*{point}"></label>
+      </div>
+      <div class="col">
+        <label for="formFileMultiple" class="form-label">All Image:</label>
+        <input onchange="readURL(this)" class="form-control" type="file" th:field="*{multipartFileList}" id="formFileMultiple" multiple>
+        <img id="imagePreview" src="#" alt="your image" width="100px"/>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col">
+        <label class="col-sm-2 col-form-label">extension:</label>
+        <th:block th:each="extension : ${extensionList}">
+          <div class="form-check" >
+            <input class="form-check-input" type="checkbox" th:field="${resortDto.extensionListId}"
+                   th:value="${extension.id}" th:text="${extension.name}">
+          </div>
+        </th:block>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      <th:block th:if="*{id == null}">
+        Tạo mới
+      </th:block>
+      <th:block th:unless="*{id == null}">
+        Cập nhật
+      </th:block>
+    </button>
+  </form>
+</div>
+
+</body>
+</html>
+
+
+<script src="/backend/js/bootstrap.bundle.min.js"></script>
+<script>
+  function readURL(input){
+    if (input.files && input.files[0]){
+      var reader = new FileReader();
+
+      reader.onload = function (e){
+        document.getElementById('imagePreview').setAttribute('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#datepicker').datepicker();
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#datepicker2').datepicker();
+  });
+</script>

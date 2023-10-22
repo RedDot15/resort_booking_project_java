@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Tạo mới Country')">
+</head>
+<body>
+<th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+    <h1 style="color: red">
+        <th:block th:if="${countryDto.id == null}">
+            Tạo mới City
+        </th:block>
+        <th:block th:unless="${countryDto.id == null}">
+            Cập nhật City
+        </th:block>
+    </h1>
+    <h2 style="color: red" th:text="${message}"></h2>
+    <form th:action="@{/backend/country/save}" enctype="multipart/form-data"
+          th:object="${countryDto}" th:method="post">
+        <input hidden th:field="*{id}"/>
+        <div class="row mb-3">
+
+            <div class="col">
+                <label for="name" class="col-sm-2 col-form-label">name:</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"  th:field="*{name}" id="name"/>
+                </div>
+                <label th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <th:block th:if="*{id == null}">
+                Tạo mới
+            </th:block>
+            <th:block th:unless="*{id == null}">
+                Cập nhật
+            </th:block>
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+<script src="/backend/js/bootstrap.bundle.min.js"></script>
+<script>
+    function readURL(input){
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function (e){
+                document.getElementById('imagePreview').setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+<script type="text/javascript">
+    $(function() {
+        $('#datepicker').datepicker();
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+        $('#datepicker2').datepicker();
+    });
+</script>
