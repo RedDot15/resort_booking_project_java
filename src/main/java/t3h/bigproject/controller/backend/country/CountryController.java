@@ -57,8 +57,6 @@ public class CountryController {
         String msg = "";
          
 
-        // My name is Quang Minh 123
-
 
         if (bindingResult.hasErrors()) return "/backend/country/create.html";
         Long id = countryDto.getId();

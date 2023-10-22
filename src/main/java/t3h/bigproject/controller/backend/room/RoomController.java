@@ -77,8 +77,7 @@ public class RoomController {
             result = roomService.update(roomDto);
             msg = "Cập nhật";
         }
-        
-        //Hello World
+
         if (Objects.equals(result, 0)) {
             model.addAttribute("message", msg + " fail");
             return "/backend/room/create.html";
