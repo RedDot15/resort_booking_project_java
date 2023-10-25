@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import t3h.bigproject.entities.GenderEntity;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +25,8 @@ public class UserDto {
     private Long roleId;
     private Long genderId;
     private String usercol;
+
+
 
     private String rePassword;
 

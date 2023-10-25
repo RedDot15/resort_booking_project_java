@@ -38,6 +38,7 @@ public class UserEntity implements UserDetails {
     @Basic
     @Column(name = "gender_id")
     private Long genderId;
+
     @Basic
     @Column(name = "usercol")
     private String usercol;
