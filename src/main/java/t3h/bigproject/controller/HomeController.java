@@ -15,8 +15,10 @@ public class HomeController {
 
     @GetMapping(value = {"home","/"})
     public String home(Model model){
-        Object danhsachCity = cityService.getAll(null);
-        model.addAttribute("listCity", danhsachCity);
+        Object danhsachCityVietNam = cityService.getAllByCountryId((long) 1);
+        model.addAttribute("listCityVietNam", danhsachCityVietNam);
+        Object danhsachCityQuocTe = cityService.getAllByCountryIdIsNot((long) 1);
+        model.addAttribute("listCityQuocTe", danhsachCityQuocTe);
         return "frontend/index.html";
     }
 
@@ -42,7 +44,7 @@ public class HomeController {
 
     @GetMapping(value = {"login"})
     public String login(Model model) {
-        return "login.html";
+        return "frontend/login.html";
     }
 
     @RequestMapping("/403")
