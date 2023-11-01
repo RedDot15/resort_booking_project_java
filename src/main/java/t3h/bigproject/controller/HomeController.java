@@ -15,6 +15,8 @@ public class HomeController {
 
     @GetMapping(value = {"home","/"})
     public String home(Model model){
+        Object danhsachCity = cityService.getAll(null);
+        model.addAttribute("listCity", danhsachCity);
         return "frontend/index.html";
     }
 
