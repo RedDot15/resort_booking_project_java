@@ -58,6 +58,24 @@ public class ResortService {
         return resortDtoList;
     }
 
+    public List<ResortDto> getAllByCityId(Long id){
+        List<ResortDto> resortDtoList = new ArrayList<>();
+        List<ResortEntity> resortEntityList;
+//        if(StringUtils.isEmpty(id)){
+//            resortEntityList = resortRepository.findAllByCityId();
+//        }
+//        else{
+        resortEntityList = resortRepository.findAllByCityId(id);
+        System.out.println();
+//        }
+        for (ResortEntity resortEntity : resortEntityList){
+            ResortDto resortDto = new ResortDto();
+            BeanUtils.copyProperties(resortEntity,resortDto);
+            resortDtoList.add(resortDto);
+        }
+        return resortDtoList;
+    }
+
     public ResortDto getDetailById(Long id){
         ResortDto resortDto =  new ResortDto();
         ResortEntity resortEntity = resortRepository.findFirstById(id);
@@ -98,7 +116,7 @@ public class ResortService {
             ) {
                 ResortimageEntity resortimageEntity = new ResortimageEntity();
                 resortimageEntity.setName(
-                        fileUtils.saveFile(multipartFile, "products\\" + resortDto.getId() + "\\detail\\"));
+                        fileUtils.saveFile(multipartFile, "resort\\" + resortDto.getId() + "\\detail\\"));
                 resortimageEntity.setResortId(resortDto.getId());
                 resortImageRepository.save(resortimageEntity);
             }
@@ -126,7 +144,7 @@ public class ResortService {
 //            throw new RuntimeException("Tạo mới lỗi");
 //        }
 
-        fileUtils.cleanDir("products\\" + resortDto.getId());// xóa ảnh trong thư mục
+        fileUtils.cleanDir("resort\\" + resortDto.getId());// xóa ảnh trong thư mục
         resortImageRepository.deleteAllByResortId(resortDto.getId());// xóa nhiều ảnh trong database
 
 //         Lưu nhiều ảnh
@@ -135,7 +153,7 @@ public class ResortService {
             ) {
                 ResortimageEntity resortimageEntity = new ResortimageEntity();
                 resortimageEntity.setName(
-                        fileUtils.saveFile(multipartFile, "products\\" + resortDto.getId() + "\\detail\\"));
+                        fileUtils.saveFile(multipartFile, "resort\\" + resortDto.getId() + "\\detail\\"));
                 resortimageEntity.setResortId(resortDto.getId());
                 resortImageRepository.save(resortimageEntity);
             }

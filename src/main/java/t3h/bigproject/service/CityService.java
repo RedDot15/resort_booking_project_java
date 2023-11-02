@@ -123,7 +123,7 @@ public class CityService {
         BeanUtils.copyProperties(cityDto, cityEntity);
         cityRepository.save(cityEntity);
 
-        fileUtils.cleanDir("products\\" + cityDto.getId());// xóa ảnh trong thư mục
+        fileUtils.cleanDir("city\\" + cityDto.getId());// xóa ảnh trong thư mục
 //        productImagesRepository.deleteAllByProductId(cityDto.getId());// xóa nhiều ảnh trong database
         try {
             saveFile(cityDto);
