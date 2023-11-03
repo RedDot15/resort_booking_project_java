@@ -43,6 +43,40 @@ public class CityService {
         return cityDtoList;
     }
 
+    public List<CityDto> getAllByCountryId(Long countryId){
+        List<CityDto> cityDtoList = new ArrayList<>();
+        List<CityEntity> cityEntityList;
+        if(StringUtils.isEmpty(countryId)){
+            cityEntityList = cityRepository.findAllByCountryId(countryId);
+        }
+        else{
+            cityEntityList = cityRepository.findAllByCountryId(countryId);
+        }
+        for (CityEntity cityEntity : cityEntityList){
+            CityDto cityDto = new CityDto();
+            BeanUtils.copyProperties(cityEntity,cityDto);
+            cityDtoList.add(cityDto);
+        }
+        return cityDtoList;
+    }
+
+    public List<CityDto> getAllByCountryIdIsNot(Long countryId){
+        List<CityDto> cityDtoList = new ArrayList<>();
+        List<CityEntity> cityEntityList;
+        if(StringUtils.isEmpty(countryId)){
+            cityEntityList = cityRepository.findAllByCountryIdIsNot(countryId);
+        }
+        else{
+            cityEntityList = cityRepository.findAllByCountryIdIsNot(countryId);
+        }
+        for (CityEntity cityEntity : cityEntityList){
+            CityDto cityDto = new CityDto();
+            BeanUtils.copyProperties(cityEntity,cityDto);
+            cityDtoList.add(cityDto);
+        }
+        return cityDtoList;
+    }
+
     public CityDto getDetailById(Long id){
         CityDto cityDto =  new CityDto();
         CityEntity cityEntity = cityRepository.findFirstById(id);
@@ -89,7 +123,7 @@ public class CityService {
         BeanUtils.copyProperties(cityDto, cityEntity);
         cityRepository.save(cityEntity);
 
-        fileUtils.cleanDir("products\\" + cityDto.getId());// xóa ảnh trong thư mục
+        fileUtils.cleanDir("city\\" + cityDto.getId());// xóa ảnh trong thư mục
 //        productImagesRepository.deleteAllByProductId(cityDto.getId());// xóa nhiều ảnh trong database
         try {
             saveFile(cityDto);

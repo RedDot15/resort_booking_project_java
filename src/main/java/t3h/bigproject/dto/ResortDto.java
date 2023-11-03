@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import t3h.bigproject.entities.ResortimageEntity;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +20,11 @@ public class ResortDto {
     private String name;
     private String infoHTML;
     private String infoMarkDown;
-    private Long point;
+    private Integer point;
 
     private ArrayList<Long> extensionListId;
 
     private List<MultipartFile> multipartFileList;
+
+    List<ResortimageEntity> resortimageEntityList;
 }

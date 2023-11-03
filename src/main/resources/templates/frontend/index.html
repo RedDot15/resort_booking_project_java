@@ -283,128 +283,23 @@
                     slides-per-view="4"
                     centered-slides="false"
                 >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phuquoc-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Phú Quốc
-                                </p>
-                                <p>398 khách sạn</p>
+                    <th:block th:each="cityDto : ${listCityVietNam}" th:object="${cityDto}">
+                        <swiper-slide>
+                            <div class="relative">
+                                <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                />
+                                <div
+                                        class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p class="text-[34px] font-semibold" th:text="*{name}">
+                                    </p>
+                                    <p>398 khách sạn</p>
+                                </div>
                             </div>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/dalat-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Đà Lạt</p>
-                                <p>509 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/quynhon-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Quy Nhơn
-                                </p>
-                                <p>118 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/vungtau-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Vũng Tàu
-                                </p>
-                                <p>192 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/nhatrang-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Nha Trang
-                                </p>
-                                <p>428 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/danang-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Đà Nẵng</p>
-                                <p>647 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phanthiet-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Phan Thiết
-                                </p>
-                                <p>120 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phuyen-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Phú Yên</p>
-                                <p>13 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
+                        </swiper-slide>
+                    </th:block>
                 </swiper-container>
             </div>
 
@@ -414,72 +309,34 @@
                     Điểm đến yêu thích nước ngoài
                 </h1>
                 <p class="text-[20px]">Bao la thế giới. Bốn bể là nhà</p>
-                <div class="mt-[10px] grid grid-cols-3 gap-[16px]">
-                    <div class="relative col-start-1 col-end-3">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/04/17/11/kl-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">
-                                Kuala Lumpur
-                            </p>
-                            <p>1033 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/cruise-terminal-banner-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Singapore</p>
-                            <p>540 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/image-62d0243c31a586-52735367-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">
-                                San Francisco
-                            </p>
-                            <p>382 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/photo-1624138784614-87fd1b6528f8-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Sydney</p>
-                            <p>290 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/02/13/17/maldives-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Maldives</p>
-                            <p>614 khách sạn</p>
-                        </div>
-                    </div>
-                </div>
+                <swiper-container
+                        class="mt-[10px]"
+                        pagination="true"
+                        pagination-clickable="true"
+                        space-between="16"
+                        autoplay-delay="2500"
+                        autoplay-disable-on-interaction="false"
+                        slides-per-view="4"
+                        centered-slides="false"
+                >
+                    <th:block th:each="cityDto : ${listCityQuocTe}" th:object="${cityDto}">
+                        <swiper-slide>
+                            <div class="relative">
+                                <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                />
+                                <div
+                                        class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p class="text-[34px] font-semibold" th:text="*{name}">
+                                    </p>
+                                    <p>398 khách sạn</p>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </th:block>
+                </swiper-container>
             </div>
         </div>
 

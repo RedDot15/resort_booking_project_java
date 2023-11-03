@@ -59,9 +59,9 @@ public class CityController {
         Long id = cityDto.getId();
 
         // LƯU TÊN ẢNH
-        if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
-            cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(), "city\\"));
-        }
+//        if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
+//            cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(), "city\\"));
+//        }
 
         if (cityDto.getId() == null) {
             // ProductsDto produceDto = productsService.getDetailById(productsDto.getId());

@@ -7,4 +7,6 @@ import t3h.bigproject.entities.ResortimageEntity;
 public interface ResortImageRepository extends JpaRepository<ResortimageEntity, Long> {
     @Modifying
     void deleteAllByResortId(Long resortId);
+
+    ResortimageEntity findFirstByResortId(Long id);
 }

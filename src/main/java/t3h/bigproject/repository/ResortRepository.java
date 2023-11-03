@@ -9,5 +9,8 @@ import java.util.List;
 public interface ResortRepository extends JpaRepository<ResortEntity, Long> {
     List<ResortEntity> findAllByName(String name);
 
+    List<ResortEntity> findAllByCityId(Long id);
+
     ResortEntity findFirstById(Long id);
+
 }
