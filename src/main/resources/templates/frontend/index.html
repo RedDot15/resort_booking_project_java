@@ -283,18 +283,23 @@
                     slides-per-view="4"
                     centered-slides="false"
                 >
-                    <th:block th:each="cityDto : ${listCityVietNam}" th:object="${cityDto}">
+                    <th:block
+                        th:each="cityDto : ${listCityVietNam}"
+                        th:object="${cityDto}"
+                    >
                         <swiper-slide>
                             <div class="relative">
                                 <img
-                                        class="h-[296px] object-cover object-center brightness-[0.8]"
-                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    class="h-[296px] object-cover object-center brightness-[0.8]"
+                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
                                 />
                                 <div
-                                        class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
                                 >
-                                    <p class="text-[34px] font-semibold" th:text="*{name}">
-                                    </p>
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
                                     <p>398 khách sạn</p>
                                 </div>
                             </div>
@@ -310,27 +315,32 @@
                 </h1>
                 <p class="text-[20px]">Bao la thế giới. Bốn bể là nhà</p>
                 <swiper-container
-                        class="mt-[10px]"
-                        pagination="true"
-                        pagination-clickable="true"
-                        space-between="16"
-                        autoplay-delay="2500"
-                        autoplay-disable-on-interaction="false"
-                        slides-per-view="4"
-                        centered-slides="false"
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="16"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
+                    slides-per-view="4"
+                    centered-slides="false"
                 >
-                    <th:block th:each="cityDto : ${listCityQuocTe}" th:object="${cityDto}">
+                    <th:block
+                        th:each="cityDto : ${listCityQuocTe}"
+                        th:object="${cityDto}"
+                    >
                         <swiper-slide>
                             <div class="relative">
                                 <img
-                                        class="h-[296px] object-cover object-center brightness-[0.8]"
-                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    class="h-[296px] object-cover object-center brightness-[0.8]"
+                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
                                 />
                                 <div
-                                        class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
                                 >
-                                    <p class="text-[34px] font-semibold" th:text="*{name}">
-                                    </p>
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
                                     <p>398 khách sạn</p>
                                 </div>
                             </div>
@@ -354,12 +364,16 @@
                         <!-- Grid column -->
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Company name
+                                Về iVIVU.com
                             </h6>
                             <p>
-                                Here you can use rows and columns to organize
-                                your footer content. Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit.
+                                <a class="text-white">Chúng tôi</a>
+                            </p>
+                            <p>
+                                <a class="text-white">iVIVU Blog</a>
+                            </p>
+                            <p>
+                                <a class="text-white">PMS - Miễn phí</a>
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -369,19 +383,16 @@
                         <!-- Grid column -->
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Products
+                                Thông Tin Cần Biết
                             </h6>
                             <p>
-                                <a class="text-white">MDBootstrap</a>
+                                <a class="text-white">Điều kiện & Điều khoản</a>
                             </p>
                             <p>
-                                <a class="text-white">MDWordPress</a>
+                                <a class="text-white">Quy chế hoạt động</a>
                             </p>
                             <p>
-                                <a class="text-white">BrandFlow</a>
-                            </p>
-                            <p>
-                                <a class="text-white">Bootstrap Angular</a>
+                                <a class="text-white">Câu hỏi thường gặp</a>
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -394,20 +405,18 @@
                         <!-- Grid column -->
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Contact
+                                Liên lạc
                             </h6>
                             <p>
-                                <i class="fas fa-home mr-3"></i> New York, NY
-                                10012, US
+                                <i class="fas fa-home mr-3"></i> P308, Tầng 3,
+                                tòa nhà The One, số 2 Chương Dương Độ, P.Chương
+                                Dương, Q.Hoàn Kiếm, Hà Nội
                             </p>
                             <p>
                                 <i class="fas fa-envelope mr-3"></i>
-                                info@gmail.com
+                                ivivu@gmail.com
                             </p>
-                            <p>
-                                <i class="fas fa-phone mr-3"></i> + 01 234 567
-                                88
-                            </p>
+                            <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
                             <p>
                                 <i class="fas fa-print mr-3"></i> + 01 234 567
                                 89
@@ -425,7 +434,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #3b5998"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-facebook-f"></i
                             ></a>
@@ -434,7 +443,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #55acee"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-twitter"></i
                             ></a>
@@ -443,7 +452,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #dd4b39"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-google"></i
                             ></a>
@@ -452,7 +461,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #ac2bac"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-instagram"></i
                             ></a>
@@ -461,7 +470,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #0082ca"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-linkedin-in"></i
                             ></a>
@@ -469,7 +478,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #333333"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-github"></i
                             ></a>
@@ -486,10 +495,8 @@
                 class="text-center p-3"
                 style="background-color: rgba(0, 0, 0, 0.2)"
             >
-                © 2020 Copyright:
-                <a class="text-white" href="https://mdbootstrap.com/"
-                    >MDBootstrap.com</a
-                >
+                © 2023 Copyright:
+                <a class="text-white" href="/">Nhóm 1</a>
             </div>
             <!-- Copyright -->
         </footer>
