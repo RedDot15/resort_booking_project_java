@@ -33,6 +33,4 @@ public class ResortEntity {
     @OneToMany()
     @JoinColumn(name = "resort_id")
     List<ResortimageEntity> resortimageEntityList;
-
-
 }

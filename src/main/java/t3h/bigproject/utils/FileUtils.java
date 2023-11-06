@@ -34,7 +34,7 @@ public class FileUtils {
     }
 
     public void cleanDir(String dir) {
-        Path dirPath = Paths.get(dir);
+        Path dirPath = Paths.get(FOLDER + "\\" + dir);
         try {
             Files.list(dirPath).forEach(file -> {
                 if (!Files.isDirectory(file)) {

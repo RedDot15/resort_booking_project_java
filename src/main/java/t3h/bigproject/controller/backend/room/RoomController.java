@@ -59,10 +59,6 @@ public class RoomController {
         if (bindingResult.hasErrors()) return "/backend/room/create.html";
         Long id = roomDto.getId();
 
-        //LƯU TÊN ẢNH
-        if (roomDto.getFileImage() != null && !roomDto.getFileImage().isEmpty()) {
-            roomDto.setImageName(fileUtils.saveFile(roomDto.getFileImage(),"room\\"));
-        }
         
         if (roomDto.getId() == null) {
 //            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
