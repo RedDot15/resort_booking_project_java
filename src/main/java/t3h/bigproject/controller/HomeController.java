@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import t3h.bigproject.service.CityService;
-import t3h.bigproject.service.ExtensionService;
-import t3h.bigproject.service.ResortImageService;
-import t3h.bigproject.service.ResortService;
+import t3h.bigproject.service.*;
 
 @Controller
 public class HomeController {
@@ -26,6 +23,12 @@ public class HomeController {
 
     @Autowired
     ResortImageService resortImageService;
+
+    @Autowired
+    RoomService roomService;
+
+    @Autowired
+    ResortExtensionService resortExtensionService;
 
     @GetMapping(value = {"home","/"})
     public String home(Model model){
@@ -48,8 +51,15 @@ public class HomeController {
         return "frontend/city.html";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/resort")
-    public String resort(Model model){
+    @RequestMapping(method = RequestMethod.GET, value = "/resort/{id}")
+    public String resort(@PathVariable Long id, Model model){
+        Object resortDto = resortService.getDetailById(id);
+        model.addAttribute("resortDto", resortDto);
+        Object roomDtoList = roomService.getAllByResortId(id);
+        model.addAttribute("roomDtoList", roomDtoList);
+        Object resortExtensionList = resortExtensionService.getAllByResortId(id);
+        model.addAttribute("extensionList", resortExtensionList);
+
         return "frontend/resort.html";
     }
 

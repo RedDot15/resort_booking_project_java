@@ -97,7 +97,7 @@ public class ResortService {
         for (Long x : resortDto.getExtensionListId()){
             ResortExtensionEntity resortExtensionEntity = new ResortExtensionEntity();
             resortExtensionEntity.setResortId(resortDto.getId());
-            resortExtensionEntity.setExtensionId(x);
+            resortExtensionEntity.setExtensionEntityId(x);
             resortExtensionRepository.save(resortExtensionEntity);
         }
 
@@ -126,6 +126,7 @@ public class ResortService {
 
     public ResortDto update(ResortDto resortDto) throws IOException {
         ResortEntity resortEntity = resortRepository.findById(resortDto.getId()).get();
+        resortDto.setResortimageEntityList(resortEntity.getResortimageEntityList());
         BeanUtils.copyProperties(resortDto, resortEntity);
         resortRepository.save(resortEntity);
 
@@ -134,7 +135,7 @@ public class ResortService {
         for (Long x : resortDto.getExtensionListId()){
             ResortExtensionEntity resortExtensionEntity = new ResortExtensionEntity();
             resortExtensionEntity.setResortId(resortDto.getId());
-            resortExtensionEntity.setExtensionId(x);
+            resortExtensionEntity.setExtensionEntityId(x);
             resortExtensionRepository.save(resortExtensionEntity);
         }
 
@@ -144,7 +145,7 @@ public class ResortService {
 //            throw new RuntimeException("Tạo mới lỗi");
 //        }
 
-        fileUtils.cleanDir("resort\\" + resortDto.getId());// xóa ảnh trong thư mục
+        fileUtils.cleanDir("resort\\" + resortDto.getId() + "\\detail\\");// xóa ảnh trong thư mục
         resortImageRepository.deleteAllByResortId(resortDto.getId());// xóa nhiều ảnh trong database
 
 //         Lưu nhiều ảnh

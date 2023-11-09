@@ -45,6 +45,23 @@ public class RoomService {
         return roomDtoList;
     }
 
+    public List<RoomDto> getAllByResortId(Long id){
+        List<RoomDto> roomDtoList = new ArrayList<>();
+        List<RoomEntity> roomEntityList;
+        if(StringUtils.isEmpty(id)){
+            roomEntityList = roomRepository.findAllByResortId(null);
+        }
+        else{
+            roomEntityList = roomRepository.findAllByResortId(id);
+        }
+        for (RoomEntity roomEntity : roomEntityList){
+            RoomDto roomDto = new RoomDto();
+            BeanUtils.copyProperties(roomEntity,roomDto);
+            roomDtoList.add(roomDto);
+        }
+        return roomDtoList;
+    }
+
     public RoomDto getDetailById(Long id){
         RoomDto roomDto =  new RoomDto();
         RoomEntity roomEntity = roomRepository.findFirstById(id);

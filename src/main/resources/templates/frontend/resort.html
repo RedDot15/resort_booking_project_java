@@ -363,8 +363,8 @@
                     <!-- Resort and buy -->
                     <div class="flex justify-between">
                         <div>
-                            <p class="font-bold text-[20px] text-[#003c71]">
-                                Vinpearl Wonderworld Phú Quốc
+                            <p class="font-bold text-[20px] text-[#003c71]"
+                                th:text="${resortDto.name}">
                             </p>
                             <div class="flex items-center gap-[20px]">
                                 <div class="flex gap-[3px]">
@@ -414,56 +414,14 @@
                         space-between="10"
                         navigation="true"
                     >
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-1.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-2.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-3.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-4.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-5.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-6.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-7.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-8.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-9.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-10.jpg"
-                            />
-                        </swiper-slide>
+                        <th:block th:each="resortImage : ${resortDto.resortimageEntityList}" th:object="${resortImage}">
+                            <swiper-slide>
+                                <img
+                                        th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
+                                />
+                            </swiper-slide>
+                        </th:block>
+
                     </swiper-container>
                     <swiper-container
                         class="mySwiper2"
@@ -473,56 +431,14 @@
                         free-mode="true"
                         watch-slides-progress="true"
                     >
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-1.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-2.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-3.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-4.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-5.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-6.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-7.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-8.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-9.jpg"
-                            />
-                        </swiper-slide>
-                        <swiper-slide>
-                            <img
-                                src="https://swiperjs.com/demos/images/nature-10.jpg"
-                            />
-                        </swiper-slide>
+                        <th:block th:each="resortImage : ${resortDto.resortimageEntityList}" th:object="${resortImage}">
+                            <swiper-slide>
+                                <img
+                                        th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
+                                />
+                            </swiper-slide>
+                        </th:block>
+
                     </swiper-container>
 
                     <!-- Table -->
@@ -545,399 +461,89 @@
                             </th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="w-[50%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-bold text-[#26bed6]"
-                                        >
-                                            Two Bedroom Pool Villa
-                                        </p>
-                                        <img
-                                            class="mt-[8px] w-full h-[310px] object-cover"
-                                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                        />
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-semibold text-[#26bed6]"
-                                        >
-                                            6.103.000 VND
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <div>
-                                            <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
+                            <th:block th:each="roomDto : ${roomDtoList}" th:object="${roomDto}">
+                                <tr>
+                                    <td class="w-[50%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <p
+                                                class="text-[22px] font-bold text-[#26bed6]"
+                                                th:text="*{name}"
                                             >
-                                                Đặt ngay
-                                            </div>
-                                            <div
-                                                class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
-                                            >
-                                                1 villa
-                                            </div>
+                                            </p>
+                                            <img
+                                                class="mt-[8px] w-full h-[310px] object-cover"
+                                                th:src="@{/image/room/} + *{id} + @{/} + *{imageName}"
+                                                src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
+                                            />
                                         </div>
-                                        <div
-                                            class="flex items-center justify-center mt-[8px]"
-                                        >
-                                            <i
-                                                class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                            ></i>
-                                            <p class="ml-[4px]">
-                                                Xác nhận ngay
+                                    </td>
+                                    <td class="w-[25%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <p
+                                                class="text-[22px] font-semibold text-[#26bed6]"
+                                                th:text="*{price} + ' VND'"
+                                            >
                                             </p>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-[50%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-bold text-[#26bed6]"
-                                        >
-                                            Two Bedroom Pool Villa
-                                        </p>
-                                        <img
-                                            class="mt-[8px] w-full h-[310px] object-cover"
-                                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                        />
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-semibold text-[#26bed6]"
-                                        >
-                                            6.103.000 VND
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <div>
-                                            <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                            >
-                                                Đặt ngay
+                                    </td>
+                                    <td class="w-[25%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <div>
+                                                <div
+                                                    class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
+                                                >
+                                                    Đặt ngay
+                                                </div>
+                                                <div
+                                                    class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
+                                                >
+                                                    1 villa
+                                                </div>
                                             </div>
                                             <div
-                                                class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
+                                                class="flex items-center justify-center mt-[8px]"
                                             >
-                                                1 villa
+                                                <i
+                                                    class="fa-sharp fa-solid fa-bolt text-[#F79321]"
+                                                ></i>
+                                                <p class="ml-[4px]">
+                                                    Xác nhận ngay
+                                                </p>
                                             </div>
                                         </div>
-                                        <div
-                                            class="flex items-center justify-center mt-[8px]"
-                                        >
-                                            <i
-                                                class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                            ></i>
-                                            <p class="ml-[4px]">
-                                                Xác nhận ngay
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-[50%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-bold text-[#26bed6]"
-                                        >
-                                            Two Bedroom Pool Villa
-                                        </p>
-                                        <img
-                                            class="mt-[8px] w-full h-[310px] object-cover"
-                                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                        />
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-semibold text-[#26bed6]"
-                                        >
-                                            6.103.000 VND
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <div>
-                                            <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                            >
-                                                Đặt ngay
-                                            </div>
-                                            <div
-                                                class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
-                                            >
-                                                1 villa
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex items-center justify-center mt-[8px]"
-                                        >
-                                            <i
-                                                class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                            ></i>
-                                            <p class="ml-[4px]">
-                                                Xác nhận ngay
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-[50%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-bold text-[#26bed6]"
-                                        >
-                                            Two Bedroom Pool Villa
-                                        </p>
-                                        <img
-                                            class="mt-[8px] w-full h-[310px] object-cover"
-                                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                        />
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-semibold text-[#26bed6]"
-                                        >
-                                            6.103.000 VND
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <div>
-                                            <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                            >
-                                                Đặt ngay
-                                            </div>
-                                            <div
-                                                class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
-                                            >
-                                                1 villa
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex items-center justify-center mt-[8px]"
-                                        >
-                                            <i
-                                                class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                            ></i>
-                                            <p class="ml-[4px]">
-                                                Xác nhận ngay
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-[50%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-bold text-[#26bed6]"
-                                        >
-                                            Two Bedroom Pool Villa
-                                        </p>
-                                        <img
-                                            class="mt-[8px] w-full h-[310px] object-cover"
-                                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                        />
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <p
-                                            class="text-[22px] font-semibold text-[#26bed6]"
-                                        >
-                                            6.103.000 VND
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="w-[25%]">
-                                    <div class="py-[12px] px-[8px]">
-                                        <div>
-                                            <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                            >
-                                                Đặt ngay
-                                            </div>
-                                            <div
-                                                class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
-                                            >
-                                                1 villa
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex items-center justify-center mt-[8px]"
-                                        >
-                                            <i
-                                                class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                            ></i>
-                                            <p class="ml-[4px]">
-                                                Xác nhận ngay
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
 
                     <!-- Extension -->
                     <div>
-                        <p class="font-semibold text-[20px] text-[#003C71]">
-                            Tiện ích của Vinpearl Wonderworld Phú Quốc
+                        <p class="font-semibold text-[20px] text-[#003C71]"
+                            th:text="'Tiện ích của ' + ${resortDto.name}">
                         </p>
                         <div class="grid grid-cols-3 gap-[8px] mt-[10px]">
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                                ></i>
-                                <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                >
-                                    Bãi đậu xe ô tô tại khách sạn
-                                </p>
-                            </div>
+                            <th:block th:each="extension : ${extensionList}" th:object="${extension}">
+                                <div class="flex items-center">
+                                    <i
+                                            class="fa-solid fa-circle text-[8px] text-[#26BED6]"
+                                    ></i>
+                                    <p
+                                            class="ml-[4px] text-[#23527c] leading-[1.25]"
+                                            th:text="*{extensionEntity.name}"
+                                    >
+                                    </p>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
 
                     <!-- Detail Markdown -->
                     <div class="mt-[46px]">
-                        <p class="font-semibold text-[20px] text-[#003C71]">
-                            Thông tin Vinpearl Wonderworld Phú Quốc
+                        <p class="font-semibold text-[20px] text-[#003C71]" th:text="'Thông tin ' + ${resortDto.name}">
                         </p>
-                        <p class="mt-[10px]">
-                            Tọa lạc tại đảo Phú Quốc, liền kề với Bãi Dài,
-                            Vinpearl Wonderworld Phú Quốc là khu nghỉ 5 sao,
-                            chuyên cung cấp biệt thự nghỉ dưỡng, cùng các tiện
-                            ích như nhà hàng, hồ bơi riêng, phòng gym,... Thiết
-                            kế của những biệt thự tại Vinpearl Wonderworld Phú
-                            Quốc tôn vinh sự riêng tư với những khoảng sân vườn
-                            rộng và khoáng đạt bên ngoài khung cửa. Khu nghỉ
-                            dưỡng sở hữu bãi biển riêng và địa hình tiếp giáp
-                            sân golf trong rừng nguyên sinh độc đáo mang đến
-                            nhiều trải nghiệm nghỉ dưỡng cho mỗi du khách yêu
-                            thích thể thao và khám phá thiên nhiên. Ngoài ra,
-                            với vị trí đắc địa liền kề Công viên giải trí
-                            VinWonders, quý khách có thể dễ dàng nghỉ dưỡng kết
-                            hợp vui chơi. Cũng như hòa mình vào hàng trăm tiện
-                            ích khác của Phú Quốc United Center.
+                        <p class="mt-[10px]" th:text="${resortDto.infoHTML}">
+
                         </p>
                     </div>
                 </div>

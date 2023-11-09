@@ -43,6 +43,8 @@ public class ResortController {
     String detail(@PathVariable Long id, Model model) {
         Object p = resortService.getDetailById(id);
         model.addAttribute("resortDto", p);
+        List<ExtensionDto> extensionDtoList = extensionService.getAll(null);
+        model.addAttribute("extensionList", extensionDtoList);
         return "/backend/resort/create.html";
     }
 
