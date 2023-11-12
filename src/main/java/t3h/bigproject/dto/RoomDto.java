@@ -14,6 +14,7 @@ public class RoomDto {
     private String imageName;
     private Integer price;
     private Long resortId;
+    private String status;
 
     MultipartFile fileImage;
 }

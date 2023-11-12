@@ -97,10 +97,12 @@
                     class="col-start-1 col-end-5 py-[16px] px-[16px] rounded-[6px] bg-white"
                 >
                     <!-- Form -->
-                    <form>
+                    <form th:action="@{/booking/} + ${roomDto.id}"
+                          th:object="${billDto}" th:method="post">
                         <p class="font-bold text-[20px] text-[#003c71]">
                             Thông tin người đặt
                         </p>
+                        <input hidden th:value="${roomid}" name="roomId" />
                         <p class="text-[12px] text-[#818180] mt-[4px] italic">
                             Vui lòng điền đầy đủ thông tin
                         </p>
@@ -117,7 +119,8 @@
                                         type="radio"
                                         id="male-check"
                                         name="gender"
-                                        checked
+                                        th:field="*{gender}"
+                                        th:value="male"
                                     />
                                     <label
                                         class="form-check-label"
@@ -132,6 +135,8 @@
                                         type="radio"
                                         id="female-check"
                                         name="gender"
+                                        th:field="*{gender}"
+                                        th:value="female"
                                     />
                                     <label
                                         class="form-check-label"
@@ -150,7 +155,7 @@
                                     Họ và tên đầy đủ:
                                 </p>
                                 <div class="w-[80%]">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control" th:field="*{name}" />
                                 </div>
                             </div>
                             <div
@@ -162,7 +167,7 @@
                                     Điện thoại:
                                 </p>
                                 <div class="w-[80%]">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control" th:field="*{phone}" />
                                 </div>
                             </div>
                             <div
@@ -174,7 +179,7 @@
                                     Email:
                                 </p>
                                 <div class="w-[80%]">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control" th:field="*{email}"/>
                                 </div>
                             </div>
                         </div>
@@ -189,6 +194,7 @@
                                 class="form-control"
                                 placeholder="Bạn có điều gì muốn nói không?"
                                 id="floatingTextarea"
+                                th:field="*{info}"
                             ></textarea>
                             <label for="floatingTextarea"
                                 >Bạn có điều gì muốn nói không?</label
@@ -214,7 +220,7 @@
                             <div class="w-[30%]">
                                 <img
                                     class="w-full h-full object-cover"
-                                    src="https://cdn1.ivivu.com/images/2023/05/23/19/5a3f26dc___145c55____horizontal-374x280.webp?o=jpg"
+                                    th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + ${resortImageDto.name}"
                                 />
                             </div>
                             <div
@@ -222,8 +228,8 @@
                             >
                                 <p
                                     class="font-semibold text-[18px] text-[#003c71] line-clamp-2"
+                                    th:text="${resortDto.name}"
                                 >
-                                    Vinpearl Wonderworld Phú Quốc
                                 </p>
                                 <div class="flex items-center">
                                     <div class="flex gap-[3px]">
@@ -259,11 +265,11 @@
                         </p>
                         <img
                             class="mt-[10px] w-full h-[262px] object-cover"
-                            src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
+                            th:src="@{/image/room/} + ${roomDto.id} + @{/} + ${roomDto.imageName}"
                         />
                         <div class="px-[10px] py-[16px] bg-[#F9FAFA]">
-                            <p class="font-semibold text-[18px] text-[#003c71]">
-                                Two Bedroom Pool Villa
+                            <p class="font-semibold text-[18px] text-[#003c71]"
+                                th:text="${roomDto.name}">
                             </p>
                         </div>
                     </div>

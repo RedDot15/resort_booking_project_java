@@ -1,13 +1,19 @@
-package t3h.bigproject.controller;
+package t3h.bigproject.controller.frontend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+import t3h.bigproject.dto.BillDto;
+import t3h.bigproject.dto.ResortDto;
+import t3h.bigproject.dto.ResortImageDto;
+import t3h.bigproject.dto.RoomDto;
 import t3h.bigproject.service.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -29,6 +35,10 @@ public class HomeController {
 
     @Autowired
     ResortExtensionService resortExtensionService;
+
+    @Autowired
+    BillService billService;
+
 
     @GetMapping(value = {"home","/"})
     public String home(Model model){
@@ -63,10 +73,6 @@ public class HomeController {
         return "frontend/resort.html";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/booking")
-    public String booking(Model model){
-        return "frontend/booking.html";
-    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/thankyou")
     public String thankyou(Model model){
@@ -79,7 +85,8 @@ public class HomeController {
     }
 
     @RequestMapping("/403")
-    public String accessDenied() {
+    public String accessDenied(Model model) {
+        model.addAttribute("message","Bạn không có quyền truy cập");
         return "errors/403.html";
     }
 }
