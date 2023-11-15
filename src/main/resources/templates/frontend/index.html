@@ -37,8 +37,73 @@
                 background-color: azure;
             }
         </style>
+        <!-- Font Awesome -->
+        <link
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+                rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+                href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+                rel="stylesheet"
+        />
     </head>
     <body>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-toggle="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container h-100">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                            <div class="card shadow-2-strong">
+                                <form action="/doLogin" method="post">
+                                    <div class="card-body py-3 px-3 text-center">
+                                        <div class="flex flex-col items-center">
+                                            <img class="w-[80px]" src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"/>
+                                            <h3 class="mt-2 mb-5">Sign in</h3>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"/>
+                                            <label class="form-label" for="typeEmailX-2">Email</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password" />
+                                            <label class="form-label" for="typePasswordX-2">Password</label>
+                                        </div>
+
+                                        <!-- Checkbox -->
+                                        <div class="form-check d-flex justify-content-start mb-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                                            <label class="form-check-label" for="form1Example3"> Remember password </label>
+                                        </div>
+
+                                        <button class="btn btn-primary btn-lg btn-block bg-[#3b5998]" type="submit">Login</button>
+
+                                        <hr class="my-4">
+
+                                        <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
+                                                type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+                                        <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
+                                                type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
         <!-- Header -->
         <header class="p-2 bg-[#003C71] text-white">
             <div class="max-w-[1200px] mx-auto">
@@ -58,23 +123,8 @@
                         class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     >
                         <li>
-                            <a href="/" class="nav-link px-2 text-secondary"
+                            <a href="/" class="nav-link px-2 text-white"
                                 >Khách sạn</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Tours</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé máy bay</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé vui chơi</a
                             >
                         </li>
                     </ul>
@@ -82,15 +132,20 @@
                         <button
                             type="button"
                             class="btn me-2 bg-danger text-white"
+                            data-mdb-toggle="modal" data-mdb-target="#exampleModal"
                         >
                             Login
                         </button>
-                        <button
-                            type="button"
-                            class="btn btn-warning text-white"
-                        >
-                            Sign-up
-                        </button>
+                        <a th:href="@{/signup}">
+                            <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
+                            >
+                                Sign-up
+                            </button>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -289,10 +344,13 @@
                     >
                         <swiper-slide>
                             <div class="relative">
-                                <img
-                                    class="h-[296px] object-cover object-center brightness-[0.8]"
-                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                                />
+                                <a th:href="@{/loggedin/city/} + *{id}">
+                                    <img
+                                            class="h-[296px] object-cover object-center brightness-[0.8]"
+                                            th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
                                 <div
                                     class="absolute text-white bottom-0 px-[15px] py-[15px]"
                                 >
@@ -300,7 +358,7 @@
                                         class="text-[34px] font-semibold"
                                         th:text="*{name}"
                                     ></p>
-                                    <p>398 khách sạn</p>
+                                    <p>5 khách sạn</p>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -330,10 +388,13 @@
                     >
                         <swiper-slide>
                             <div class="relative">
-                                <img
-                                    class="h-[296px] object-cover object-center brightness-[0.8]"
-                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                                />
+                                <a th:href="@{/loggedin/city/} + *{id}">
+                                    <img
+                                            class="h-[296px] object-cover object-center brightness-[0.8]"
+                                            th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
                                 <div
                                     class="absolute text-white bottom-0 px-[15px] py-[15px]"
                                 >
@@ -341,7 +402,7 @@
                                         class="text-[34px] font-semibold"
                                         th:text="*{name}"
                                     ></p>
-                                    <p>398 khách sạn</p>
+                                    <p>5 khách sạn</p>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -505,3 +566,7 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
     </body>
 </html>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+></script>

@@ -7,13 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import t3h.bigproject.dto.CityDto;
 import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortImageDto;
+import t3h.bigproject.entities.*;
 import t3h.bigproject.entities.ResortEntity;
-import t3h.bigproject.entities.ResortEntity;
-import t3h.bigproject.entities.ResortExtensionEntity;
-import t3h.bigproject.entities.ResortimageEntity;
 import t3h.bigproject.repository.ResortExtensionRepository;
 import t3h.bigproject.repository.ResortImageRepository;
 import t3h.bigproject.repository.ResortRepository;
@@ -66,7 +65,6 @@ public class ResortService {
 //        }
 //        else{
         resortEntityList = resortRepository.findAllByCityId(id);
-        System.out.println();
 //        }
         for (ResortEntity resortEntity : resortEntityList){
             ResortDto resortDto = new ResortDto();
@@ -84,6 +82,23 @@ public class ResortService {
         else
             return null;
         return resortDto;
+    }
+
+    public List<ResortDto> getAllByIdIsNot(Long id){
+        List<ResortDto> resortDtoList = new ArrayList<>();
+        List<ResortEntity> resortEntityList;
+        if(StringUtils.isEmpty(id)){
+            resortEntityList = resortRepository.findAllByIdIsNot(id);
+        }
+        else{
+            resortEntityList = resortRepository.findAllByIdIsNot(id);
+        }
+        for (ResortEntity resortEntity : resortEntityList){
+            ResortDto resortDto = new ResortDto();
+            BeanUtils.copyProperties(resortEntity,resortDto);
+            resortDtoList.add(resortDto);
+        }
+        return resortDtoList;
     }
 
     public ResortDto add(ResortDto resortDto) throws IOException {

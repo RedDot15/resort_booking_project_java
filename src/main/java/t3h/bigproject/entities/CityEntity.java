@@ -21,5 +21,4 @@ public class CityEntity {
     @Basic
     @Column(name = "image_name")
     private String imageName;
-
 }

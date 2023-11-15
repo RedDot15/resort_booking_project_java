@@ -39,10 +39,6 @@ public class UserEntity implements UserDetails {
     @Column(name = "gender_id")
     private Long genderId;
 
-    @Basic
-    @Column(name = "usercol")
-    private String usercol;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

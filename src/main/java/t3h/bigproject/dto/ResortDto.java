@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import t3h.bigproject.entities.ResortimageEntity;
+import t3h.bigproject.entities.RoomEntity;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -27,4 +28,6 @@ public class ResortDto {
     private List<MultipartFile> multipartFileList;
 
     List<ResortimageEntity> resortimageEntityList;
+
+    List<RoomEntity> roomEntityList;
 }

@@ -18,7 +18,6 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/backend/user")
-@PreAuthorize("hasAnyAuthority('ROLE_1')")
 public class UserController {
 
     @Autowired
@@ -52,7 +51,6 @@ public class UserController {
         return "/backend/user/create.html";
     }
 
-    // Bài tập: Validate mật khẩu và nhập lại mật khẩu trùng nhau?
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String addUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
                    Model model,
@@ -71,11 +69,6 @@ public class UserController {
         }
 
         if (userDto.getId() == null) {
-            UserDto u = userService.getDetailByPhone(userDto.getPhone());
-            if (u != null) {
-                model.addAttribute("message", "Số điện thoại đã tồn tại");
-                return "/backend/user/create.html";
-            }
             userService.addUser(userDto);
             id = userDto.getId();
             msg = " tao moi";

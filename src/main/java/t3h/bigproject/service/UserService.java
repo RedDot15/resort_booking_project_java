@@ -64,6 +64,9 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDto, userEntity);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        if (userEntity.getRoleId() == null || userEntity.getRoleId().equals("")){
+            userEntity.setRoleId((long) 2);
+        }
         userRepository.save(userEntity);
         userDto.setId(userEntity.getId());
         return userDto;
