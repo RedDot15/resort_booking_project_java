@@ -15,6 +15,7 @@ import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -86,7 +87,10 @@ public class HomeController {
         model.addAttribute("roomDtoList", roomDtoList);
         Object resortExtensionList = resortExtensionService.getAllByResortId(id);
         model.addAttribute("extensionList", resortExtensionList);
-        Object resortList = resortService.getAllByIdIsNot(id);
+        List<ResortDto> resortList = resortService.getAllByIdIsNot(id);
+        while (resortList.size() > 15){
+            resortList.remove(0);
+        }
         model.addAttribute("resortList",resortList);
 
         return "frontend/resort.html";
