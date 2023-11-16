@@ -7,10 +7,10 @@
 <div class="container">
     <h1 style="color: red">
         <th:block th:if="${roomDto.id == null}">
-            Tạo mới City
+            Tạo mới Room
         </th:block>
         <th:block th:unless="${roomDto.id == null}">
-            Cập nhật City
+            Cập nhật Room
         </th:block>
     </h1>
     <h2 style="color: red" th:text="${message}"></h2>

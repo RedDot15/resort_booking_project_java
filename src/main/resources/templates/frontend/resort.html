@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -117,39 +117,21 @@
                         class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     >
                         <li>
-                            <a href="/" class="nav-link px-2 text-secondary"
-                                >Khách sạn</a
-                            >
-                        </li>
-                        <li>
                             <a href="/" class="nav-link px-2 text-white"
-                                >Tours</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé máy bay</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé vui chơi</a
+                            >Khách sạn</a
                             >
                         </li>
                     </ul>
                     <div class="text-end">
-                        <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                        >
-                            Login
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-warning text-white"
-                        >
-                            Sign-up
-                        </button>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tài khoản
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#" sec:authentication="principal.email"></a></li>
+                                <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,191 +152,44 @@
                         <p class="font-semibold text-[20px] text-[#003C71]">
                             Khách sạn tương tự
                         </p>
-                        <div
-                            class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                class="rounded-[6px]"
-                                src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
-                            />
-                            <div>
-                                <p class="text-[#23527c] leading-[1.25]">
-                                    Sheraton Phú Quốc Long Beach Resort
-                                </p>
-                                <div
-                                    class="flex items-center gap-[2px] mt-[6px]"
-                                >
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
+                        <th:block th:each="resortDto : ${resortList}" th:object="${resortDto}">
+                            <div
+                                    class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
+                            >
+                                <img
+                                        class="rounded-[6px]"
+                                        src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
+                                />
+                                <div>
+                                    <p class="text-[#23527c] leading-[1.25]" th:text="*{name}">
+                                    </p>
+                                    <div
+                                            class="flex items-center gap-[2px] mt-[6px]"
+                                    >
+                                        <i
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        ></i>
+                                        <i
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        ></i>
+                                        <i
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        ></i>
+                                        <i
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        ></i>
+                                        <i
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        ></i>
+                                    </div>
+                                    <p
+                                            class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
+                                    >
+                                        Tuyệt vời
+                                    </p>
                                 </div>
-                                <p
-                                    class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
-                                    Tuyệt vời
-                                </p>
                             </div>
-                        </div>
-                        <div
-                            class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                class="rounded-[6px]"
-                                src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
-                            />
-                            <div>
-                                <p class="text-[#23527c] leading-[1.25]">
-                                    Sheraton Phú Quốc Long Beach Resort
-                                </p>
-                                <div
-                                    class="flex items-center gap-[2px] mt-[6px]"
-                                >
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
-                                    Tuyệt vời
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                class="rounded-[6px]"
-                                src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
-                            />
-                            <div>
-                                <p class="text-[#23527c] leading-[1.25]">
-                                    Sheraton Phú Quốc Long Beach Resort
-                                </p>
-                                <div
-                                    class="flex items-center gap-[2px] mt-[6px]"
-                                >
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
-                                    Tuyệt vời
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                class="rounded-[6px]"
-                                src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
-                            />
-                            <div>
-                                <p class="text-[#23527c] leading-[1.25]">
-                                    Sheraton Phú Quốc Long Beach Resort
-                                </p>
-                                <div
-                                    class="flex items-center gap-[2px] mt-[6px]"
-                                >
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
-                                    Tuyệt vời
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                class="rounded-[6px]"
-                                src="https://cdn1.ivivu.com/iVivu/2018/04/03/14/vinpearl-phu-quoc-resort--80x80.webp?o=jpg"
-                            />
-                            <div>
-                                <p class="text-[#23527c] leading-[1.25]">
-                                    Sheraton Phú Quốc Long Beach Resort
-                                </p>
-                                <div
-                                    class="flex items-center gap-[2px] mt-[6px]"
-                                >
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                    <i
-                                        class="fa-solid fa-star text-[12px] text-[#FDBF65]"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
-                                    Tuyệt vời
-                                </p>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
 
@@ -391,14 +226,16 @@
                         </div>
                         <div>
                             <p class="text-[#555863] text-[14px]">Giá chỉ từ</p>
-                            <p class="text-[22px] font-semibold text-[#26bed6]">
-                                5.766.000 VND
+                            <p class="text-[22px] font-semibold text-[#26bed6]" th:text="${resortDto.roomEntityList.get(0).price} + ' VND'">
                             </p>
-                            <button
-                                class="mt-[6px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
-                            >
-                                Đặt ngay
-                            </button>
+                            <a href="#booking">
+                                <button
+                                        class="mt-[6px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
+                                >
+                                    Đặt ngay
+                                </button>
+                            </a>
+
                         </div>
                     </div>
 
@@ -442,7 +279,7 @@
                     </swiper-container>
 
                     <!-- Table -->
-                    <table class="table table-bordered table-hover mt-[30px]">
+                    <table class="table table-bordered table-hover mt-[30px]" id="booking">
                         <thead class="bg-[#E6E7EA]">
                             <th
                                 class="border-none font-bold text-[20px] text-[#003c71]"
@@ -489,11 +326,14 @@
                                     <td class="w-[25%]">
                                         <div class="py-[12px] px-[8px]">
                                             <div>
-                                                <div
-                                                    class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                                >
-                                                    Đặt ngay
-                                                </div>
+                                                <a th:href="@{/loggedin/booking/} + *{id}">
+                                                    <div
+                                                            class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
+                                                    >
+                                                        Đặt ngay
+                                                    </div>
+                                                </a>
+
                                                 <div
                                                     class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
                                                 >

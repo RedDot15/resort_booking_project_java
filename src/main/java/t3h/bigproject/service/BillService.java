@@ -10,6 +10,8 @@ import t3h.bigproject.entities.VerificationTokenEntity;
 import t3h.bigproject.repository.BillRepository;
 import t3h.bigproject.repository.VerificationTokenRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class BillService {
@@ -19,6 +21,16 @@ public class BillService {
 
     @Autowired
     VerificationTokenRepository verificationTokenRepository;
+
+    public List<BillEntity> getAll(){
+        return billRepository.findAll();
+    }
+
+    public void updateBill(Long id){
+        BillEntity billEntity = billRepository.getBillEntityById(id);
+        billEntity.setStatusId((long) 3);
+        billRepository.save(billEntity);
+    }
 
     public BillEntity add(BillDto billDto){
         BillEntity billEntity = new BillEntity();
@@ -35,5 +47,9 @@ public class BillService {
 
     public VerificationTokenEntity getVerificationToken(String verificationToken) {
         return verificationTokenRepository.findVerificationTokenEntityByToken(verificationToken);
+    }
+
+    public List<VerificationTokenEntity> getAllVerificationToken(){
+        return verificationTokenRepository.findAll();
     }
 }

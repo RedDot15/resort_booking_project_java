@@ -24,9 +24,6 @@ public class UserDto {
     private String phone;
     private Long roleId;
     private Long genderId;
-    private String usercol;
-
-
 
     private String rePassword;
 

@@ -26,7 +26,8 @@ public class SecSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests((authz) -> authz
-                        .antMatchers("/backend/**").authenticated()
+                        .antMatchers("/backend/**").hasAnyAuthority("ROLE_1")
+                        .antMatchers("/loggedin/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling().accessDeniedPage("/403")
@@ -37,6 +38,12 @@ public class SecSecurityConfig {
                             .passwordParameter("password")
                             .loginProcessingUrl("/doLogin")
                             .defaultSuccessUrl("/backend/user/")
+                            .failureUrl("/login?error=true");
+                    form.loginPage("/home")
+                            .usernameParameter("email")
+                            .passwordParameter("password")
+                            .loginProcessingUrl("/doLogin")
+                            .defaultSuccessUrl("/loggedin/home")
                             .failureUrl("/login?error=true");
                 })
 

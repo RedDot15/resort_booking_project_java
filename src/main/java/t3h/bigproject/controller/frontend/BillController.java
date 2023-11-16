@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.BillDto;
 import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortImageDto;
@@ -45,7 +46,20 @@ public class BillController {
     private ApplicationEventPublisher eventPublisher;
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/booking/{roomid}")
+    @RequestMapping(method = RequestMethod.GET, value = "/backend/bill")
+    String list(Model model){
+        Object danhsach = billService.getAll();
+        model.addAttribute("list", danhsach);
+        return"/backend/bill/listBill.html";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/backend/updateBill/{id}")
+    String updateBill(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes){
+        billService.updateBill(id);
+        return "redirect:/backend/bill";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "loggedin/booking/{roomid}")
     public String showFormBooking(@PathVariable Long roomid , Model model){
         BillDto billDto = new BillDto();
         model.addAttribute("roomid",roomid);
@@ -59,7 +73,7 @@ public class BillController {
         return "frontend/booking.html";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/booking/{roomid}")
+    @RequestMapping(method = RequestMethod.POST, value = "loggedin/booking/{roomid}")
     public String booking(@Valid @ModelAttribute("billDto") BillDto billDto, BindingResult result,
                           WebRequest request, Model model, @PathVariable Long roomid){
 //        RoomDto roomDto = roomService.getDetailById(id);

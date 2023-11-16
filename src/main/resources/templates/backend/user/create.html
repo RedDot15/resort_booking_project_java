@@ -67,13 +67,6 @@
 
         <div class="row mb-3">
             <div class="col">
-                <label for="usercol" class="col-sm-2 col-form-label">usercol:</label>
-                <div class="col-sm-10">
-                    <input class="form-control form-control-lg"  th:field="*{usercol}" id="usercol"/>
-                </div>
-                <label th:if="${#fields.hasErrors('usercol')}" class="error" th:errors="*{usercol}"></label>
-            </div>
-            <div class="col">
                 <label for="phone" class="col-sm-2 col-form-label">phone:</label>
                 <div class="col-sm-10">
                     <input class="form-control form-control-lg"  th:field="*{phone}" id="phone"/>

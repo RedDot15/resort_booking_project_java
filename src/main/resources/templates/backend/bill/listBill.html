@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/backend/fragments/common :: head('Danh sách Room')">
+</head>
+<body>
+<th:block th:replace="/backend/fragments/header :: header"></th:block>
+<div class="container">
+  <h1 style="color: red">
+    Danh sách Bill</h1>
+  <br/>
+  <div class="table-responsive">
+    <table class="table table-striped" style="margin-top: 10px;">
+      <thead>
+      <th>ID</th>
+      <th>GENDER</th>
+      <th>NAME</th>
+      <th>PHONE</th>
+      <th>EMAIL</th>
+      <th>INFO</th>
+      <th>STATUS</th>
+      <th>ROOM</th>
+      <th>PAID</th>
+
+      </thead>
+      <tbody class="table-group-divider">
+      <th:block th:each="billEntity : ${list}">
+        <tr th:object="${billEntity}">
+          <!-- khi co th:object -->
+
+          <td th:text="*{id}"></td>
+          <td th:text="*{gender}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="*{phone}"></td>
+          <td th:text="*{email}"></td>
+          <td th:text="*{info}"></td>
+          <td th:text="*{statusId}"></td>
+          <td th:text="*{roomId}"></td>
+          <td>
+            <span th:if="*{statusId == 2}">
+              <a th:href="@{/backend/updateBill/} + *{id}">UPDATE</a>
+            </span>
+            <span th:unless="*{statusId == 2}" >
+              COMPLETED
+            </span>
+
+          </td>
+
+
+        </tr>
+      </th:block>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!--        <h1>[[${time}]]</h1>-->
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

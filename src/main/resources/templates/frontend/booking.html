@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,39 +51,21 @@
                         class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     >
                         <li>
-                            <a href="/" class="nav-link px-2 text-secondary"
-                                >Khách sạn</a
-                            >
-                        </li>
-                        <li>
                             <a href="/" class="nav-link px-2 text-white"
-                                >Tours</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé máy bay</a
-                            >
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                                >Vé vui chơi</a
+                            >Khách sạn</a
                             >
                         </li>
                     </ul>
                     <div class="text-end">
-                        <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                        >
-                            Login
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-warning text-white"
-                        >
-                            Sign-up
-                        </button>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tài khoản
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#" sec:authentication="principal.email"></a></li>
+                                <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,7 +79,7 @@
                     class="col-start-1 col-end-5 py-[16px] px-[16px] rounded-[6px] bg-white"
                 >
                     <!-- Form -->
-                    <form th:action="@{/booking/} + ${roomDto.id}"
+                    <form th:action="@{/loggedin/booking/} + ${roomDto.id}"
                           th:object="${billDto}" th:method="post">
                         <p class="font-bold text-[20px] text-[#003c71]">
                             Thông tin người đặt

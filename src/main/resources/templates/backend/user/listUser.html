@@ -19,7 +19,6 @@
             <th>PHONE</th>
             <th>ROLE ID</th>
             <th>GENDER ID</th>
-            <th>USERCOL</th>
             </thead>
             <tbody class="table-group-divider">
             <th:block th:each="userDto : ${list}">
@@ -32,7 +31,6 @@
                     <td th:text="*{phone}"></td>
                     <td th:text="*{roleId}"></td>
                     <td th:text="*{genderId}"></td>
-                    <td th:text="*{usercol}"></td>
                 </tr>
             </th:block>
 
