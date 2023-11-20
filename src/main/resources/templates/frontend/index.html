@@ -36,6 +36,10 @@
                 width: 20px;
                 background-color: azure;
             }
+
+            #search-input:focus ~ #search-result {
+                display: block;
+            }
         </style>
         <!-- Font Awesome -->
         <link
@@ -155,7 +159,7 @@
             <!-- Banner -->
             <div class="relative">
                 <img
-                    src="https://cdn1.ivivu.com/images/2023/08/17/13/anlam_nvb-t_mptfzq_horizontal.webp"
+                    src="https://cdn1.ivivu.com/images/2023/08/18/11/vinoasis-t_s39l4g_horizontal.webp"
                     class="h-[493px] object-cover"
                 />
                 <div class="absolute top-0 left-0 right-0">
@@ -173,15 +177,87 @@
                             Combo khách sạn - vé máy bay - đưa đón sân bay giá
                             tốt nhất
                         </p>
+                        <!-- Search -->
                         <form
                             class="mt-4 p-[15px] w-[60%] flex gap-[16px]"
                             style="background: rgba(0, 0, 0, 0.3)"
                         >
-                            <input
-                                type="text"
-                                class="form-control h-[60px]"
-                                placeholder="Bạn muốn đi đâu?"
-                            />
+                            <div class="w-[calc(100%-90px)] relative">
+                                <input
+                                    id="search-input"
+                                    type="text"
+                                    class="form-control h-[60px]"
+                                    placeholder="Bạn muốn đi đâu?"
+                                />
+                                <div id="search-result" class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]">
+                                    <p class="py-[10px] px-[16px] border-b-[1px] font-bold">Địa điểm đang HOT nhất</p>
+                                    <div class="grid grid-cols-3">
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                        <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                            <img class="rounded-[4px]" src="https://cdn1.ivivu.com/iVivu/2018/10/18/23/undefined-60x60.jpg" />
+                                            <div>
+                                                <p>Đà Lạt</p>
+                                                <p>509 KS</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <button
                                 class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
                             >
