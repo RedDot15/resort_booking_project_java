@@ -27,7 +27,7 @@ public class SecSecurityConfig {
                 .csrf().disable()
                 .authorizeRequests((authz) -> authz
                         .antMatchers("/backend/**").hasAnyAuthority("ROLE_1")
-                        .antMatchers("/loggedin/**").authenticated()
+                        .antMatchers("/booking/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling().accessDeniedPage("/403")
@@ -43,14 +43,15 @@ public class SecSecurityConfig {
                             .usernameParameter("email")
                             .passwordParameter("password")
                             .loginProcessingUrl("/doLogin")
-                            .defaultSuccessUrl("/loggedin/home")
+                            .defaultSuccessUrl("/home")
                             .failureUrl("/login?error=true");
                 })
 
 //                .failureHandler(authenticationFailureHandler())
                 .logout((logout) -> {
                     logout.logoutUrl("/logout")
-                            .deleteCookies("JSESSIONID");
+                            .deleteCookies("JSESSIONID")
+                            .logoutSuccessUrl("/home");
                 })
 
 //                .logoutSuccessHandler(logoutSuccessHandler())

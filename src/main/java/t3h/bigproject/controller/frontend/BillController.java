@@ -59,7 +59,7 @@ public class BillController {
         return "redirect:/backend/bill";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "loggedin/booking/{roomid}")
+    @RequestMapping(method = RequestMethod.GET, value = "/booking/{roomid}")
     public String showFormBooking(@PathVariable Long roomid , Model model){
         BillDto billDto = new BillDto();
         model.addAttribute("roomid",roomid);
@@ -73,7 +73,7 @@ public class BillController {
         return "frontend/booking.html";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "loggedin/booking/{roomid}")
+    @RequestMapping(method = RequestMethod.POST, value = "/booking/{roomid}")
     public String booking(@Valid @ModelAttribute("billDto") BillDto billDto, BindingResult result,
                           WebRequest request, Model model, @PathVariable Long roomid){
 //        RoomDto roomDto = roomService.getDetailById(id);

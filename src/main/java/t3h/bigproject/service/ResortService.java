@@ -57,15 +57,15 @@ public class ResortService {
         return resortDtoList;
     }
 
-    public List<ResortDto> getAllByCityId(Long id){
+    public List<ResortDto> getAllByCityIdAndNameContaining(Long id, String keyword){
         List<ResortDto> resortDtoList = new ArrayList<>();
         List<ResortEntity> resortEntityList;
-//        if(StringUtils.isEmpty(id)){
-//            resortEntityList = resortRepository.findAllByCityId();
-//        }
-//        else{
-        resortEntityList = resortRepository.findAllByCityId(id);
-//        }
+        if(StringUtils.isEmpty(keyword)){
+            resortEntityList = resortRepository.findAllByCityId(id);
+        }
+        else{
+        resortEntityList = resortRepository.findAllByCityIdAndNameContaining(id, keyword);
+        }
         for (ResortEntity resortEntity : resortEntityList){
             ResortDto resortDto = new ResortDto();
             BeanUtils.copyProperties(resortEntity,resortDto);

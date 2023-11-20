@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -103,7 +103,6 @@
                 </div>
             </div>
         </div>
-        </div>
         <!-- Header -->
         <header class="p-2 bg-[#003C71] text-white">
             <div class="max-w-[1200px] mx-auto">
@@ -129,22 +128,35 @@
                         </li>
                     </ul>
                     <div class="text-end">
-                        <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                            data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                        >
-                            Login
-                        </button>
-                        <a th:href="@{/signup}">
+                        <div sec:authorize="!isAuthenticated()">
                             <button
                                     type="button"
-                                    class="btn btn-warning text-white"
-                                    th:src="@{/signup}"
+                                    class="btn me-2 bg-danger text-white"
+                                    data-mdb-toggle="modal" data-mdb-target="#exampleModal"
                             >
-                                Sign-up
+                                Login
                             </button>
-                        </a>
+                            <a th:href="@{/signup}">
+                                <button
+                                        type="button"
+                                        class="btn btn-warning text-white"
+                                        th:src="@{/signup}"
+                                >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tài khoản
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#" sec:authentication="principal.email"></a></li>
+                                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -344,7 +356,7 @@
                     >
                         <swiper-slide>
                             <div class="relative">
-                                <a th:href="@{/loggedin/city/} + *{id}">
+                                <a th:href="@{/city/} + *{id}">
                                     <img
                                             class="h-[296px] object-cover object-center brightness-[0.8]"
                                             th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
@@ -388,7 +400,7 @@
                     >
                         <swiper-slide>
                             <div class="relative">
-                                <a th:href="@{/loggedin/city/} + *{id}">
+                                <a th:href="@{/city/} + *{id}">
                                     <img
                                             class="h-[296px] object-cover object-center brightness-[0.8]"
                                             th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
