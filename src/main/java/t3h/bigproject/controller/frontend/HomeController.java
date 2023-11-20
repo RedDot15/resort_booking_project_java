@@ -1,6 +1,7 @@
 package t3h.bigproject.controller.frontend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -58,28 +59,20 @@ public class HomeController {
         return "frontend/index.html";
     }
 
-    @GetMapping(value = {"/loggedin/home"})
-    public String homeGuest(Model model){
-        Object danhsachCityVietNam = cityService.getAllByCountryId((long) 1);
-        model.addAttribute("listCityVietNam", danhsachCityVietNam);
-        Object danhsachCityQuocTe = cityService.getAllByCountryIdIsNot((long) 1);
-        model.addAttribute("listCityQuocTe", danhsachCityQuocTe);
-        return "frontend/loggedIndex.html";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/loggedin/city/{id}")
-    public String city(@PathVariable Long id, Model model){
+    @RequestMapping(method = RequestMethod.GET, value = "/city/{id}")
+    public String city(@PathVariable Long id, Model model, @Param("keyword") String keyword){
         Object city = cityService.getDetailById(id);
         model.addAttribute("cityDto", city);
         Object extensionList = extensionService.getAll(null);
         model.addAttribute("extensionList", extensionList);
-        Object resortList = resortService.getAllByCityId(id);
+        Object resortList = resortService.getAllByCityIdAndNameContaining(id,keyword);
         model.addAttribute("resortList", resortList);
+        model.addAttribute("keyword",keyword);
 
         return "frontend/city.html";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/loggedin/resort/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/resort/{id}")
     public String resort(@PathVariable Long id, Model model){
         Object resortDto = resortService.getDetailById(id);
         model.addAttribute("resortDto", resortDto);
@@ -97,7 +90,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/loggedin/thankyou")
+    @RequestMapping(method = RequestMethod.GET, value = "/thankyou")
     public String thankyou(Model model){
         return "frontend/thankyou.html";
     }
