@@ -37,4 +37,8 @@ public class ResortEntity {
     @OneToMany()
     @JoinColumn(name = "resort_id")
     List<RoomEntity> roomEntityList;
+
+    @OneToMany()
+    @JoinColumn(name = "resort_id")
+    List<ResortExtensionEntity> resortExtensionEntityList;
 }
