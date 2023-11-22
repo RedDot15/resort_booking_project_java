@@ -1,18 +1,25 @@
 package t3h.bigproject.service;
 
+import org.hibernate.mapping.Set;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import t3h.bigproject.dto.CityDto;
+import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.entities.CityEntity;
+import t3h.bigproject.entities.ResortEntity;
+import t3h.bigproject.entities.ResortExtensionEntity;
 import t3h.bigproject.repository.CityRepository;
+import t3h.bigproject.repository.ResortExtensionRepository;
+import t3h.bigproject.repository.ResortRepository;
 import t3h.bigproject.utils.FileUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 @Service
 @Transactional
@@ -22,6 +29,12 @@ public class CityService {
 
     @Autowired
     FileUtils fileUtils;
+
+    @Autowired
+    ResortRepository resortRepository;
+
+    @Autowired
+    ResortExtensionRepository resortExtensionRepository;
 
     // @Autowired
     // ProductImagesRepository productImagesRepository;
