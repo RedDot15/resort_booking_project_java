@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Đặt phòng khách sạn trực tuyến giá rẻ</title>
-        <link
-            rel="shortcut icon"
-            href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
-            type="image/x-icon"
-        />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -45,127 +36,69 @@
                 width: 20px;
                 background-color: azure;
             }
+
+            #search-input:focus ~ #search-result {
+                display: block;
+            }
         </style>
         <!-- Font Awesome -->
         <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-            rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+                rel="stylesheet"
         />
         <!-- Google Fonts -->
         <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                rel="stylesheet"
         />
         <!-- MDB -->
         <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
-            rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+                rel="stylesheet"
         />
     </head>
     <body>
+
         <!-- Modal -->
-        <div
-            class="modal fade"
-            id="exampleModal"
-            data-bs-backdrop="static"
-            data-bs-toggle="modal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-toggle="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="container h-100">
-                        <div
-                            class="row d-flex justify-content-center align-items-center h-100"
-                        >
+                        <div class="row d-flex justify-content-center align-items-center h-100">
                             <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
                             <div class="card shadow-2-strong">
                                 <form action="/doLogin" method="post">
-                                    <div
-                                        class="card-body py-3 px-3 text-center"
-                                    >
+                                    <div class="card-body py-3 px-3 text-center">
                                         <div class="flex flex-col items-center">
-                                            <img
-                                                class="w-[80px]"
-                                                src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
-                                            />
+                                            <img class="w-[80px]" src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"/>
                                             <h3 class="mt-2 mb-5">Sign in</h3>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input
-                                                type="email"
-                                                id="typeEmailX-2"
-                                                class="form-control form-control-lg"
-                                                name="email"
-                                            />
-                                            <label
-                                                class="form-label"
-                                                for="typeEmailX-2"
-                                                >Email</label
-                                            >
+                                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"/>
+                                            <label class="form-label" for="typeEmailX-2">Email</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input
-                                                type="password"
-                                                id="typePasswordX-2"
-                                                class="form-control form-control-lg"
-                                                name="password"
-                                            />
-                                            <label
-                                                class="form-label"
-                                                for="typePasswordX-2"
-                                                >Password</label
-                                            >
+                                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password" />
+                                            <label class="form-label" for="typePasswordX-2">Password</label>
                                         </div>
 
                                         <!-- Checkbox -->
-                                        <div
-                                            class="form-check d-flex justify-content-start mb-4"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="form1Example3"
-                                            />
-                                            <label
-                                                class="form-check-label"
-                                                for="form1Example3"
-                                            >
-                                                Remember password
-                                            </label>
+                                        <div class="form-check d-flex justify-content-start mb-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                                            <label class="form-check-label" for="form1Example3"> Remember password </label>
                                         </div>
 
-                                        <button
-                                            class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
-                                            type="submit"
-                                        >
-                                            Login
-                                        </button>
+                                        <button class="btn btn-primary btn-lg btn-block bg-[#3b5998]" type="submit">Login</button>
 
-                                        <hr class="my-4" />
+                                        <hr class="my-4">
 
-                                        <button
-                                            class="btn btn-lg btn-block btn-primary"
-                                            style="background-color: #dd4b39"
-                                            type="submit"
-                                        >
-                                            <i class="fab fa-google me-2"></i>
-                                            Sign in with google
-                                        </button>
-                                        <button
-                                            class="btn btn-lg btn-block btn-primary mb-2"
-                                            style="background-color: #3b5998"
-                                            type="submit"
-                                        >
-                                            <i
-                                                class="fab fa-facebook-f me-2"
-                                            ></i
-                                            >Sign in with facebook
-                                        </button>
+                                        <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
+                                                type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+                                        <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
+                                                type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
+
                                     </div>
                                 </form>
                             </div>
@@ -193,49 +126,25 @@
                         class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     >
                         <li>
-                            <a
-                                href="/"
-                                class="nav-link px-2 text-white text-[20px]"
+                            <a href="/" class="nav-link px-2 text-white"
                                 >Khách sạn</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/"
-                                class="nav-link px-2 text-white text-[20px]"
-                                >Tours</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/"
-                                class="nav-link px-2 text-white text-[20px]"
-                                >Vé máy bay</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/"
-                                class="nav-link px-2 text-white text-[20px]"
-                                >Vé vui chơi</a
                             >
                         </li>
                     </ul>
                     <div class="text-end">
                         <div sec:authorize="!isAuthenticated()">
                             <button
-                                type="button"
-                                class="btn me-2 bg-danger text-white"
-                                data-mdb-toggle="modal"
-                                data-mdb-target="#exampleModal"
+                                    type="button"
+                                    class="btn me-2 bg-danger text-white"
+                                    data-mdb-toggle="modal" data-mdb-target="#exampleModal"
                             >
                                 Login
                             </button>
                             <a th:href="@{/signup}">
                                 <button
-                                    type="button"
-                                    class="btn btn-warning text-white"
-                                    th:src="@{/signup}"
+                                        type="button"
+                                        class="btn btn-warning text-white"
+                                        th:src="@{/signup}"
                                 >
                                     Sign-up
                                 </button>
@@ -243,45 +152,45 @@
                         </div>
                         <div sec:authorize="isAuthenticated()">
                             <div class="nav-item dropdown">
-                                <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    id="navbarDropdown"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Tài khoản
                                 </a>
                                 <ul
-                                    class="dropdown-menu"
-                                    aria-labelledby="navbarDropdown"
+                                        class="dropdown-menu"
+                                        aria-labelledby="navbarDropdown"
                                 >
                                     <li>
                                         <a
-                                            class="dropdown-item"
-                                            href="/profile"
-                                            sec:authentication="principal.email"
+                                                class="dropdown-item"
+                                                href="/profile"
+                                                sec:authentication="principal.email"
                                         ></a>
                                     </li>
                                     <li>
+                                        <a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="/profile"
-                                            >Hồ sơ của tôi</a
+                                        >Hồ sơ của tôi</a
                                         >
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/trips"
-                                            >Đơn hàng của tôi</a
+                                        >Đơn hàng của tôi</a
                                         >
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/logout"
-                                            >Đăng xuất</a
+                                        >Đăng xuất</a
                                         >
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -314,49 +223,27 @@
                             class="mt-4 p-[15px] w-[60%] flex gap-[16px]"
                             style="background: rgba(0, 0, 0, 0.3)"
                         >
-                            <div
-                                id="search-container"
-                                class="w-[calc(100%-90px)] relative z-[5]"
-                            >
+                            <div class="w-[calc(100%-90px)] relative">
                                 <input
                                     id="search-input"
                                     type="text"
                                     class="form-control h-[60px]"
                                     placeholder="Bạn muốn đi đâu?"
                                 />
-                                <div
-                                    id="search-result"
-                                    class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]"
-                                >
-                                    <p
-                                        class="py-[10px] px-[16px] border-b-[1px] font-bold"
-                                    >
-                                        Địa điểm đang HOT nhất
-                                    </p>
-                                    <div
-                                        class="grid grid-cols-3"
-                                        id="result-list"
-                                    >
+                                <div id="search-result" class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]">
+                                    <p class="py-[10px] px-[16px] border-b-[1px] font-bold">Địa điểm đang HOT nhất</p>
+                                    <div class="grid grid-cols-3">
                                         <th:block
-                                            th:each="cityDto : ${listCityVietNam}"
-                                            th:object="${cityDto}"
+                                                th:each="cityDto : ${listCityVietNam}"
+                                                th:object="${cityDto}"
                                         >
-                                            <a th:href="@{'/city/' + *{id}}">
-                                                <div
-                                                    class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
-                                                >
-                                                    <img
-                                                        class="rounded-[4px] w-[60px] h-[60px] object-cover"
-                                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                                                    />
-                                                    <div>
-                                                        <p
-                                                            th:text="*{name}"
-                                                        ></p>
-                                                        <p>5 KS</p>
-                                                    </div>
+                                            <div class="py-[10px] px-[16px] flex items-center gap-[8px]">
+                                                <img class="rounded-[4px]" th:src="@{/image/city/} + *{id} + @{/} + *{imageName}" />
+                                                <div>
+                                                    <p th:text="*{name}"></p>
+                                                    <p>5 KS</p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </th:block>
                                     </div>
                                 </div>
@@ -525,8 +412,8 @@
                             <div class="relative">
                                 <a th:href="@{/city/} + *{id}">
                                     <img
-                                        class="h-[296px] object-cover object-center brightness-[0.8]"
-                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                            class="h-[296px] object-cover object-center brightness-[0.8]"
+                                            th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
                                     />
                                 </a>
 
@@ -569,8 +456,8 @@
                             <div class="relative">
                                 <a th:href="@{/city/} + *{id}">
                                     <img
-                                        class="h-[296px] object-cover object-center brightness-[0.8]"
-                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                            class="h-[296px] object-cover object-center brightness-[0.8]"
+                                            th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
                                     />
                                 </a>
 
@@ -746,83 +633,6 @@
     </body>
 </html>
 <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>
-<script th:inline="javascript">
-    let searchContainer = document.getElementById("search-container");
-    let searchInput = document.getElementById("search-input");
-    let searchResult = document.getElementById("search-result");
-    let resultList = document.getElementById("result-list");
-    let html = "";
-
-    searchInput.onfocus = (e) => {
-        searchResult.style.display = "block";
-    };
-
-    searchInput.onkeyup = (e) => {
-        let keyword = searchInput.value;
-        if (keyword) {
-            let url = `http://localhost:8888/city/search/${keyword}`;
-            fetch(url)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    renderSearchResults(data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        } else {
-            let url = `http://localhost:8888/city/search`;
-            fetch(url)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    renderSearchResults(data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    };
-
-    let renderSearchResults = (data) => {
-        clearDataSearchResults();
-
-        let html = "";
-        html = Array.from(data)
-            .map((item, index) => {
-                return `
-                    <a href="/city/${item.id}">
-                        <div
-                            class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
-                        >
-                            <img
-                                class="rounded-[4px] w-[60px] h-[60px] object-cover"
-                                src="/image/city/${item.id}/${item.imageName}"
-                            />
-                            <div>
-                                <p>${item.name}</p>
-                                <p>${item.resortEntityList.length} KS</p>
-                            </div>
-                        </div>
-                    </a>
-                `;
-            })
-            .join("");
-        resultList.innerHTML = html;
-    };
-
-    let clearDataSearchResults = () => {
-        resultList.innerHTML = html;
-    };
-
-    document.body.onclick = (e) => {
-        if (!searchContainer.contains(e.target)) {
-            searchResult.style.display = "none";
-        }
-    };
-</script>
