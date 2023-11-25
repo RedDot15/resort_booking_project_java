@@ -69,7 +69,7 @@ public class CountryController {
 //            }
             countryService.add(countryDto);
             id = countryDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = countryService.update(countryDto);
             msg = "Cập nhật";

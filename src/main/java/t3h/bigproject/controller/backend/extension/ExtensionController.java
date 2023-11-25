@@ -68,7 +68,7 @@ public class ExtensionController {
 //            }
             extensionService.add(extensionDto);
             id = extensionDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = extensionService.update(extensionDto);
             msg = "Cập nhật";

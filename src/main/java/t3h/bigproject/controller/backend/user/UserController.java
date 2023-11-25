@@ -71,13 +71,13 @@ public class UserController {
         if (userDto.getId() == null) {
             userService.addUser(userDto);
             id = userDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = userService.updateUser(userDto);
             msg = "Cập nhật";
         }
         if (Objects.equals(result, 0)) {
-            model.addAttribute("message", msg + " fail");
+            model.addAttribute("message", msg + " thất bại");
             return "/backend/user/create.html";
         }
         redirectAttributes.addFlashAttribute("message", msg + " tài khoản " + id + " thành công");

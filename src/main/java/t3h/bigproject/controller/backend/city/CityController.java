@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.CityDto;
 import t3h.bigproject.service.CityService;
+import t3h.bigproject.service.CountryService;
 import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
@@ -18,12 +19,14 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/backend/city")
 public class CityController {
-    // I love you quang minh
     @Autowired
     CityService cityService;
 
     @Autowired
     FileUtils fileUtils;
+
+    @Autowired
+    CountryService countryService;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
@@ -37,6 +40,8 @@ public class CityController {
     String detail(@PathVariable Long id, Model model) {
         Object p = cityService.getDetailById(id);
         model.addAttribute("cityDto", p);
+        Object danhsach = countryService.getAll(null);
+        model.addAttribute("listCountry", danhsach);
         return "/backend/city/create.html";
     }
 
@@ -44,6 +49,8 @@ public class CityController {
     String add(Model model) {
         CityDto b = new CityDto();
         model.addAttribute("cityDto", b);
+        Object danhsach = countryService.getAll(null);
+        model.addAttribute("listCountry", danhsach);
         return "/backend/city/create.html";
     }
 
@@ -71,7 +78,7 @@ public class CityController {
             // }
             cityService.add(cityDto);
             id = cityDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = cityService.update(cityDto);
             msg = "Cập nhật";

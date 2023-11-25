@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.ExtensionDto;
 import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortDto;
+import t3h.bigproject.service.CityService;
 import t3h.bigproject.service.ExtensionService;
 import t3h.bigproject.service.ResortService;
 import t3h.bigproject.utils.FileUtils;
@@ -31,6 +32,9 @@ public class ResortController {
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    CityService cityService;
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
                 Model model){
@@ -45,6 +49,8 @@ public class ResortController {
         model.addAttribute("resortDto", p);
         List<ExtensionDto> extensionDtoList = extensionService.getAll(null);
         model.addAttribute("extensionList", extensionDtoList);
+        Object danhsach = cityService.getAll(null);
+        model.addAttribute("listCity", danhsach);
         return "/backend/resort/create.html";
     }
 
@@ -54,6 +60,8 @@ public class ResortController {
         model.addAttribute("resortDto", b);
         List<ExtensionDto> extensionDtoList = extensionService.getAll(null);
         model.addAttribute("extensionList", extensionDtoList);
+        Object danhsach = cityService.getAll(null);
+        model.addAttribute("listCity", danhsach);
         return "/backend/resort/create.html";
     }
 
@@ -76,7 +84,7 @@ public class ResortController {
 //            }
             resortService.add(resortDto);
             id = resortDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = resortService.update(resortDto);
             msg = "Cập nhật";
