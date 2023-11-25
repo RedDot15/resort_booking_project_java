@@ -1,374 +1,477 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Phú Quốc</title>
-        <link
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="'Đặt phòng ' + ${roomDto.name}"></title>
+    <link
+            rel="shortcut icon"
+            href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
+            type="image/x-icon"
+    />
+    <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-        />
-        <script
+    />
+    <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
-        ></script>
-        <link
+    ></script>
+    <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-        />
+    />
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-        <link
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-toggle="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="container h-100">
-                    <div class="row d-flex justify-content-center align-items-center h-100">
-                        <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
-                        <div class="card shadow-2-strong">
-                            <form action="/doLogin" method="post">
-                                <div class="card-body py-3 px-3 text-center">
-                                    <div class="flex flex-col items-center">
-                                        <img class="w-[80px]" src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"/>
-                                        <h3 class="mt-2 mb-5">Sign in</h3>
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"/>
-                                        <label class="form-label" for="typeEmailX-2">Email</label>
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password" />
-                                        <label class="form-label" for="typePasswordX-2">Password</label>
-                                    </div>
-
-                                    <!-- Checkbox -->
-                                    <div class="form-check d-flex justify-content-start mb-4">
-                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                                        <label class="form-check-label" for="form1Example3"> Remember password </label>
-                                    </div>
-
-                                    <button class="btn btn-primary btn-lg btn-block bg-[#3b5998]" type="submit">Login</button>
-
-                                    <hr class="my-4">
-
-                                    <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-                                            type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
-                                    <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
-                                            type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
-
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!-- Modal -->
+<div
+        class="modal fade"
+        id="exampleModal"
+        data-bs-backdrop="static"
+        data-bs-toggle="modal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container h-100">
+                <div
+                        class="row d-flex justify-content-center align-items-center h-100"
+                >
+                    <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                    <div class="card shadow-2-strong">
+                        <form action="/doLogin" method="post">
+                            <div
+                                    class="card-body py-3 px-3 text-center"
+                            >
+                                <div class="flex flex-col items-center">
+                                    <img
+                                            class="w-[80px]"
+                                            src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
+                                    />
+                                    <h3 class="mt-2 mb-5">Sign in</h3>
                                 </div>
-                            </form>
-                        </div>
+
+                                <div class="form-outline mb-4">
+                                    <input
+                                            type="email"
+                                            id="typeEmailX-2"
+                                            class="form-control form-control-lg"
+                                            name="email"
+                                    />
+                                    <label
+                                            class="form-label"
+                                            for="typeEmailX-2"
+                                    >Email</label
+                                    >
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input
+                                            type="password"
+                                            id="typePasswordX-2"
+                                            class="form-control form-control-lg"
+                                            name="password"
+                                    />
+                                    <label
+                                            class="form-label"
+                                            for="typePasswordX-2"
+                                    >Password</label
+                                    >
+                                </div>
+
+                                <!-- Checkbox -->
+                                <div
+                                        class="form-check d-flex justify-content-start mb-4"
+                                >
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value=""
+                                            id="form1Example3"
+                                    />
+                                    <label
+                                            class="form-check-label"
+                                            for="form1Example3"
+                                    >
+                                        Remember password
+                                    </label>
+                                </div>
+
+                                <button
+                                        class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
+                                        type="submit"
+                                >
+                                    Login
+                                </button>
+
+                                <hr class="my-4" />
+
+                                <button
+                                        class="btn btn-lg btn-block btn-primary"
+                                        style="background-color: #dd4b39"
+                                        type="submit"
+                                >
+                                    <i class="fab fa-google me-2"></i>
+                                    Sign in with google
+                                </button>
+                                <button
+                                        class="btn btn-lg btn-block btn-primary mb-2"
+                                        style="background-color: #3b5998"
+                                        type="submit"
+                                >
+                                    <i
+                                            class="fab fa-facebook-f me-2"
+                                    ></i
+                                    >Sign in with facebook
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <!-- Header -->
-        <header class="p-2 bg-[#003C71] text-white">
-            <div class="max-w-[1200px] mx-auto">
-                <div
-                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-                >
+</div>
+<!-- Header -->
+<header class="p-2 bg-[#003C71] text-white">
+    <div class="max-w-[1200px] mx-auto">
+        <div
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+        >
+            <a
+                    href="/"
+                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+            >
+                <img
+                        alt=""
+                        src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                />
+            </a>
+
+            <ul
+                    class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+            >
+                <li>
                     <a
-                        href="/"
-                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Khách sạn</a
                     >
-                        <img
-                                alt=""
-                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
-                        />
-                    </a>
-
-                    <ul
-                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Tours</a
                     >
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                            >Khách sạn</a
-                            >
-                        </li>
-                    </ul>
-                    <div class="text-end">
-                        <div sec:authorize="!isAuthenticated()">
-                            <button
-                                    type="button"
-                                    class="btn me-2 bg-danger text-white"
-                                    data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                            >
-                                Login
-                            </button>
-                            <a th:href="@{/signup}">
-                                <button
-                                        type="button"
-                                        class="btn btn-warning text-white"
-                                        th:src="@{/signup}"
-                                >
-                                    Sign-up
-                                </button>
-                            </a>
-                        </div>
-                        <div sec:authorize="isAuthenticated()">
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Tài khoản
-                                </a>
-                                <ul
-                                    class="dropdown-menu"
-                                    aria-labelledby="navbarDropdown"
-                                >
-                                    <li>
-                                        <a
-                                            class="dropdown-item"
-                                            href="/profile"
-                                            sec:authentication="principal.email"
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/profile"
-                                            >Hồ sơ của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/trips"
-                                            >Đơn hàng của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/logout"
-                                            >Đăng xuất</a
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Body -->
-        <div class="h-[calc(100vh-66px)] bg-[#ECF0F5] py-[16px]">
-            <div class="max-w-[1200px] mx-auto grid grid-cols-6 gap-[30px]">
-                <!-- Left -->
-                <div
-                    class="col-start-1 col-end-5 py-[16px] px-[16px] rounded-[6px] bg-white"
-                >
-                    <!-- Form -->
-                    <form th:action="@{/booking/} + ${roomDto.id}"
-                          th:object="${billDto}" th:method="post">
-                        <p class="font-bold text-[20px] text-[#003c71]">
-                            Thông tin người đặt
-                        </p>
-                        <input hidden th:value="${roomid}" name="roomId" />
-                        <p class="text-[12px] text-[#818180] mt-[4px] italic">
-                            Vui lòng điền đầy đủ thông tin
-                        </p>
-                        <div class="mt-[10px]">
-                            <div class="flex w-auto items-center gap-[10px]">
-                                <p
-                                    class="w-[20%] text-[#818180] whitespace-nowrap"
-                                >
-                                    Họ và tên đầy đủ:
-                                </p>
-                                <div class="form-check mr-[20px]">
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        id="male-check"
-                                        name="gender"
-                                        th:field="*{gender}"
-                                        th:value="male"
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="male-check"
-                                    >
-                                        Anh
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        id="female-check"
-                                        name="gender"
-                                        th:field="*{gender}"
-                                        th:value="female"
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="female-check"
-                                    >
-                                        Chị
-                                    </label>
-                                </div>
-                            </div>
-                            <div
-                                class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
-                            >
-                                <p
-                                    class="w-[20%] text-[#818180] whitespace-nowrap"
-                                >
-                                    Họ và tên đầy đủ:
-                                </p>
-                                <div class="w-[80%]">
-                                    <input type="text" class="form-control" th:field="*{name}" />
-                                </div>
-                            </div>
-                            <div
-                                class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
-                            >
-                                <p
-                                    class="w-[20%] text-[#818180] whitespace-nowrap"
-                                >
-                                    Điện thoại:
-                                </p>
-                                <div class="w-[80%]">
-                                    <input type="text" class="form-control" th:field="*{phone}" />
-                                </div>
-                            </div>
-                            <div
-                                class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
-                            >
-                                <p
-                                    class="w-[20%] text-[#818180] whitespace-nowrap"
-                                >
-                                    Email:
-                                </p>
-                                <div class="w-[80%]">
-                                    <input type="text" class="form-control" th:field="*{email}"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p
-                            class="font-bold mt-[20px] text-[20px] text-[#003c71]"
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Vé máy bay</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Vé vui chơi</a
+                    >
+                </li>
+            </ul>
+            <div class="text-end">
+                <div sec:authorize="!isAuthenticated()">
+                    <button
+                            type="button"
+                            class="btn me-2 bg-danger text-white"
+                            data-mdb-toggle="modal"
+                            data-mdb-target="#exampleModal"
+                    >
+                        Login
+                    </button>
+                    <a th:href="@{/signup}">
+                        <button
+                                type="button"
+                                class="btn btn-warning text-white"
+                                th:src="@{/signup}"
                         >
-                            Thông tin yêu cầu khác
-                        </p>
-                        <div class="form-floating mt-[10px]">
-                            <textarea
-                                class="form-control"
-                                placeholder="Bạn có điều gì muốn nói không?"
-                                id="floatingTextarea"
-                                th:field="*{info}"
-                            ></textarea>
-                            <label for="floatingTextarea"
-                                >Bạn có điều gì muốn nói không?</label
-                            >
-                        </div>
-                        <input
-                            type="submit"
-                            value="Thanh toán ngay"
-                            class="mt-[20px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
-                        />
-                    </form>
+                            Sign-up
+                        </button>
+                    </a>
                 </div>
-
-                <!-- Right -->
-                <div
-                    class="col-start-5 col-end-7 py-[16px] px-[16px] rounded-[6px] bg-white"
-                >
-                    <div>
-                        <p class="font-bold text-[20px] text-[#003c71]">
-                            Tên resort:
-                        </p>
-                        <div class="flex mt-[10px]">
-                            <div class="w-[30%]">
-                                <img
-                                    class="w-full h-full object-cover"
-                                    th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + ${resortImageDto.name}"
-                                />
-                            </div>
-                            <div
-                                class="w-[70%] px-[10px] py-[10px] bg-[#F9FAFA]"
-                            >
-                                <p
-                                    class="font-semibold text-[18px] text-[#003c71] line-clamp-2"
-                                    th:text="${resortDto.name}"
+                <div sec:authorize="isAuthenticated()">
+                    <div class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Tài khoản
+                        </a>
+                        <ul
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdown"
+                        >
+                            <li>
+                                <a
+                                        class="dropdown-item"
+                                        href="/profile"
+                                        sec:authentication="principal.email"
+                                ></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/profile"
+                                >Hồ sơ của tôi</a
                                 >
-                                </p>
-                                <div class="flex items-center">
-                                    <div class="flex gap-[3px]">
-                                        <i
-                                            class="fa-solid fa-star text-[#FDBF65]"
-                                        ></i>
-                                        <i
-                                            class="fa-solid fa-star text-[#FDBF65]"
-                                        ></i>
-                                        <i
-                                            class="fa-solid fa-star text-[#FDBF65]"
-                                        ></i>
-                                        <i
-                                            class="fa-solid fa-star text-[#FDBF65]"
-                                        ></i>
-                                        <i
-                                            class="fa-solid fa-star text-[#FDBF65]"
-                                        ></i>
-                                    </div>
-                                    <div class="ml-[10px]">
-                                        <i
-                                            class="fa-solid fa-heart text-[#E52822]"
-                                        ></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Room -->
-                    <div class="mt-[20px]">
-                        <p class="font-bold text-[20px] text-[#003c71]">
-                            Phòng đặt:
-                        </p>
-                        <img
-                            class="mt-[10px] w-full h-[262px] object-cover"
-                            th:src="@{/image/room/} + ${roomDto.id} + @{/} + ${roomDto.imageName}"
-                        />
-                        <div class="px-[10px] py-[16px] bg-[#F9FAFA]">
-                            <p class="font-semibold text-[18px] text-[#003c71]"
-                                th:text="${roomDto.name}">
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Price -->
-                    <div class="mt-[20px]">
-                        <p class="font-bold text-[20px] text-[#003c71]">
-                            Tổng cộng thanh toán
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <p class="w-[20%] text-[#818180] whitespace-nowrap">
-                                Tổng tiền
-                            </p>
-                            <p class="text-[22px] font-semibold text-[#26bed6]">
-                                5.766.000 VND
-                            </p>
-                        </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/trips"
+                                >Đơn hàng của tôi</a
+                                >
+                            </li>
+                            <li><a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a></li>
+                            <li><a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a></li>
+                            <li>
+                                <a class="dropdown-item" href="/logout"
+                                >Đăng xuất</a
+                                >
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</header>
+
+<!-- Body -->
+<div class="h-[calc(100vh-66px)] bg-[#ECF0F5] py-[16px]">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-6 gap-[30px]">
+        <!-- Left -->
+        <div
+                class="col-start-1 col-end-5 py-[16px] px-[16px] rounded-[6px] bg-white"
+        >
+            <!-- Form -->
+            <form
+                    th:action="@{/booking/} + ${roomDto.id}"
+                    th:object="${billDto}"
+                    th:method="post"
+            >
+                <p class="font-bold text-[20px] text-[#003c71]">
+                    Thông tin người đặt
+                </p>
+                <input hidden th:value="${roomid}" name="roomId" />
+                <p class="text-[12px] text-[#818180] mt-[4px] italic">
+                    Vui lòng điền đầy đủ thông tin
+                </p>
+                <div class="mt-[10px]">
+                    <div class="flex w-auto items-center gap-[10px]">
+                        <p
+                                class="w-[20%] text-[#818180] whitespace-nowrap"
+                        >
+                            Họ và tên đầy đủ:
+                        </p>
+                        <div class="form-check mr-[20px]">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    id="male-check"
+                                    name="gender"
+                                    th:field="*{gender}"
+                                    th:value="male"
+                            />
+                            <label
+                                    class="form-check-label"
+                                    for="male-check"
+                            >
+                                Anh
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    id="female-check"
+                                    name="gender"
+                                    th:field="*{gender}"
+                                    th:value="female"
+                            />
+                            <label
+                                    class="form-check-label"
+                                    for="female-check"
+                            >
+                                Chị
+                            </label>
+                        </div>
+                    </div>
+                    <div
+                            class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
+                    >
+                        <p
+                                class="w-[20%] text-[#818180] whitespace-nowrap"
+                        >
+                            Họ và tên đầy đủ:
+                        </p>
+                        <div class="w-[80%]">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{name}"
+                            />
+                        </div>
+                    </div>
+                    <div
+                            class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
+                    >
+                        <p
+                                class="w-[20%] text-[#818180] whitespace-nowrap"
+                        >
+                            Điện thoại:
+                        </p>
+                        <div class="w-[80%]">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{phone}"
+                            />
+                        </div>
+                    </div>
+                    <div
+                            class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
+                    >
+                        <p
+                                class="w-[20%] text-[#818180] whitespace-nowrap"
+                        >
+                            Email:
+                        </p>
+                        <div class="w-[80%]">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{email}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <p
+                        class="font-bold mt-[20px] text-[20px] text-[#003c71]"
+                >
+                    Thông tin yêu cầu khác
+                </p>
+                <div class="form-floating mt-[10px]">
+                            <textarea
+                                    class="form-control"
+                                    placeholder="Bạn có điều gì muốn nói không?"
+                                    id="floatingTextarea"
+                                    th:field="*{info}"
+                            ></textarea>
+                    <label for="floatingTextarea"
+                    >Bạn có điều gì muốn nói không?</label
+                    >
+                </div>
+                <input
+                        type="submit"
+                        value="Thanh toán ngay"
+                        class="mt-[20px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
+                />
+            </form>
+        </div>
+
+        <!-- Right -->
+        <div
+                class="col-start-5 col-end-7 py-[16px] px-[16px] rounded-[6px] bg-white"
+        >
+            <div>
+                <p class="font-bold text-[20px] text-[#003c71]">
+                    Tên resort:
+                </p>
+                <div class="flex mt-[10px]">
+                    <div class="w-[30%]">
+                        <img
+                                class="w-full h-full object-cover"
+                                th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + ${resortImageDto.name}"
+                        />
+                    </div>
+                    <div
+                            class="w-[70%] px-[10px] py-[10px] bg-[#F9FAFA]"
+                    >
+                        <p
+                                class="font-semibold text-[18px] text-[#003c71] line-clamp-2"
+                                th:text="${resortDto.name}"
+                        ></p>
+                        <div class="flex items-center">
+                            <div class="flex gap-[3px]">
+                                <i
+                                        th:each="number : ${#numbers.sequence(1, resortDto.point)}"
+                                        class="fa-solid fa-star text-[#FDBF65]"
+                                ></i>
+                            </div>
+                            <div class="ml-[10px]">
+                                <i
+                                        class="fa-solid fa-heart text-[#E52822]"
+                                ></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Room -->
+            <div class="mt-[20px]">
+                <p class="font-bold text-[20px] text-[#003c71]">
+                    Phòng đặt:
+                </p>
+                <img
+                        class="mt-[10px] w-full h-[262px] object-cover"
+                        th:src="@{/image/room/} + ${roomDto.id} + @{/} + ${roomDto.imageName}"
+                />
+                <div class="px-[10px] py-[16px] bg-[#F9FAFA]">
+                    <p
+                            class="font-semibold text-[18px] text-[#003c71]"
+                            th:text="${roomDto.name}"
+                    ></p>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="mt-[20px]">
+                <p class="font-bold text-[20px] text-[#003c71]">
+                    Tổng cộng thanh toán
+                </p>
+                <div class="flex justify-between items-center">
+                    <p class="w-[20%] text-[#818180] whitespace-nowrap">
+                        Tổng tiền
+                    </p>
+                    <p class="text-[22px] font-semibold text-[#26bed6]">
+                        5.766.000 VND
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

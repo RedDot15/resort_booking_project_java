@@ -1,617 +1,751 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Phú Quốc</title>
-        <link
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="'Khách sạn ' + ${cityDto.name}"></title>
+    <link
+            rel="shortcut icon"
+            href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
+            type="image/x-icon"
+    />
+    <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-        />
-        <script
+    />
+    <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
-        ></script>
-        <link
+    ></script>
+    <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-        />
+    />
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-        <link
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
-                height: 20px;
-                width: 20px;
-                background-color: azure;
-            }
-        </style>
-        <!-- Font Awesome -->
-        <link
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-                rel="stylesheet"
-        />
-        <!-- Google Fonts -->
-        <link
-                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                rel="stylesheet"
-        />
-        <!-- MDB -->
-        <link
-                href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
-                rel="stylesheet"
-        />
-    </head>
-    <body>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-toggle="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="container h-100">
-                        <div class="row d-flex justify-content-center align-items-center h-100">
-                            <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
-                            <div class="card shadow-2-strong">
-                                <form action="/doLogin" method="post">
-                                    <div class="card-body py-3 px-3 text-center">
-                                        <div class="flex flex-col items-center">
-                                            <img class="w-[80px]" src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"/>
-                                            <h3 class="mt-2 mb-5">Sign in</h3>
-                                        </div>
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
+            height: 20px;
+            width: 20px;
+            background-color: azure;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<!-- Modal -->
+<div
+        class="modal fade"
+        id="exampleModal"
+        data-bs-backdrop="static"
+        data-bs-toggle="modal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container h-100">
+                <div
+                        class="row d-flex justify-content-center align-items-center h-100"
+                >
+                    <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                    <div class="card shadow-2-strong">
+                        <form action="/doLogin" method="post">
+                            <div
+                                    class="card-body py-3 px-3 text-center"
+                            >
+                                <div class="flex flex-col items-center">
+                                    <img
+                                            class="w-[80px]"
+                                            src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
+                                    />
+                                    <h3 class="mt-2 mb-5">Sign in</h3>
+                                </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email"/>
-                                            <label class="form-label" for="typeEmailX-2">Email</label>
-                                        </div>
+                                <div class="form-outline mb-4">
+                                    <input
+                                            type="email"
+                                            id="typeEmailX-2"
+                                            class="form-control form-control-lg"
+                                            name="email"
+                                    />
+                                    <label
+                                            class="form-label"
+                                            for="typeEmailX-2"
+                                    >Email</label
+                                    >
+                                </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password" />
-                                            <label class="form-label" for="typePasswordX-2">Password</label>
-                                        </div>
+                                <div class="form-outline mb-4">
+                                    <input
+                                            type="password"
+                                            id="typePasswordX-2"
+                                            class="form-control form-control-lg"
+                                            name="password"
+                                    />
+                                    <label
+                                            class="form-label"
+                                            for="typePasswordX-2"
+                                    >Password</label
+                                    >
+                                </div>
 
-                                        <!-- Checkbox -->
-                                        <div class="form-check d-flex justify-content-start mb-4">
-                                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                                            <label class="form-check-label" for="form1Example3"> Remember password </label>
-                                        </div>
+                                <!-- Checkbox -->
+                                <div
+                                        class="form-check d-flex justify-content-start mb-4"
+                                >
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value=""
+                                            id="form1Example3"
+                                    />
+                                    <label
+                                            class="form-check-label"
+                                            for="form1Example3"
+                                    >
+                                        Remember password
+                                    </label>
+                                </div>
 
-                                        <button class="btn btn-primary btn-lg btn-block bg-[#3b5998]" type="submit">Login</button>
+                                <button
+                                        class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
+                                        type="submit"
+                                >
+                                    Login
+                                </button>
 
-                                        <hr class="my-4">
+                                <hr class="my-4" />
 
-                                        <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-                                                type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
-                                        <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
-                                                type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
-
-                                    </div>
-                                </form>
+                                <button
+                                        class="btn btn-lg btn-block btn-primary"
+                                        style="background-color: #dd4b39"
+                                        type="submit"
+                                >
+                                    <i class="fab fa-google me-2"></i>
+                                    Sign in with google
+                                </button>
+                                <button
+                                        class="btn btn-lg btn-block btn-primary mb-2"
+                                        style="background-color: #3b5998"
+                                        type="submit"
+                                >
+                                    <i
+                                            class="fab fa-facebook-f me-2"
+                                    ></i
+                                    >Sign in with facebook
+                                </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Header -->
-        <header class="p-2 bg-[#003C71] text-white">
-            <div class="max-w-[1200px] mx-auto">
-                <div
-                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-                >
-                    <a
-                        href="/"
-                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-                    >
-                        <img
-                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
-                        />
-                    </a>
+    </div>
+</div>
+<!-- Header -->
+<header class="p-2 bg-[#003C71] text-white">
+    <div class="max-w-[1200px] mx-auto">
+        <div
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+        >
+            <a
+                    href="/"
+                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+            >
+                <img
+                        src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                />
+            </a>
 
-                    <ul
-                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+            <ul
+                    class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+            >
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Khách sạn</a
                     >
-                        <li>
-                            <a href="/" class="nav-link px-2 text-white"
-                            >Khách sạn</a
-                            >
-                        </li>
-                    </ul>
-                    <div class="text-end">
-                        <div sec:authorize="!isAuthenticated()">
-                            <button
-                                    type="button"
-                                    class="btn me-2 bg-danger text-white"
-                                    data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                            >
-                                Login
-                            </button>
-                            <a th:href="@{/signup}">
-                                <button
-                                        type="button"
-                                        class="btn btn-warning text-white"
-                                        th:src="@{/signup}"
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Tours</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Vé máy bay</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/"
+                            class="nav-link px-2 text-white text-[20px]"
+                    >Vé vui chơi</a
+                    >
+                </li>
+            </ul>
+            <div class="text-end">
+                <div sec:authorize="!isAuthenticated()">
+                    <button
+                            type="button"
+                            class="btn me-2 bg-danger text-white"
+                            data-mdb-toggle="modal"
+                            data-mdb-target="#exampleModal"
+                    >
+                        Login
+                    </button>
+                    <a th:href="@{/signup}">
+                        <button
+                                type="button"
+                                class="btn btn-warning text-white"
+                                th:src="@{/signup}"
+                        >
+                            Sign-up
+                        </button>
+                    </a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <div class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Tài khoản
+                        </a>
+                        <ul
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdown"
+                        >
+                            <li>
+                                <a
+                                        class="dropdown-item"
+                                        href="/profile"
+                                        sec:authentication="principal.email"
+                                ></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/profile"
+                                >Hồ sơ của tôi</a
                                 >
-                                    Sign-up
-                                </button>
-                            </a>
-                        </div>
-                        <div sec:authorize="isAuthenticated()">
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Tài khoản
-                                </a>
-                                <ul
-                                        class="dropdown-menu"
-                                        aria-labelledby="navbarDropdown"
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/trips"
+                                >Đơn hàng của tôi</a
                                 >
-                                    <li>
-                                        <a
-                                                class="dropdown-item"
-                                                href="/profile"
-                                                sec:authentication="principal.email"
-                                        ></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/profile"
-                                        >Hồ sơ của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/trips"
-                                        >Đơn hàng của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/logout"
-                                        >Đăng xuất</a
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                            </li>
+                            <li><a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a></li>
+                            <li><a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a></li>
+                            <li>
+                                <a class="dropdown-item" href="/logout"
+                                >Đăng xuất</a
+                                >
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </div>
+</header>
 
-        <!-- Body -->
-        <div>
-            <div class="max-w-[1200px] mx-auto py-[16px]">
-                <h1
-                    class="text-[44px] font-semibold text-[#003c71]"
-                    th:text="'Khách sạn ' + ${cityDto.name}"
-                ></h1>
-                <div class="grid grid-cols-4 mt-[16px] gap-[16px]">
-                    <!-- Left -->
-                    <div class="col-start-1 col-end-2 grid gap-[16px]">
-                        <!-- Supported -->
-                        <div
-                            class="p-[16px] flex gap-[6px] border-[1px] border-[#9497a326]"
+<!-- Body -->
+<div>
+    <div class="max-w-[1200px] mx-auto py-[16px]">
+        <h1
+                class="text-[44px] font-semibold text-[#003c71]"
+                th:text="'Khách sạn ' + ${cityDto.name}"
+        ></h1>
+        <div class="grid grid-cols-4 mt-[16px] gap-[16px]">
+            <!-- Left -->
+            <div class="flex flex-col gap-[16px]">
+                <!-- Supported -->
+                <div
+                        class="p-[16px] flex gap-[6px] border-[1px] border-[#9497a326]"
+                >
+                    <img
+                            src="https://cdn1.ivivu.com/iVivu/2018/12/04/09/undefined-2.png"
+                            class="w-[100px] h-[100px]"
+                    />
+                    <div>
+                        <p class="text-[22px] font-semibold">
+                            Cần hỗ trợ?
+                        </p>
+                        <p>
+                            HCM -
+                            <a href="/" class="text-[#f79321]"
+                            >1900 1870</a
+                            >
+                        </p>
+                        <p>
+                            HN -
+                            <a href="/" class="text-[#f79321]"
+                            >1900 2045</a
+                            >
+                        </p>
+                        <p>
+                            CT -
+                            <a href="/" class="text-[#f79321]"
+                            >1900 2087</a
+                            >
+                        </p>
+                    </div>
+                </div>
+                <!-- Select option -->
+                <div class="border-[1px] px-[16px] border-[#9497a326]">
+                    <!-- Search -->
+                    <form class="flex py-[16px]">
+                        <input
+                                type="text"
+                                class="form-control h-[40px]"
+                                placeholder="Nhập tên khách sạn"
+                                name="keyword"
+                                id="keyword"
+                                th:value="${keyword}"
+                                onkeyup="handleGetResortByExtension(event, null, null, null, null)"
+                        />
+                        <button
+                                class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
+                                type="submit"
                         >
-                            <img
-                                src="https://cdn1.ivivu.com/iVivu/2018/12/04/09/undefined-2.png"
-                                class="w-[100px] h-[100px]"
-                            />
-                            <div>
-                                <p class="text-[22px] font-semibold">
-                                    Cần hỗ trợ?
-                                </p>
-                                <p>
-                                    HCM -
-                                    <a href="/" class="text-[#f79321]"
-                                        >1900 1870</a
-                                    >
-                                </p>
-                                <p>
-                                    HN -
-                                    <a href="/" class="text-[#f79321]"
-                                        >1900 2045</a
-                                    >
-                                </p>
-                                <p>
-                                    CT -
-                                    <a href="/" class="text-[#f79321]"
-                                        >1900 2087</a
-                                    >
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Select option -->
-                        <div class="border-[1px] px-[16px] border-[#9497a326]">
-                            <!-- Search -->
-                            <form class="flex py-[16px]">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+                    <!-- Star -->
+                    <div
+                            class="border-t-[1px] py-[16px] border-[#9497a326]"
+                    >
+                        <p class="font-semibold text-[20px]">
+                            Hạng sao
+                        </p>
+                        <div>
+                            <div
+                                    class="py-[6px] flex"
+                                    th:each="number : ${#numbers.sequence(1, 5)}"
+                            >
                                 <input
-                                    type="text"
-                                    class="form-control h-[40px]"
-                                    placeholder="Nhập tên khách sạn"
-                                    name="keyword" id="keyword" th:value="${keyword}"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        th:id="'star-' + ${number}"
+                                        th:attr="star-id=${5 - number + 1}"
+                                        onchange="handleGetResortByExtension(null, this.getAttribute('star-id'), this, null, null)"
                                 />
-                                <button
-                                    class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
-                                    type="submit"
+                                <label
+                                        th:for="'star-' + ${number}"
+                                        class="pl-[6px]"
                                 >
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </form>
-
-                            <!-- Star -->
-                            <div
-                                class="border-t-[1px] py-[16px] border-[#9497a326]"
-                            >
-                                <p class="font-semibold text-[20px]">
-                                    Hạng sao
-                                </p>
-                                <div>
-                                    <div class="py-[6px] flex">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="five-star"
-                                        />
-                                        <label
-                                            for="five-star"
-                                            class="ml-[10px]"
-                                        >
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                        </label>
-                                    </div>
-                                    <div class="py-[6px] flex">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="four-star"
-                                        />
-                                        <label
-                                            for="four-star"
-                                            class="ml-[10px]"
-                                        >
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                        </label>
-                                    </div>
-                                    <div class="py-[6px] flex">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="three-star"
-                                        />
-                                        <label
-                                            for="three-star"
-                                            class="ml-[10px]"
-                                        >
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                        </label>
-                                    </div>
-                                    <div class="py-[6px] flex">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="two-star"
-                                        />
-                                        <label for="two-star" class="ml-[10px]">
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                        </label>
-                                    </div>
-                                    <div class="py-[6px] flex">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            id="one-star"
-                                        />
-                                        <label for="one-star" class="ml-[10px]">
-                                            <i
-                                                class="fa-solid fa-star text-[#FDBF65]"
-                                            ></i>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Extension -->
-                            <div
-                                class="border-t-[1px] py-[16px] border-[#9497a326]"
-                            >
-                                <p class="font-semibold text-[20px]">
-                                    Tiện ích
-                                </p>
-                                <div>
-                                    <th:block
-                                        th:each="extensionDto : ${extensionList}"
-                                        th:object="${extensionDto}"
-                                    >
-                                        <div class="py-[6px] flex">
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                id="ex-1"
-                                            />
-                                            <label
-                                                for="ex-1"
-                                                class="ml-[10px]"
-                                                th:text="*{name}"
-                                            >
-                                            </label>
-                                        </div>
-                                    </th:block>
-                                </div>
+                                    <i
+                                            th:each="numberChildren : ${#numbers.sequence(1, 5 - number + 1)}"
+                                            class="fa-solid fa-star text-[#FDBF65] mr-[3px]"
+                                    ></i>
+                                </label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right -->
-                    <div class="col-start-2 col-end-5">
-                        <div class="grid grid-cols-1 gap-[16px]">
+                    <!-- Extension -->
+                    <div
+                            class="border-t-[1px] py-[16px] border-[#9497a326]"
+                    >
+                        <p class="font-semibold text-[20px]">
+                            Tiện ích
+                        </p>
+                        <div>
                             <th:block
-                                th:each="resortDto : ${resortList}"
-                                th:object="${resortDto}"
+                                    th:each="extensionDto : ${extensionList}"
+                                    th:object="${extensionDto}"
                             >
-                                <div
-                                    class="flex h-[210px] shadow-[0_3px_15px_rgba(0,0,0,0.1)] group"
-                                >
-                                    <div class="w-[30%] overflow-hidden">
-                                        <a th:href="@{/resort/} + *{id}">
-                                            <img
-                                                class="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-[0.4s]"
-                                                th:src="@{/image/resort/} + *{id} + @{/detail/} + *{resortimageEntityList.get(0).name}"
-                                            />
-                                        </a>
-                                    </div>
-                                    <div
-                                        class="w-[50%] px-[10px] py-[16px] bg-[#F9FAFA]"
-                                    >
-                                        <p
-                                            class="font-semibold text-[20px] text-[#003c71]"
+                                <div class="py-[6px] flex">
+                                    <input
+                                            class="form-check-input extension-checkbox"
+                                            type="checkbox"
+                                            th:id="'checkbox-' + ${extensionDto.id}"
+                                            th:attr="extension-id=${extensionDto.id}"
+                                            onchange="handleGetResortByExtension(null, null, null, this.getAttribute('extension-id'), this)"
+                                    />
+                                    <label
+                                            th:for="'checkbox-' + ${extensionDto.id}"
+                                            class="pl-[6px] cursor-pointer"
                                             th:text="*{name}"
-                                        ></p>
-                                        <div class="flex items-center">
-                                            <div class="flex gap-[3px]">
-                                                <i
-                                                    class="fa-solid fa-star text-[#FDBF65]"
-                                                ></i>
-                                                <i
-                                                    class="fa-solid fa-star text-[#FDBF65]"
-                                                ></i>
-                                                <i
-                                                    class="fa-solid fa-star text-[#FDBF65]"
-                                                ></i>
-                                                <i
-                                                    class="fa-solid fa-star text-[#FDBF65]"
-                                                ></i>
-                                                <i
-                                                    class="fa-solid fa-star text-[#FDBF65]"
-                                                ></i>
-                                            </div>
-                                            <div class="ml-[10px]">
-                                                <i
-                                                    class="fa-solid fa-heart text-[#E52822]"
-                                                ></i>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-[#9fc43a] text-[16px] font-bold"
-                                        >
-                                            Tuyệt vời
-                                        </p>
-                                    </div>
-                                    <div
-                                        class="w-[20%] flex items-center justify-center text-[22px] font-semibold text-[#26bed6]"
                                     >
-                                        <p th:text="*{roomEntityList.get(0).price} + ' VND'"></p>
-                                    </div>
+                                    </label>
                                 </div>
                             </th:block>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Right -->
+            <div class="col-start-2 col-end-5">
+                <div
+                        id="city-container"
+                        class="grid grid-cols-1 gap-[16px]"
+                >
+                    <th:block
+                            th:each="resortDto : ${resortList}"
+                            th:object="${resortDto}"
+                    >
+                        <div
+                                class="flex h-[210px] shadow-[0_3px_15px_rgba(0,0,0,0.1)] group"
+                        >
+                            <div class="w-[30%] overflow-hidden">
+                                <a th:href="@{/resort/} + *{id}">
+                                    <img
+                                            class="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-[0.4s]"
+                                            th:src="@{/image/resort/} + *{id} + @{/detail/} + *{resortimageEntityList.get(0).name}"
+                                    />
+                                </a>
+                            </div>
+                            <div
+                                    class="w-[50%] px-[10px] py-[16px] bg-[#F9FAFA]"
+                            >
+                                <p
+                                        class="font-semibold text-[20px] text-[#003c71]"
+                                        th:text="*{name}"
+                                ></p>
+                                <div class="flex items-center">
+                                    <div class="flex gap-[3px]">
+                                        <i
+                                                th:each="number : ${#numbers.sequence(1, resortDto.point)}"
+                                                class="fa-solid fa-star text-[#FDBF65]"
+                                        ></i>
+                                    </div>
+                                    <div class="ml-[10px]">
+                                        <i
+                                                class="fa-solid fa-heart text-[#E52822]"
+                                        ></i>
+                                    </div>
+                                </div>
+                                <p
+                                        class="text-[#9fc43a] text-[16px] font-bold"
+                                >
+                                    Tuyệt vời
+                                </p>
+                            </div>
+                            <div
+                                    class="w-[20%] flex items-center justify-center text-[22px] font-semibold text-[#26bed6]"
+                            >
+                                <p
+                                        th:text="*{roomEntityList.get(0).price} + ' VND'"
+                                ></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 
-        <!-- Footer -->
-        <footer
-            class="text-center text-lg-start text-white"
-            style="background-color: #929fba"
-        >
-            <!-- Grid container -->
-            <div class="max-w-[1200px] mx-auto py-[24px]">
-                <!-- Section: Links -->
-                <section class="">
-                    <!--Grid row-->
-                    <div class="row">
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Về iVIVU.com
-                            </h6>
-                            <p>
-                                <a class="text-white">Chúng tôi</a>
-                            </p>
-                            <p>
-                                <a class="text-white">iVIVU Blog</a>
-                            </p>
-                            <p>
-                                <a class="text-white">PMS - Miễn phí</a>
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+<!-- Footer -->
+<footer
+        class="text-center text-lg-start text-white"
+        style="background-color: #929fba"
+>
+    <!-- Grid container -->
+    <div class="max-w-[1200px] mx-auto py-[24px]">
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Về iVIVU.com
+                    </h6>
+                    <p>
+                        <a class="text-white">Chúng tôi</a>
+                    </p>
+                    <p>
+                        <a class="text-white">iVIVU Blog</a>
+                    </p>
+                    <p>
+                        <a class="text-white">PMS - Miễn phí</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
 
-                        <hr class="w-100 clearfix d-md-none" />
+                <hr class="w-100 clearfix d-md-none" />
 
-                        <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Thông Tin Cần Biết
-                            </h6>
-                            <p>
-                                <a class="text-white">Điều kiện & Điều khoản</a>
-                            </p>
-                            <p>
-                                <a class="text-white">Quy chế hoạt động</a>
-                            </p>
-                            <p>
-                                <a class="text-white">Câu hỏi thường gặp</a>
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Thông Tin Cần Biết
+                    </h6>
+                    <p>
+                        <a class="text-white">Điều kiện & Điều khoản</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Quy chế hoạt động</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Câu hỏi thường gặp</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
 
-                        <hr class="w-100 clearfix d-md-none" />
+                <hr class="w-100 clearfix d-md-none" />
 
-                        <!-- Grid column -->
-                        <hr class="w-100 clearfix d-md-none" />
+                <!-- Grid column -->
+                <hr class="w-100 clearfix d-md-none" />
 
-                        <!-- Grid column -->
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Liên lạc
-                            </h6>
-                            <p>
-                                <i class="fas fa-home mr-3"></i> P308, Tầng 3,
-                                tòa nhà The One, số 2 Chương Dương Độ, P.Chương
-                                Dương, Q.Hoàn Kiếm, Hà Nội
-                            </p>
-                            <p>
-                                <i class="fas fa-envelope mr-3"></i>
-                                ivivu@gmail.com
-                            </p>
-                            <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
-                            <p>
-                                <i class="fas fa-print mr-3"></i> + 01 234 567
-                                89
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Liên lạc
+                    </h6>
+                    <p>
+                        <i class="fas fa-home mr-3"></i> P308, Tầng 3,
+                        tòa nhà The One, số 2 Chương Dương Độ, P.Chương
+                        Dương, Q.Hoàn Kiếm, Hà Nội
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i>
+                        ivivu@gmail.com
+                    </p>
+                    <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
+                    <p>
+                        <i class="fas fa-print mr-3"></i> + 01 234 567
+                        89
+                    </p>
+                </div>
+                <!-- Grid column -->
 
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Follow us
+                    </h6>
 
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Follow us
-                            </h6>
+                    <!-- Facebook -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #3b5998"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-facebook-f"></i
+                    ></a>
 
-                            <!-- Facebook -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #3b5998"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-facebook-f"></i
-                            ></a>
+                    <!-- Twitter -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #55acee"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
 
-                            <!-- Twitter -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #55acee"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-twitter"></i
-                            ></a>
+                    <!-- Google -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #dd4b39"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-google"></i
+                    ></a>
 
-                            <!-- Google -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #dd4b39"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-google"></i
-                            ></a>
+                    <!-- Instagram -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #ac2bac"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-instagram"></i
+                    ></a>
 
-                            <!-- Instagram -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #ac2bac"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-instagram"></i
-                            ></a>
-
-                            <!-- Linkedin -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #0082ca"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-linkedin-in"></i
-                            ></a>
-                            <!-- Github -->
-                            <a
-                                class="btn btn-primary btn-floating m-1"
-                                style="background-color: #333333"
-                                href="/"
-                                role="button"
-                                ><i class="fab fa-github"></i
-                            ></a>
-                        </div>
-                    </div>
-                    <!--Grid row-->
-                </section>
-                <!-- Section: Links -->
+                    <!-- Linkedin -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #0082ca"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                    <!-- Github -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #333333"
+                            href="/"
+                            role="button"
+                    ><i class="fab fa-github"></i
+                    ></a>
+                </div>
             </div>
-            <!-- Grid container -->
+            <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
 
-            <!-- Copyright -->
-            <div
-                class="text-center p-3"
-                style="background-color: rgba(0, 0, 0, 0.2)"
-            >
-                © 2023 Copyright:
-                <a class="text-white" href="/">Nhóm 1</a>
-            </div>
-            <!-- Copyright -->
-        </footer>
-    </body>
+    <!-- Copyright -->
+    <div
+            class="text-center p-3"
+            style="background-color: rgba(0, 0, 0, 0.2)"
+    >
+        © 2023 Copyright:
+        <a class="text-white" href="/">Nhóm 1</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+</body>
 </html>
 <script
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>
+<script>
+    let url = `http://localhost:8888/resort/filter`;
+    let cityContainer = document.getElementById("city-container");
+    let extensionCity = { cityId: [[${cityDto.id}]], starArrId: [], extensionArrId: [], keyword: '' };
+    let html = "";
+
+    let handleGetResortByExtension = (event, starId, star, extensionId, extension) => {
+        if (event) {
+            extensionCity.keyword = event.target.value
+        }
+        if (star) {
+            if (star.checked) {
+                extensionCity.starArrId.push(Number(starId));
+            }
+            else {
+                extensionCity.starArrId = extensionCity.starArrId.filter((star) => {
+                    return star != starId;
+                });
+            }
+        }
+        if (extension) {
+            if (extension.checked) {
+                extensionCity.extensionArrId.push(Number(extensionId));
+            } else {
+                extensionCity.extensionArrId = extensionCity.extensionArrId.filter((ext) => {
+                    return ext != extensionId;
+                });
+            }
+        }
+
+        postData(url, extensionCity).then((data) => {
+            renderResortByFilter(data)
+        });
+    };
+
+    async function postData(url = "", data = []) {
+        const response = await fetch(url, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    }
+
+    let renderResortByFilter = (data) => {
+        html = Array.from(data)
+            .map((resort, index) => {
+                let starHTML = ''
+                for (let i = 0; i < resort.point; i++) {
+                    starHTML += `
+                        <i
+                            class="fa-solid fa-star text-[#FDBF65]"
+                        ></i>
+                        `
+                }
+
+                return `
+                    <div
+                        class="flex h-[210px] shadow-[0_3px_15px_rgba(0,0,0,0.1)] group"
+                    >
+                        <div class="w-[30%] overflow-hidden">
+                            <a href="/resort/${resort.id}">
+                                <img
+                                    class="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-[0.4s]"
+                                    src="/image/resort/${resort.id}/detail/${resort.resortimageEntityList[0].name}"
+                                />
+                            </a>
+                        </div>
+                        <div
+                            class="w-[50%] px-[10px] py-[16px] bg-[#F9FAFA]"
+                        >
+                            <p
+                                class="font-semibold text-[20px] text-[#003c71]"
+                            >${resort.name}</p>
+                            <div class="flex items-center">
+                                <div class="flex gap-[3px]">
+                                    ${starHTML}
+                                </div>
+                                <div class="ml-[10px]">
+                                    <i
+                                        class="fa-solid fa-heart text-[#E52822]"
+                                    ></i>
+                                </div>
+                            </div>
+                            <p
+                                class="text-[#9fc43a] text-[16px] font-bold"
+                            >
+                                Tuyệt vời
+                            </p>
+                        </div>
+                        <div
+                            class="w-[20%] flex items-center justify-center text-[22px] font-semibold text-[#26bed6]"
+                        >
+                            <p>${resort.roomEntityList[0]?.price} VND</p>
+                        </div>
+                    </div>
+                `;
+            })
+            .join("");
+
+        cityContainer.innerHTML = html;
+    }
+
+    let clearResortByFilter = () => {
+        cityContainer.innerHTML = '';
+    }
+</script>
