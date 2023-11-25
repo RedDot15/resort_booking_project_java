@@ -105,7 +105,7 @@ public class CityService {
         List<CityEntity> cityEntityList = new ArrayList<>();
         List<CityEntity> allCityRepository = cityRepository.findAll();
         for (CityEntity cityEntity : allCityRepository) {
-            if (cityEntity.getName().toUpperCase().contains(keyword.toUpperCase())) {
+            if (cityEntity.getName().toUpperCase().trim().contains(keyword.toUpperCase().trim())) {
                 cityEntityList.add(cityEntity);
             }
         }

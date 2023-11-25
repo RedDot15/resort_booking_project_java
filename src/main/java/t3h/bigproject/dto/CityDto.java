@@ -23,3 +23,5 @@ public class CityDto {
 
     List<ResortEntity> resortEntityList;
 }
+
+

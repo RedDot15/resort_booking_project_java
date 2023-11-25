@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.RoomDto;
 import t3h.bigproject.dto.RoomDto;
+import t3h.bigproject.service.ResortService;
 import t3h.bigproject.service.RoomService;
 import t3h.bigproject.utils.FileUtils;
 
@@ -26,6 +27,9 @@ public class RoomController {
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    ResortService resortService;
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
                 Model model){
@@ -38,6 +42,8 @@ public class RoomController {
     String detail(@PathVariable Long id, Model model) {
         Object p = roomService.getDetailById(id);
         model.addAttribute("roomDto", p);
+        Object danhsach = resortService.getAll(null);
+        model.addAttribute("listResort", danhsach);
         return "/backend/room/create.html";
     }
 
@@ -45,6 +51,8 @@ public class RoomController {
     String add(Model model) {
         RoomDto b = new RoomDto();
         model.addAttribute("roomDto", b);
+        Object danhsach = resortService.getAll(null);
+        model.addAttribute("listResort", danhsach);
         return "/backend/room/create.html";
     }
 
@@ -68,7 +76,7 @@ public class RoomController {
 //            }
             roomService.add(roomDto);
             id = roomDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = roomService.update(roomDto);
             msg = "Cập nhật";
