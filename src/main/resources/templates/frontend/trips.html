@@ -162,7 +162,6 @@
                         class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
                     >
                         <img
-                            alt=""
                             src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
                         />
                     </a>
@@ -251,6 +250,21 @@
                                         <a class="dropdown-item" href="/trips"
                                             >Đơn hàng của tôi</a
                                         >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/logout"
