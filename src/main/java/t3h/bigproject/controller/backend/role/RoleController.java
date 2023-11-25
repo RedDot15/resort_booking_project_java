@@ -60,14 +60,9 @@ public class RoleController {
         Long id = roleDto.getId();
 
         if (roleDto.getId() == null) {
-//            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
-//            if (produceDto != null) {
-//                model.addAttribute("message", "đã tồn tại");
-//                return "/products/create.html";
-//            }
             roleService.add(roleDto);
             id = roleDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = roleService.update(roleDto);
             msg = "Cập nhật";
