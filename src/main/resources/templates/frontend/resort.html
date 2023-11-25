@@ -216,11 +216,38 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Tài khoản
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#" sec:authentication="principal.email"></a></li>
-                                    <li><a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a></li>
-                                    <li><a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a></li>
-                                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                <ul
+                                        class="dropdown-menu"
+                                        aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                                class="dropdown-item"
+                                                href="/profile"
+                                                sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/profile"
+                                        >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/trips"
+                                        >Đơn hàng của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                        >Đăng xuất</a
+                                        >
+                                    </li>
                                 </ul>
                             </div>
                         </div>
