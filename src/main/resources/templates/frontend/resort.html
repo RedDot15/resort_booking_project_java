@@ -127,6 +127,15 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+        />
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/toastify-js"
+        ></script>
     </head>
     <body>
         <!-- Modal -->
@@ -560,7 +569,27 @@
                                     </td>
                                     <td class="w-[25%]">
                                         <div class="py-[12px] px-[8px]">
-                                            <div>
+                                            <div
+                                                onclick="handleLoginToBuy()"
+                                                sec:authorize="!isAuthenticated()"
+                                            >
+                                                <div>
+                                                    <div
+                                                        class="cursor-pointer rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
+                                                    >
+                                                        Đặt ngay
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="cursor-pointer rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
+                                                >
+                                                    1 villa
+                                                </div>
+                                            </div>
+                                            <div
+                                                sec:authorize="isAuthenticated()"
+                                            >
                                                 <a
                                                     th:href="@{/booking/} + *{id}"
                                                 >
@@ -578,6 +607,7 @@
                                                 </div>
                                             </div>
                                             <div
+                                                sec:authorize="isAuthenticated()"
                                                 class="flex items-center justify-center mt-[8px]"
                                             >
                                                 <i
@@ -870,3 +900,21 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>
+<script>
+    let handleLoginToBuy = () => {
+        Toastify({
+            text: "Bạn cần phải đăng nhập trước khi đặt phòng!",
+            duration: 3000,
+            newWindow: false,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background:
+                    "linear-gradient(90deg, rgba(249,11,11,1) 2%, rgba(249,11,24,0.9192927170868347) 100%)",
+            },
+            onClick: function () {}, // Callback after click
+        }).showToast();
+    };
+</script>
