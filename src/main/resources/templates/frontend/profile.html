@@ -298,12 +298,9 @@
                     <img
                         class="w-[110px] h-[110px] rounded-[50%] object-cover"
                         onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
-                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                        th:src="@{/image/user/} + ${userDto.avatarImg}"
                     />
-                    <p
-                        class="font-bold mt-[14px]"
-                        th:text="${userDto.name}"
-                    ></p>
+                    <p class="font-bold mt-[14px]" th:text="${userDto.name}"></p>
                     <div class="mt-[20px] w-full">
                         <a
                             th:href="@{|~/profile/${#authentication.principal.id}|}"
@@ -331,7 +328,7 @@
                         <div class="flex flex-col items-center">
                             <img
                                 onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
-                                th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                th:src="@{/image/user/} + ${userDto.avatarImg}"
                                 alt=""
                                 class="w-[130px] h-[130px] object-cover"
                                 id="imagePreview"
