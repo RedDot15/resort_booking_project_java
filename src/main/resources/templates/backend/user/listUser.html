@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
   <meta charset="utf-8">
@@ -97,7 +97,7 @@
                           class="dropdown-item"
                           href="/backend/user"
                           sec:authorize="hasAnyAuthority('ROLE_1')"
-                          th:text="'Cơ sở dữ liệu'"
+                          th:text="'Quay lại trang chủ'"
                       ></a>
                   </li>
                   <li>
