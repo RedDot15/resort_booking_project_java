@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class UserDto {
     private Long id;
+    private String name;
     @Email(message = "Không đúng định dạng email")
     private String email;
     @NotBlank(message = "Mật khẩu là bắt buộc")

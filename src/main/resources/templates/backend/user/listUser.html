@@ -242,6 +242,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
+                    <th>NAME</th>
                     <th>EMAIL</th>
                     <th>PASSWORD</th>
                     <th>AVATAR IMAGE</th>
@@ -255,6 +256,7 @@
                   <tr th:object="${userDto}">
                     <!-- khi co th:object -->
                     <td th:text="*{id}"></td>
+                    <td th:text="*{name}"></td>
                     <td th:text="*{email}"></td>
                     <td th:text="*{password}"></td>
                     <td th:text="*{avatarImg}"></td>
