@@ -142,6 +142,6 @@ public class HomeController {
     @RequestMapping("/403")
     public String accessDenied(Model model) {
         model.addAttribute("message", "Bạn không có quyền truy cập");
-        return "errors/403.html";
+        return "errors/pages-error-403.html";
     }
 }
