@@ -1,757 +1,771 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đặt phòng khách sạn trực tuyến giá rẻ</title>
-    <link
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đặt phòng khách sạn trực tuyến giá rẻ</title>
+        <link
             rel="shortcut icon"
             href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
             type="image/x-icon"
-    />
-    <link
+        />
+        <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-    />
-    <script
+        />
+        <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
-    ></script>
-    <link
+        ></script>
+        <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-    />
+        />
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <link
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
-            height: 20px;
-            width: 20px;
-            background-color: azure;
-        }
-    </style>
-    <!-- Font Awesome -->
-    <link
+        <style>
+            .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
+                height: 20px;
+                width: 20px;
+                background-color: azure;
+            }
+        </style>
+        <!-- Font Awesome -->
+        <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
+        />
+        <!-- Google Fonts -->
+        <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
+        />
+        <!-- MDB -->
+        <link
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
             rel="stylesheet"
-    />
-</head>
-<body>
-<!-- Modal -->
-<div
-        class="modal fade"
-        id="exampleModal"
-        data-bs-backdrop="static"
-        data-bs-toggle="modal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="container h-100">
-                <div
-                        class="row d-flex justify-content-center align-items-center h-100"
-                >
-                    <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
-                    <div class="card shadow-2-strong">
-                        <form action="/doLogin" method="post">
-                            <div
-                                    class="card-body py-3 px-3 text-center"
-                            >
-                                <div class="flex flex-col items-center">
-                                    <img
-                                            class="w-[80px]"
-                                            src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
-                                    />
-                                    <h3 class="mt-2 mb-5">Sign in</h3>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input
-                                            type="email"
-                                            id="typeEmailX-2"
-                                            class="form-control form-control-lg"
-                                            name="email"
-                                    />
-                                    <label
-                                            class="form-label"
-                                            for="typeEmailX-2"
-                                    >Email</label
+        />
+    </head>
+    <body>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="exampleModal"
+            data-bs-backdrop="static"
+            data-bs-toggle="modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container h-100">
+                        <div
+                            class="row d-flex justify-content-center align-items-center h-100"
+                        >
+                            <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                            <div class="card shadow-2-strong">
+                                <form action="/doLogin" method="post">
+                                    <div
+                                        class="card-body py-3 px-3 text-center"
                                     >
-                                </div>
+                                        <div class="flex flex-col items-center">
+                                            <img
+                                                class="w-[80px]"
+                                                src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
+                                            />
+                                            <h3 class="mt-2 mb-5">Sign in</h3>
+                                        </div>
 
-                                <div class="form-outline mb-4">
-                                    <input
-                                            type="password"
-                                            id="typePasswordX-2"
-                                            class="form-control form-control-lg"
-                                            name="password"
-                                    />
-                                    <label
-                                            class="form-label"
-                                            for="typePasswordX-2"
-                                    >Password</label
-                                    >
-                                </div>
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="email"
+                                                id="typeEmailX-2"
+                                                class="form-control form-control-lg"
+                                                name="email"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typeEmailX-2"
+                                                >Email</label
+                                            >
+                                        </div>
 
-                                <!-- Checkbox -->
-                                <div
-                                        class="form-check d-flex justify-content-start mb-4"
-                                >
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="form1Example3"
-                                    />
-                                    <label
-                                            class="form-check-label"
-                                            for="form1Example3"
-                                    >
-                                        Remember password
-                                    </label>
-                                </div>
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="password"
+                                                id="typePasswordX-2"
+                                                class="form-control form-control-lg"
+                                                name="password"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typePasswordX-2"
+                                                >Password</label
+                                            >
+                                        </div>
 
-                                <button
-                                        class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
-                                        type="submit"
-                                >
-                                    Login
-                                </button>
+                                        <!-- Checkbox -->
+                                        <div
+                                            class="form-check d-flex justify-content-start mb-4"
+                                        >
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                value=""
+                                                id="form1Example3"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="form1Example3"
+                                            >
+                                                Remember password
+                                            </label>
+                                        </div>
 
-                                <hr class="my-4" />
+                                        <button
+                                            class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
+                                            type="submit"
+                                        >
+                                            Login
+                                        </button>
 
-                                <button
-                                        class="btn btn-lg btn-block btn-primary"
-                                        style="background-color: #dd4b39"
-                                        type="submit"
-                                >
-                                    <i class="fab fa-google me-2"></i>
-                                    Sign in with google
-                                </button>
-                                <button
-                                        class="btn btn-lg btn-block btn-primary mb-2"
-                                        style="background-color: #3b5998"
-                                        type="submit"
-                                >
-                                    <i
-                                            class="fab fa-facebook-f me-2"
-                                    ></i
-                                    >Sign in with facebook
-                                </button>
+                                        <hr class="my-4" />
+
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary"
+                                            style="background-color: #dd4b39"
+                                            type="submit"
+                                        >
+                                            <i class="fab fa-google me-2"></i>
+                                            Sign in with google
+                                        </button>
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary mb-2"
+                                            style="background-color: #3b5998"
+                                            type="submit"
+                                        >
+                                            <i
+                                                class="fab fa-facebook-f me-2"
+                                            ></i
+                                            >Sign in with facebook
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="p-2 bg-[#003C71] text-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+                >
+                    <a
+                        href="/"
+                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                    >
+                        <img
+                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                        />
+                    </a>
+
+                    <ul
+                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    >
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Khách sạn</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Tours</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé máy bay</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé vui chơi</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="text-end">
+                        <div sec:authorize="!isAuthenticated()">
+                            <button
+                                type="button"
+                                class="btn me-2 bg-danger text-white"
+                                data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal"
+                            >
+                                Login
+                            </button>
+                            <a th:href="@{/signup}">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
+                                >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Tài khoản
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/profile"
+                                            sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/profile"
+                                            >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/trips"
+                                            >Đơn hàng của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                            >Đăng xuất</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Body -->
+        <div>
+            <!-- Banner -->
+            <div class="relative">
+                <img
+                    src="https://cdn1.ivivu.com/images/2023/08/18/11/vinoasis-t_s39l4g_horizontal.webp"
+                    class="h-[493px] object-cover"
+                />
+                <div class="absolute top-0 left-0 right-0">
+                    <div class="max-w-[1200px] mx-auto pt-[100px]">
+                        <h1
+                            class="text-white text-[44px] font-semibold"
+                            style="text-shadow: 1px 1px #454545"
+                        >
+                            Trải nghiệm kỳ nghỉ tuyệt vời
+                        </h1>
+                        <p
+                            class="text-white text-[20px] mt-3"
+                            style="text-shadow: 1px 1px #454545"
+                        >
+                            Combo khách sạn - vé máy bay - đưa đón sân bay giá
+                            tốt nhất
+                        </p>
+                        <!-- Search -->
+                        <form
+                            class="mt-4 p-[15px] w-[60%] flex gap-[16px]"
+                            style="background: rgba(0, 0, 0, 0.3)"
+                        >
+                            <div
+                                id="search-container"
+                                class="w-[calc(100%-90px)] relative z-[5]"
+                            >
+                                <input
+                                    id="search-input"
+                                    type="text"
+                                    class="form-control h-[60px]"
+                                    placeholder="Bạn muốn đi đâu?"
+                                />
+                                <div
+                                    id="search-result"
+                                    class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]"
+                                >
+                                    <p
+                                        class="py-[10px] px-[16px] border-b-[1px] font-bold"
+                                    >
+                                        Địa điểm đang HOT nhất
+                                    </p>
+                                    <div
+                                        class="grid grid-cols-3"
+                                        id="result-list"
+                                    >
+                                        <th:block
+                                            th:each="cityDto : ${listCityVietNam}"
+                                            th:object="${cityDto}"
+                                        >
+                                            <a th:href="@{'/city/' + *{id}}">
+                                                <div
+                                                    class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
+                                                >
+                                                    <img
+                                                        class="rounded-[4px] w-[60px] h-[60px] object-cover"
+                                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                                    />
+                                                    <div>
+                                                        <p
+                                                            th:text="*{name}"
+                                                        ></p>
+                                                        <p>5 KS</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
+                            >
+                                Tìm
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- Header -->
-<header class="p-2 bg-[#003C71] text-white">
-    <div class="max-w-[1200px] mx-auto">
-        <div
-                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-        >
-            <a
-                    href="/"
-                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-            >
-                <img
-                        src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
-                />
-            </a>
 
-            <ul
-                    class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-            >
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Khách sạn du lịch</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Tours</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Vé máy bay</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Vé vui chơi</a
-                    >
-                </li>
-            </ul>
-            <div class="text-end">
-                <div sec:authorize="!isAuthenticated()">
-                    <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                            data-mdb-toggle="modal"
-                            data-mdb-target="#exampleModal"
-                    >
-                        Login
-                    </button>
-                    <a th:href="@{/signup}">
-                        <button
-                                type="button"
-                                class="btn btn-warning text-white"
-                                th:src="@{/signup}"
-                        >
-                            Sign-up
-                        </button>
-                    </a>
-                </div>
-                <div sec:authorize="isAuthenticated()">
-                    <div class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >
-                            Tài khoản
-                        </a>
-                        <ul
-                                class="dropdown-menu"
-                                aria-labelledby="navbarDropdown"
-                        >
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        href="/profile"
-                                        sec:authentication="principal.email"
-                                ></a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/profile"
-                                >Hồ sơ của tôi</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/trips"
-                                >Đơn hàng của tôi</a
-                                >
-                            </li>
-                            <li><a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a></li>
-                            <li><a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a></li>
-                            <li>
-                                <a class="dropdown-item" href="/logout"
-                                >Đăng xuất</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<!-- Body -->
-<div>
-    <!-- Banner -->
-    <div class="relative">
-        <img
-                src="https://cdn1.ivivu.com/images/2023/08/18/11/vinoasis-t_s39l4g_horizontal.webp"
-                class="h-[493px] object-cover"
-        />
-        <div class="absolute top-0 left-0 right-0">
-            <div class="max-w-[1200px] mx-auto pt-[100px]">
-                <h1
-                        class="text-white text-[44px] font-semibold"
-                        style="text-shadow: 1px 1px #454545"
-                >
-                    Trải nghiệm kỳ nghỉ tuyệt vời
+            <!-- Combo -->
+            <div class="max-w-[1200px] mx-auto py-[30px]">
+                <h1 class="text-[44px] font-semibold">
+                    Combo tốt nhất hôm nay
                 </h1>
-                <p
-                        class="text-white text-[20px] mt-3"
-                        style="text-shadow: 1px 1px #454545"
+                <p class="text-[20px]">Nhanh tay đặt ngay. Để mai sẽ lỡ</p>
+                <swiper-container
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="30"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
                 >
-                    Combo khách sạn - vé máy bay - đưa đón sân bay giá
-                    tốt nhất
-                </p>
-                <!-- Search -->
-                <form
-                        class="mt-4 p-[15px] w-[60%] flex gap-[16px]"
-                        style="background: rgba(0, 0, 0, 0.3)"
+                    <swiper-slide
+                        ><img
+                            class="w-full"
+                            src="https://cdn1.ivivu.com/images/2023/08/17/18/novotel_pq-sd_nqbt0o_horizontal.webp"
+                    /></swiper-slide>
+                    <swiper-slide
+                        ><img
+                            class="w-full"
+                            src="https://cdn1.ivivu.com/images/2023/08/18/11/vin_golf_nha-sd_hggww7_horizontal.webp"
+                    /></swiper-slide>
+                    <swiper-slide
+                        ><img
+                            class="w-full"
+                            src="https://cdn1.ivivu.com/images/2023/08/17/17/furama_dn-sd_8wbom0_horizontal.webp"
+                    /></swiper-slide>
+                    <swiper-slide
+                        ><img
+                            class="w-full"
+                            src="https://cdn1.ivivu.com/images/2023/08/18/11/crowne_pq-sd_j5e301_horizontal.webp"
+                    /></swiper-slide>
+                    <swiper-slide
+                        ><img
+                            class="w-full"
+                            src="https://cdn1.ivivu.com/images/2023/08/17/17/swandor_cr-sd_2ld6lp_horizontal.webp"
+                    /></swiper-slide>
+                </swiper-container>
+            </div>
+
+            <!-- Vacation -->
+            <div class="max-w-[1200px] mx-auto py-[30px]">
+                <h1 class="text-[44px] font-semibold">Hè rồi, du lịch thôi!</h1>
+                <p class="text-[20px]">Thư giãn - nạp năng lượng - khám phá</p>
+                <swiper-container
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="16"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
+                    slides-per-view="4"
+                    centered-slides="false"
                 >
-                    <div
-                            id="search-container"
-                            class="w-[calc(100%-90px)] relative z-[5]"
-                    >
-                        <input
-                                id="search-input"
-                                type="text"
-                                class="form-control h-[60px]"
-                                placeholder="Bạn muốn đi đâu?"
-                        />
-                        <div
-                                id="search-result"
-                                class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]"
-                        >
-                            <p
-                                    class="py-[10px] px-[16px] border-b-[1px] font-bold"
-                            >
-                                Địa điểm đang HOT nhất
-                            </p>
+                    <swiper-slide>
+                        <div class="relative">
+                            <img
+                                class="h-[296px] w-full object-cover object-center brightness-[0.8]"
+                                src="https://cdn1.ivivu.com/iVivu/2023/05/23/19/chon-2.jpg"
+                            />
                             <div
-                                    class="grid grid-cols-3"
-                                    id="result-list"
+                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
                             >
-                                <th:block
-                                        th:each="cityDto : ${listCityVietNam}"
-                                        th:object="${cityDto}"
-                                >
-                                    <a th:href="@{'/city/' + *{id}}">
-                                        <div
-                                                class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
-                                        >
-                                            <img
-                                                    class="rounded-[4px] w-[60px] h-[60px] object-cover"
-                                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                                            />
-                                            <div>
-                                                <p
-                                                        th:text="*{name}"
-                                                ></p>
-                                                <p>5 KS</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </th:block>
+                                <p class="text-[34px] font-semibold">Quốc tế</p>
+                                <p>
+                                    Khám phá thế giới trong tầm tay - 65 khách
+                                    sạn
+                                </p>
                             </div>
                         </div>
-                    </div>
-                    <button
-                            class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
+                    </swiper-slide>
+                    <swiper-slide>
+                        <div class="relative">
+                            <img
+                                class="h-[296px] w-full object-cover object-center brightness-[0.8]"
+                                src="https://cdn1.ivivu.com/iVivu/2022/01/14/16/chon-4.jpg"
+                            />
+                            <div
+                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                            >
+                                <p class="text-[34px] font-semibold">Villa</p>
+                                <p>
+                                    Chill tại Villa, vui hè thả ga - 30 khách
+                                    sạn
+                                </p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                    <swiper-slide>
+                        <div class="relative">
+                            <img
+                                class="h-[296px] w-full object-cover object-center brightness-[0.8]"
+                                src="https://cdn1.ivivu.com/iVivu/2023/06/01/18/tb1.png"
+                            />
+                            <div
+                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                            >
+                                <p class="text-[34px] font-semibold">Team X</p>
+                                <p>
+                                    Nâng tầm chuyến du lịch của công ty và đội
+                                    nhóm của bạn!
+                                </p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                    <swiper-slide>
+                        <div class="relative">
+                            <img
+                                class="h-[296px] w-full object-cover object-center brightness-[0.8]"
+                                src="https://cdn1.ivivu.com/images/general/dangcap1.webp"
+                            />
+                            <div
+                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                            >
+                                <p class="text-[34px] font-semibold">
+                                    Gift Voucher
+                                </p>
+                                <p>
+                                    Lưu giữ khoảnh khắc, trải nghiệm hành trình
+                                </p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper-container>
+            </div>
+
+            <!-- Favorite in my country -->
+            <div class="max-w-[1200px] mx-auto py-[30px]">
+                <h1 class="text-[44px] font-semibold">
+                    Điểm đến yêu thích trong nước
+                </h1>
+                <p class="text-[20px]">
+                    Lên rừng xuống biển. Trọn vẹn Việt Nam
+                </p>
+                <swiper-container
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="16"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
+                    slides-per-view="4"
+                    centered-slides="false"
+                >
+                    <th:block
+                        th:each="cityDto : ${listCityVietNam}"
+                        th:object="${cityDto}"
                     >
-                        Tìm
-                    </button>
-                </form>
+                        <swiper-slide>
+                            <div class="relative">
+                                <a th:href="@{/city/} + *{id}">
+                                    <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
+                                <div
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
+                                    <p>5 khách sạn</p>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </th:block>
+                </swiper-container>
+            </div>
+
+            <!-- Favorite in other country -->
+            <div class="max-w-[1200px] mx-auto py-[30px]">
+                <h1 class="text-[44px] font-semibold">
+                    Điểm đến yêu thích nước ngoài
+                </h1>
+                <p class="text-[20px]">Bao la thế giới. Bốn bể là nhà</p>
+                <swiper-container
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="16"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
+                    slides-per-view="4"
+                    centered-slides="false"
+                >
+                    <th:block
+                        th:each="cityDto : ${listCityQuocTe}"
+                        th:object="${cityDto}"
+                    >
+                        <swiper-slide>
+                            <div class="relative">
+                                <a th:href="@{/city/} + *{id}">
+                                    <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
+                                <div
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
+                                    <p>5 khách sạn</p>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </th:block>
+                </swiper-container>
             </div>
         </div>
-    </div>
 
-    <!-- Combo -->
-    <div class="max-w-[1200px] mx-auto py-[30px]">
-        <h1 class="text-[44px] font-semibold">
-            Combo tốt nhất hôm nay
-        </h1>
-        <p class="text-[20px]">Nhanh tay đặt ngay. Để mai sẽ lỡ</p>
-        <swiper-container
-                class="mt-[10px]"
-                pagination="true"
-                pagination-clickable="true"
-                space-between="30"
-                autoplay-delay="2500"
-                autoplay-disable-on-interaction="false"
+        <!-- Footer -->
+        <footer
+            class="text-center text-lg-start text-white"
+            style="background-color: #929fba"
         >
-            <swiper-slide
-            ><img
-                    class="w-full"
-                    src="https://cdn1.ivivu.com/images/2023/08/17/18/novotel_pq-sd_nqbt0o_horizontal.webp"
-            /></swiper-slide>
-            <swiper-slide
-            ><img
-                    class="w-full"
-                    src="https://cdn1.ivivu.com/images/2023/08/18/11/vin_golf_nha-sd_hggww7_horizontal.webp"
-            /></swiper-slide>
-            <swiper-slide
-            ><img
-                    class="w-full"
-                    src="https://cdn1.ivivu.com/images/2023/08/17/17/furama_dn-sd_8wbom0_horizontal.webp"
-            /></swiper-slide>
-            <swiper-slide
-            ><img
-                    class="w-full"
-                    src="https://cdn1.ivivu.com/images/2023/08/18/11/crowne_pq-sd_j5e301_horizontal.webp"
-            /></swiper-slide>
-            <swiper-slide
-            ><img
-                    class="w-full"
-                    src="https://cdn1.ivivu.com/images/2023/08/17/17/swandor_cr-sd_2ld6lp_horizontal.webp"
-            /></swiper-slide>
-        </swiper-container>
-    </div>
+            <!-- Grid container -->
+            <div class="max-w-[1200px] mx-auto py-[24px]">
+                <!-- Section: Links -->
+                <section class="">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Về iVIVU.com
+                            </h6>
+                            <p>
+                                <a class="text-white">Chúng tôi</a>
+                            </p>
+                            <p>
+                                <a class="text-white">iVIVU Blog</a>
+                            </p>
+                            <p>
+                                <a class="text-white">PMS - Miễn phí</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
 
-    <!-- Vacation -->
-    <div class="max-w-[1200px] mx-auto py-[30px]">
-        <h1 class="text-[44px] font-semibold">Hè rồi, du lịch thôi!</h1>
-        <p class="text-[20px]">Thư giãn - nạp năng lượng - khám phá</p>
-        <swiper-container
-                class="mt-[10px]"
-                pagination="true"
-                pagination-clickable="true"
-                space-between="16"
-                autoplay-delay="2500"
-                autoplay-disable-on-interaction="false"
-                slides-per-view="4"
-                centered-slides="false"
-        >
-            <swiper-slide>
-                <div class="relative">
-                    <img
-                            class="h-[296px] w-full object-cover object-center brightness-[0.8]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/05/23/19/chon-2.jpg"
-                    />
-                    <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                    >
-                        <p class="text-[34px] font-semibold">Quốc tế</p>
-                        <p>
-                            Khám phá thế giới trong tầm tay - 65 khách
-                            sạn
-                        </p>
-                    </div>
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="relative">
-                    <img
-                            class="h-[296px] w-full object-cover object-center brightness-[0.8]"
-                            src="https://cdn1.ivivu.com/iVivu/2022/01/14/16/chon-4.jpg"
-                    />
-                    <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                    >
-                        <p class="text-[34px] font-semibold">Villa</p>
-                        <p>
-                            Chill tại Villa, vui hè thả ga - 30 khách
-                            sạn
-                        </p>
-                    </div>
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="relative">
-                    <img
-                            class="h-[296px] w-full object-cover object-center brightness-[0.8]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/06/01/18/tb1.png"
-                    />
-                    <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                    >
-                        <p class="text-[34px] font-semibold">Team X</p>
-                        <p>
-                            Nâng tầm chuyến du lịch của công ty và đội
-                            nhóm của bạn!
-                        </p>
-                    </div>
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="relative">
-                    <img
-                            class="h-[296px] w-full object-cover object-center brightness-[0.8]"
-                            src="https://cdn1.ivivu.com/images/general/dangcap1.webp"
-                    />
-                    <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                    >
-                        <p class="text-[34px] font-semibold">
-                            Gift Voucher
-                        </p>
-                        <p>
-                            Lưu giữ khoảnh khắc, trải nghiệm hành trình
-                        </p>
-                    </div>
-                </div>
-            </swiper-slide>
-        </swiper-container>
-    </div>
+                        <hr class="w-100 clearfix d-md-none" />
 
-    <!-- Favorite in my country -->
-    <div class="max-w-[1200px] mx-auto py-[30px]">
-        <h1 class="text-[44px] font-semibold">
-            Điểm đến yêu thích trong nước
-        </h1>
-        <p class="text-[20px]">
-            Lên rừng xuống biển. Trọn vẹn Việt Nam
-        </p>
-        <swiper-container
-                class="mt-[10px]"
-                pagination="true"
-                pagination-clickable="true"
-                space-between="16"
-                autoplay-delay="2500"
-                autoplay-disable-on-interaction="false"
-                slides-per-view="4"
-                centered-slides="false"
-        >
-            <th:block
-                    th:each="cityDto : ${listCityVietNam}"
-                    th:object="${cityDto}"
-            >
-                <swiper-slide>
-                    <div class="relative">
-                        <a th:href="@{/city/} + *{id}">
-                            <img
-                                    class="h-[296px] object-cover object-center brightness-[0.8]"
-                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                            />
-                        </a>
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Thông Tin Cần Biết
+                            </h6>
+                            <p>
+                                <a class="text-white">Điều kiện & Điều khoản</a>
+                            </p>
+                            <p>
+                                <a class="text-white">Quy chế hoạt động</a>
+                            </p>
+                            <p>
+                                <a class="text-white">Câu hỏi thường gặp</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
 
-                        <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p
-                                    class="text-[34px] font-semibold"
-                                    th:text="*{name}"
-                            ></p>
-                            <p>5 khách sạn</p>
+                        <hr class="w-100 clearfix d-md-none" />
+
+                        <!-- Grid column -->
+                        <hr class="w-100 clearfix d-md-none" />
+
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Liên lạc
+                            </h6>
+                            <p>
+                                <i class="fas fa-home mr-3"></i> P308, Tầng 3,
+                                tòa nhà The One, số 2 Chương Dương Độ, P.Chương
+                                Dương, Q.Hoàn Kiếm, Hà Nội
+                            </p>
+                            <p>
+                                <i class="fas fa-envelope mr-3"></i>
+                                ivivu@gmail.com
+                            </p>
+                            <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
+                            <p>
+                                <i class="fas fa-print mr-3"></i> + 01 234 567
+                                89
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Follow us
+                            </h6>
+
+                            <!-- Facebook -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #3b5998"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+
+                            <!-- Twitter -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #55acee"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+
+                            <!-- Google -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #dd4b39"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-google"></i
+                            ></a>
+
+                            <!-- Instagram -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #ac2bac"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+
+                            <!-- Linkedin -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #0082ca"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                            <!-- Github -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #333333"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-github"></i
+                            ></a>
                         </div>
                     </div>
-                </swiper-slide>
-            </th:block>
-        </swiper-container>
-    </div>
-
-    <!-- Favorite in other country -->
-    <div class="max-w-[1200px] mx-auto py-[30px]">
-        <h1 class="text-[44px] font-semibold">
-            Điểm đến yêu thích nước ngoài
-        </h1>
-        <p class="text-[20px]">Bao la thế giới. Bốn bể là nhà</p>
-        <swiper-container
-                class="mt-[10px]"
-                pagination="true"
-                pagination-clickable="true"
-                space-between="16"
-                autoplay-delay="2500"
-                autoplay-disable-on-interaction="false"
-                slides-per-view="4"
-                centered-slides="false"
-        >
-            <th:block
-                    th:each="cityDto : ${listCityQuocTe}"
-                    th:object="${cityDto}"
-            >
-                <swiper-slide>
-                    <div class="relative">
-                        <a th:href="@{/city/} + *{id}">
-                            <img
-                                    class="h-[296px] object-cover object-center brightness-[0.8]"
-                                    th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
-                            />
-                        </a>
-
-                        <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p
-                                    class="text-[34px] font-semibold"
-                                    th:text="*{name}"
-                            ></p>
-                            <p>5 khách sạn</p>
-                        </div>
-                    </div>
-                </swiper-slide>
-            </th:block>
-        </swiper-container>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer
-        class="text-center text-lg-start text-white"
-        style="background-color: #929fba"
->
-    <!-- Grid container -->
-    <div class="max-w-[1200px] mx-auto py-[24px]">
-        <!-- Section: Links -->
-        <section class="">
-            <!--Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Về iVIVU.com
-                    </h6>
-                    <p>
-                        <a class="text-white">Chúng tôi</a>
-                    </p>
-                    <p>
-                        <a class="text-white">iVIVU Blog</a>
-                    </p>
-                    <p>
-                        <a class="text-white">PMS - Miễn phí</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <hr class="w-100 clearfix d-md-none" />
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Thông Tin Cần Biết
-                    </h6>
-                    <p>
-                        <a class="text-white">Điều kiện & Điều khoản</a>
-                    </p>
-                    <p>
-                        <a class="text-white">Quy chế hoạt động</a>
-                    </p>
-                    <p>
-                        <a class="text-white">Câu hỏi thường gặp</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <hr class="w-100 clearfix d-md-none" />
-
-                <!-- Grid column -->
-                <hr class="w-100 clearfix d-md-none" />
-
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Liên lạc
-                    </h6>
-                    <p>
-                        <i class="fas fa-home mr-3"></i> P308, Tầng 3,
-                        tòa nhà The One, số 2 Chương Dương Độ, P.Chương
-                        Dương, Q.Hoàn Kiếm, Hà Nội
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope mr-3"></i>
-                        ivivu@gmail.com
-                    </p>
-                    <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
-                    <p>
-                        <i class="fas fa-print mr-3"></i> + 01 234 567
-                        89
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Follow us
-                    </h6>
-
-                    <!-- Facebook -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #3b5998"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-facebook-f"></i
-                    ></a>
-
-                    <!-- Twitter -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #55acee"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-twitter"></i
-                    ></a>
-
-                    <!-- Google -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #dd4b39"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-google"></i
-                    ></a>
-
-                    <!-- Instagram -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #ac2bac"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-instagram"></i
-                    ></a>
-
-                    <!-- Linkedin -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #0082ca"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-linkedin-in"></i
-                    ></a>
-                    <!-- Github -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #333333"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-github"></i
-                    ></a>
-                </div>
+                    <!--Grid row-->
+                </section>
+                <!-- Section: Links -->
             </div>
-            <!--Grid row-->
-        </section>
-        <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
+            <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div
-            class="text-center p-3"
-            style="background-color: rgba(0, 0, 0, 0.2)"
-    >
-        © 2023 Copyright:
-        <a class="text-white" href="/">Nhóm 1</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+            <!-- Copyright -->
+            <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+            >
+                © 2023 Copyright:
+                <a class="text-white" href="/">Nhóm 1</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
 
-<!-- Swiper -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
-</body>
+        <!-- Swiper -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+    </body>
 </html>
 <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>
 <script th:inline="javascript">
+    // Hello
     let searchContainer = document.getElementById("search-container");
     let searchInput = document.getElementById("search-input");
     let searchResult = document.getElementById("search-result");
