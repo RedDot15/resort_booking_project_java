@@ -244,14 +244,26 @@
                         <div sec:authorize="isAuthenticated()">
                             <div class="nav-item dropdown">
                                 <a
-                                    class="nav-link dropdown-toggle"
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
                                     href="#"
-                                    id="navbarDropdown"
-                                    role="button"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
                                 >
-                                    Tài khoản
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
                                 </a>
                                 <ul
                                     class="dropdown-menu"
@@ -260,18 +272,15 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="/profile"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             sec:authentication="principal.email"
                                         ></a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile"
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             >Hồ sơ của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/trips"
-                                            >Đơn hàng của tôi</a
                                         >
                                     </li>
                                     <li>
