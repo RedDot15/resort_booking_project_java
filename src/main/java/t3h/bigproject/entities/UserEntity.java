@@ -21,6 +21,9 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
     @Column(name = "email")
     private String email;
     @Basic
