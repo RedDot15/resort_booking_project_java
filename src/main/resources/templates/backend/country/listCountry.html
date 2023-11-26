@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -112,7 +112,7 @@
                                     class="dropdown-item"
                                     href="/backend/user"
                                     sec:authorize="hasAnyAuthority('ROLE_1')"
-                                    th:text="'Cơ sở dữ liệu'"
+                                    th:text="'Quay lại trang chủ'"
                                 ></a>
                             </li>
                             <li>
@@ -303,6 +303,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>NAME</th>
+                                            <th>EDIT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -313,6 +314,11 @@
                                                 <!-- khi co th:object -->
                                                 <td th:text="*{id}"></td>
                                                 <td th:text="*{name}"></td>
+                                                <td>
+                                                    <a th:href="@{/backend/country/} + *{id}">
+                                                        EDIT
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </th:block>
                                     </tbody>
