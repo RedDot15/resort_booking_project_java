@@ -221,14 +221,26 @@
                         <div sec:authorize="isAuthenticated()">
                             <div class="nav-item dropdown">
                                 <a
-                                    class="nav-link dropdown-toggle"
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
                                     href="#"
-                                    id="navbarDropdown"
-                                    role="button"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
                                 >
-                                    Tài khoản
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
                                 </a>
                                 <ul
                                     class="dropdown-menu"
@@ -237,18 +249,15 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="/profile"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             sec:authentication="principal.email"
                                         ></a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile"
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             >Hồ sơ của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/trips"
-                                            >Đơn hàng của tôi</a
                                         >
                                     </li>
                                     <li>
@@ -287,28 +296,23 @@
                     class="w-[25%] pt-[30px] px-[16px] rounded-[6px] bg-white flex flex-col items-center"
                 >
                     <img
-                        class="w-[110px] h-[110px] rounded-[50%]"
-                        th:src="@{/image/user/} + ${userDto.avatarImg}"
+                        class="w-[110px] h-[110px] rounded-[50%] object-cover"
+                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
                     />
-                    <p class="font-bold mt-[14px]" th:text="${userDto.name}"></p>
+                    <p
+                        class="font-bold mt-[14px]"
+                        th:text="${userDto.name}"
+                    ></p>
                     <div class="mt-[20px] w-full">
                         <a
-                            href="/profile"
+                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                             class="flex items-center cursor-pointer py-[14px] border-b-[1px] border-[#bdbdbd]"
                         >
                             <i
                                 class="fa-solid fa-user mr-[6px] text-[#26bed6]"
                             ></i>
                             <p class="text-[#26bed6]">Hồ sơ của tôi</p>
-                        </a>
-                        <a
-                            href="/trips"
-                            class="flex items-center cursor-pointer py-[14px]"
-                        >
-                            <i
-                                class="fa-solid fa-cart-shopping mr-[6px] text-[#555863]"
-                            ></i>
-                            <p class="text-[#555863]">Đơn hàng của tôi</p>
                         </a>
                     </div>
                 </div>
@@ -317,32 +321,38 @@
                 <div
                     class="w-[75%] pt-[30px] pb-[16px] px-[16px] rounded-[6px] bg-white"
                 >
-                    <form class="mt-[20px]" th:action="@{/infoChange}" enctype="multipart/form-data"
-                                            th:object="${userDto}" th:method="post">
+                    <form
+                        class="mt-[20px]"
+                        th:action="@{/infoChange}"
+                        enctype="multipart/form-data"
+                        th:object="${userDto}"
+                        th:method="post"
+                    >
                         <div class="flex flex-col items-center">
                             <img
-                                    th:src="@{/image/user/} + *{avatarImg}"
-                                    alt=""
-                                    class="w-[130px] h-[130px] object-cover"
-                                    id="imagePreview"
+                                onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                alt=""
+                                class="w-[130px] h-[130px] object-cover"
+                                id="imagePreview"
                             />
                             <label
-                                    for="avatar-customer"
-                                    class="font-bold mt-[14px] text-[#26bed6] hover:text-[#003c71] cursor-pointer transition-all duration-100"
+                                for="avatar-customer"
+                                class="font-bold mt-[14px] text-[#26bed6] hover:text-[#003c71] cursor-pointer transition-all duration-100"
                             >
                                 Upload hình mới
                             </label>
                             <input
-                                    type="file"
-                                    name="avatar-customer"
-                                    id="avatar-customer"
-                                    class="hidden"
-                                    onchange="readURL(this)"
-                                    th:field="*{fileImage}"
-                                    required
+                                type="file"
+                                name="avatar-customer"
+                                id="avatar-customer"
+                                class="hidden"
+                                onchange="readURL(this)"
+                                th:field="*{fileImage}"
+                                required
                             />
                         </div>
-                        <br>
+                        <br />
                         <div
                             class="flex w-auto justify-between items-center gap-[10px]"
                         >
@@ -350,7 +360,11 @@
                                 Họ và tên đầy đủ:
                             </p>
                             <div class="w-[80%]">
-                                <input type="text" class="form-control" th:field="*{name}"/>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{name}"
+                                />
                             </div>
                         </div>
                         <div
@@ -360,7 +374,11 @@
                                 Điện thoại:
                             </p>
                             <div class="w-[80%]">
-                                <input type="text" class="form-control" th:field="*{phone}"/>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{phone}"
+                                />
                             </div>
                         </div>
                         <div
@@ -370,13 +388,17 @@
                                 Email:
                             </p>
                             <div class="w-[80%]">
-                                <input type="text" class="form-control" th:field="*{email}"/>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{email}"
+                                />
                             </div>
                         </div>
-                        <input hidden th:field="*{id}"/>
-                        <input hidden th:field="*{password}"/>
-                        <input hidden th:field="*{roleId}"/>
-                        <input hidden th:field="*{genderId}"/>
+                        <input hidden th:field="*{id}" />
+                        <input hidden th:field="*{password}" />
+                        <input hidden th:field="*{roleId}" />
+                        <input hidden th:field="*{genderId}" />
                         <input
                             class="bg-[#26BED6] h-[40px] w-[190px] rounded-[4px] text-white mt-[20px] hover:bg-[#003c71] cursor-pointer transition-all duration-100"
                             type="submit"
@@ -390,16 +412,17 @@
     </body>
 </html>
 <script>
-    function readURL(input){
-        if (input.files && input.files[0]){
+    function readURL(input) {
+        if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e){
-                document.getElementById('imagePreview').setAttribute('src', e.target.result);
-            }
+            reader.onload = function (e) {
+                document
+                    .getElementById("imagePreview")
+                    .setAttribute("src", e.target.result);
+            };
 
             reader.readAsDataURL(input.files[0]);
         }
     }
-
 </script>

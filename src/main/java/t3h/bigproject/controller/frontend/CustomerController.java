@@ -45,8 +45,8 @@ public class CustomerController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/infoChange", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String registerHandle(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
-                          Model model,
-                          RedirectAttributes redirectAttributes) throws IOException {
+            Model model,
+            RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
         if (bindingResult.hasErrors())
