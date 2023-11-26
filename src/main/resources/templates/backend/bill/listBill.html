@@ -332,18 +332,25 @@
                                                 <td th:text="*{roomId}"></td>
                                                 <td>
                                                     <span
-                                                        th:if="*{statusId <= 2}"
+                                                        th:if="*{statusId == 2}"
                                                     >
                                                         <a
                                                             th:href="@{/backend/updateBill/} + *{id}"
-                                                            >UPDATE</a
+                                                            >Update</a
                                                         >
                                                     </span>
                                                     <span
-                                                        th:unless="*{statusId =<= 2}"
+                                                        th:if="*{statusId == 3}"
                                                     >
-                                                        COMPLETED
+                                                        Completed
                                                     </span>
+                                                    <span
+                                                        th:if="*{statusId == 1}"
+                                                    >
+                                                        Waiting
+                                                    </span>
+                                                </td>
+
                                                 </td>
                                             </tr>
                                         </th:block>

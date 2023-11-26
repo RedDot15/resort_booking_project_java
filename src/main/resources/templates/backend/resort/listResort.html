@@ -307,6 +307,7 @@
                                             <th>INFO_HTML</th>
                                             <th>INFO_MARKDOWN</th>
                                             <th>POINT</th>
+                                            <th>EDIT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -321,6 +322,11 @@
                                                     th:text="*{infoMarkDown}"
                                                 ></td>
                                                 <td th:text="*{point}"></td>
+                                                <td>
+                                                    <a th:href="@{/backend/resort/} + *{id}">
+                                                        EDIT
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </th:block>
                                     </tbody>

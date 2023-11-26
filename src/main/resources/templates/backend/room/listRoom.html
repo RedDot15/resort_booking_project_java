@@ -306,6 +306,7 @@
                                             <th>IMAGE_NAME</th>
                                             <th>PRICE</th>
                                             <th>RESORT_ID</th>
+                                            <th>EDIT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -322,6 +323,11 @@
                                                 </td>
                                                 <td th:text="*{price}"></td>
                                                 <td th:text="*{resortId}"></td>
+                                                <td>
+                                                    <a th:href="@{/backend/room/} + *{id}">
+                                                        EDIT
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </th:block>
                                     </tbody>

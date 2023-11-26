@@ -305,6 +305,7 @@
                                             <th>COUNTRY_ID</th>
                                             <th>NAME</th>
                                             <th>IMAGE_NAME</th>
+                                            <th>EDIT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -323,6 +324,11 @@
                                                         "
                                                         th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
                                                     />
+                                                </td>
+                                                <td>
+                                                    <a th:href="@{/backend/city/} + *{id}">
+                                                        EDIT
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </th:block>
