@@ -83,12 +83,12 @@
                   <li>
                       <a
                           class="dropdown-item"
-                          href="/profile"
+                          th:href="@{|~/profile/${#authentication.principal.id}|}"
                           sec:authentication="principal.email"
                       ></a>
                   </li>
                   <li>
-                      <a class="dropdown-item" href="/profile"
+                      <a class="dropdown-item" th:href="@{|~/profile/${#authentication.principal.id}|}"
                           >Hồ sơ của tôi</a
                       >
                   </li>
@@ -248,6 +248,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
+                    <th>NAME</th>
                     <th>EMAIL</th>
                     <th>AVATAR IMAGE</th>
                     <th>PHONE</th>
@@ -260,6 +261,7 @@
                   <tr th:object="${userDto}">
                     <!-- khi co th:object -->
                     <td th:text="*{id}"></td>
+                    <td th:text="*{name}"></td>
                     <td th:text="*{email}"></td>
                     <td>
                       <img onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'" th:src="@{/image/user/} + *{avatarImg}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="">

@@ -79,4 +79,11 @@ public class UserService {
         userRepository.save(userEntity);
         return userDto;
     }
+
+    public UserDto updateUserWithoutEncode(UserDto userDto) {
+        UserEntity userEntity = userRepository.findById(userDto.getId()).get();
+        BeanUtils.copyProperties(userDto, userEntity);
+        userRepository.save(userEntity);
+        return userDto;
+    }
 }

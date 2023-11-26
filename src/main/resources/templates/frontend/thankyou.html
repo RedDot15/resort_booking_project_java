@@ -249,12 +249,14 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="/profile"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             sec:authentication="principal.email"
                                         ></a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile"
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             >Hồ sơ của tôi</a
                                         >
                                     </li>
@@ -323,7 +325,7 @@
                         Cần Thơ: 1900 2087
                     </p>
                     <a
-                        href="/loggedin/home"
+                        href="/"
                         class="flex items-center justify-center mt-[30px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
                     >
                         Về lại trang chủ

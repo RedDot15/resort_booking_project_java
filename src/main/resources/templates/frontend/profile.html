@@ -249,12 +249,14 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="/profile"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             sec:authentication="principal.email"
                                         ></a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/profile"
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                                             >Hồ sơ của tôi</a
                                         >
                                     </li>
@@ -294,13 +296,17 @@
                     class="w-[25%] pt-[30px] px-[16px] rounded-[6px] bg-white flex flex-col items-center"
                 >
                     <img
-                        class="w-[110px] h-[110px] rounded-[50%]"
-                        src="https://gate.ivivu.com/upload/avatar/67910d23-0680-4e70-b7af-57b19eef6e52/crop_jumping230939358.jpg"
+                        class="w-[110px] h-[110px] rounded-[50%] object-cover"
+                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
                     />
-                    <p class="font-bold mt-[14px]">Nguyễn Viết Nam</p>
+                    <p
+                        class="font-bold mt-[14px]"
+                        th:text="${userDto.name}"
+                    ></p>
                     <div class="mt-[20px] w-full">
                         <a
-                            href="/profile"
+                            th:href="@{|~/profile/${#authentication.principal.id}|}"
                             class="flex items-center cursor-pointer py-[14px] border-b-[1px] border-[#bdbdbd]"
                         >
                             <i
@@ -315,26 +321,52 @@
                 <div
                     class="w-[75%] pt-[30px] pb-[16px] px-[16px] rounded-[6px] bg-white"
                 >
-                    <div class="flex flex-col items-center">
-                        <img
-                            src="https://gate.ivivu.com/upload/avatar/67910d23-0680-4e70-b7af-57b19eef6e52/crop_jumping230939358.jpg"
-                            alt=""
-                            class="w-[130px] h-[130px] object-cover"
-                        />
-                        <label
-                            for="avatar-customer"
-                            class="font-bold mt-[14px] text-[#26bed6] hover:text-[#003c71] cursor-pointer transition-all duration-100"
+                    <form
+                        class="mt-[20px]"
+                        th:action="@{/infoChange}"
+                        enctype="multipart/form-data"
+                        th:object="${userDto}"
+                        th:method="post"
+                    >
+                        <div class="flex flex-col items-center">
+                            <img
+                                onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                alt=""
+                                class="w-[130px] h-[130px] object-cover"
+                                id="imagePreview"
+                            />
+                            <label
+                                for="avatar-customer"
+                                class="font-bold mt-[14px] text-[#26bed6] hover:text-[#003c71] cursor-pointer transition-all duration-100"
+                            >
+                                Upload hình mới
+                            </label>
+                            <input
+                                type="file"
+                                name="avatar-customer"
+                                id="avatar-customer"
+                                class="hidden"
+                                onchange="readURL(this)"
+                                th:field="*{fileImage}"
+                                required
+                            />
+                        </div>
+                        <br />
+                        <div
+                            class="flex w-auto justify-between items-center gap-[10px]"
                         >
-                            Upload hình mới
-                        </label>
-                        <input
-                            type="file"
-                            name="avatar-customer"
-                            id="avatar-customer"
-                            class="hidden"
-                        />
-                    </div>
-                    <form class="mt-[20px]">
+                            <p class="w-[20%] text-[#818180] whitespace-nowrap">
+                                Họ và tên đầy đủ:
+                            </p>
+                            <div class="w-[80%]">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{name}"
+                                />
+                            </div>
+                        </div>
                         <div
                             class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
                         >
@@ -342,7 +374,11 @@
                                 Điện thoại:
                             </p>
                             <div class="w-[80%]">
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{phone}"
+                                />
                             </div>
                         </div>
                         <div
@@ -352,17 +388,41 @@
                                 Email:
                             </p>
                             <div class="w-[80%]">
-                                <input type="text" class="form-control" />
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    th:field="*{email}"
+                                />
                             </div>
                         </div>
+                        <input hidden th:field="*{id}" />
+                        <input hidden th:field="*{password}" />
+                        <input hidden th:field="*{roleId}" />
+                        <input hidden th:field="*{genderId}" />
                         <input
                             class="bg-[#26BED6] h-[40px] w-[190px] rounded-[4px] text-white mt-[20px] hover:bg-[#003c71] cursor-pointer transition-all duration-100"
                             type="submit"
                             value="Lưu thay đổi"
                         />
+                        <h2 th:text="${message}"></h2>
                     </form>
                 </div>
             </div>
         </div>
     </body>
 </html>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                document
+                    .getElementById("imagePreview")
+                    .setAttribute("src", e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

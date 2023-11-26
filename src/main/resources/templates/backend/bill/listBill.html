@@ -101,12 +101,12 @@
                             <li>
                                 <a
                                     class="dropdown-item"
-                                    href="/profile"
+                                    th:href="@{|~/profile/${#authentication.principal.id}|}"
                                     sec:authentication="principal.email"
                                 ></a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/profile"
+                                <a class="dropdown-item" th:href="@{|~/profile/${#authentication.principal.id}|}"
                                     >Hồ sơ của tôi</a
                                 >
                             </li>
