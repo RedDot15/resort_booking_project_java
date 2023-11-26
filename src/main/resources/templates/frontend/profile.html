@@ -221,14 +221,26 @@
                         <div sec:authorize="isAuthenticated()">
                             <div class="nav-item dropdown">
                                 <a
-                                    class="nav-link dropdown-toggle"
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
                                     href="#"
-                                    id="navbarDropdown"
-                                    role="button"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
                                 >
-                                    Tài khoản
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
                                 </a>
                                 <ul
                                     class="dropdown-menu"
@@ -244,11 +256,6 @@
                                     <li>
                                         <a class="dropdown-item" href="/profile"
                                             >Hồ sơ của tôi</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/trips"
-                                            >Đơn hàng của tôi</a
                                         >
                                     </li>
                                     <li>
@@ -301,15 +308,6 @@
                             ></i>
                             <p class="text-[#26bed6]">Hồ sơ của tôi</p>
                         </a>
-                        <a
-                            href="/trips"
-                            class="flex items-center cursor-pointer py-[14px]"
-                        >
-                            <i
-                                class="fa-solid fa-cart-shopping mr-[6px] text-[#555863]"
-                            ></i>
-                            <p class="text-[#555863]">Đơn hàng của tôi</p>
-                        </a>
                     </div>
                 </div>
 
@@ -337,16 +335,6 @@
                         />
                     </div>
                     <form class="mt-[20px]">
-                        <div
-                            class="flex w-auto justify-between items-center gap-[10px]"
-                        >
-                            <p class="w-[20%] text-[#818180] whitespace-nowrap">
-                                Họ và tên đầy đủ:
-                            </p>
-                            <div class="w-[80%]">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
                         <div
                             class="mt-[10px] flex w-auto justify-between items-center gap-[10px]"
                         >

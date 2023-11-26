@@ -28,13 +28,13 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     String listUser(@RequestParam(required = false) String email,
-                    Model model) {
+            Model model) {
+        // Object user = userService.get
         Object danhsach = userService.getAll(email);
         model.addAttribute("list", danhsach);
         return "/backend/user/listUser.html";
 
     }
-
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     String newPage(Model model) {
@@ -42,7 +42,6 @@ public class UserController {
         model.addAttribute("userDto", s);
         return "/backend/user/create.html";
     }
-
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detailUser(@PathVariable Long id, Model model) {
@@ -53,19 +52,20 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String addUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
-                   Model model,
-                   RedirectAttributes redirectAttributes) throws IOException {
+            Model model,
+            RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
-        if (!Objects.equals(userDto.getPassword(), userDto.getRePassword())){
+        if (!Objects.equals(userDto.getPassword(), userDto.getRePassword())) {
             bindingResult.rejectValue("rePassword", "error.userDto", "Mật khẩu không trùng khớp");
         }
-        if (bindingResult.hasErrors())  return "/backend/user/create.html";
+        if (bindingResult.hasErrors())
+            return "/backend/user/create.html";
         Long id = userDto.getId();
 
-        //LƯU TÊN ẢNH
+        // LƯU TÊN ẢNH
         if (userDto.getFileImage() != null && !userDto.getFileImage().isEmpty()) {
-            userDto.setAvatarImg(fileUtils.saveFile(userDto.getFileImage(),"user\\"));
+            userDto.setAvatarImg(fileUtils.saveFile(userDto.getFileImage(), "user\\"));
         }
 
         if (userDto.getId() == null) {

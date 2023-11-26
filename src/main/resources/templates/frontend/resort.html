@@ -1,850 +1,870 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:text="${resortDto.name}"></title>
-    <link
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title th:text="${resortDto.name}"></title>
+        <link
             rel="shortcut icon"
             href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
             type="image/x-icon"
-    />
-    <link
+        />
+        <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-    />
-    <script
+        />
+        <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
-    ></script>
-    <link
+        ></script>
+        <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-    />
+        />
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <link
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 300px; /* The height is 400 pixels */
-            width: 100%; /* The width is the width of the web page */
-        }
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 300px; /* The height is 400 pixels */
+                width: 100%; /* The width is the width of the web page */
+            }
 
-        /* swiper-container {
+            /* swiper-container {
             width: 100%;
             height: 100%;
         } */
 
-        swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            swiper-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
-        swiper-container {
-            width: 100%;
-            height: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+            swiper-container {
+                width: 100%;
+                height: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-        swiper-slide {
-            background-size: cover;
-            background-position: center;
-        }
+            swiper-slide {
+                background-size: cover;
+                background-position: center;
+            }
 
-        .mySwiper {
-            height: 466px;
-            width: 100%;
-        }
+            .mySwiper {
+                height: 466px;
+                width: 100%;
+            }
 
-        .mySwiper2 {
-            height: 150px;
-            box-sizing: border-box;
-            padding: 10px 0;
-        }
+            .mySwiper2 {
+                height: 150px;
+                box-sizing: border-box;
+                padding: 10px 0;
+            }
 
-        .mySwiper2 swiper-slide {
-            width: auto;
-            height: 100%;
-            opacity: 0.4;
-        }
+            .mySwiper2 swiper-slide {
+                width: auto;
+                height: 100%;
+                opacity: 0.4;
+            }
 
-        .mySwiper2 .swiper-slide-thumb-active {
-            opacity: 1;
-        }
+            .mySwiper2 .swiper-slide-thumb-active {
+                opacity: 1;
+            }
 
-        swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
-    <style>
-        .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
-            height: 20px;
-            width: 20px;
-            background-color: azure;
-        }
-    </style>
-    <!-- Font Awesome -->
-    <link
+            swiper-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        </style>
+        <style>
+            .swiper .swiper-pagination-bullets .swiper-pagination-bullet {
+                height: 20px;
+                width: 20px;
+                background-color: azure;
+            }
+        </style>
+        <!-- Font Awesome -->
+        <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
+        />
+        <!-- Google Fonts -->
+        <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
+        />
+        <!-- MDB -->
+        <link
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
             rel="stylesheet"
-    />
-</head>
-<body>
-<!-- Modal -->
-<div
-        class="modal fade"
-        id="exampleModal"
-        data-bs-backdrop="static"
-        data-bs-toggle="modal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="container h-100">
-                <div
-                        class="row d-flex justify-content-center align-items-center h-100"
-                >
-                    <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
-                    <div class="card shadow-2-strong">
-                        <form action="/doLogin" method="post">
-                            <div
-                                    class="card-body py-3 px-3 text-center"
-                            >
-                                <div class="flex flex-col items-center">
-                                    <img
-                                            class="w-[80px]"
-                                            src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
-                                    />
-                                    <h3 class="mt-2 mb-5">Sign in</h3>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input
-                                            type="email"
-                                            id="typeEmailX-2"
-                                            class="form-control form-control-lg"
-                                            name="email"
-                                    />
-                                    <label
-                                            class="form-label"
-                                            for="typeEmailX-2"
-                                    >Email</label
-                                    >
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input
-                                            type="password"
-                                            id="typePasswordX-2"
-                                            class="form-control form-control-lg"
-                                            name="password"
-                                    />
-                                    <label
-                                            class="form-label"
-                                            for="typePasswordX-2"
-                                    >Password</label
-                                    >
-                                </div>
-
-                                <!-- Checkbox -->
-                                <div
-                                        class="form-check d-flex justify-content-start mb-4"
-                                >
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="form1Example3"
-                                    />
-                                    <label
-                                            class="form-check-label"
-                                            for="form1Example3"
-                                    >
-                                        Remember password
-                                    </label>
-                                </div>
-
-                                <button
-                                        class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
-                                        type="submit"
-                                >
-                                    Login
-                                </button>
-
-                                <hr class="my-4" />
-
-                                <button
-                                        class="btn btn-lg btn-block btn-primary"
-                                        style="background-color: #dd4b39"
-                                        type="submit"
-                                >
-                                    <i class="fab fa-google me-2"></i>
-                                    Sign in with google
-                                </button>
-                                <button
-                                        class="btn btn-lg btn-block btn-primary mb-2"
-                                        style="background-color: #3b5998"
-                                        type="submit"
-                                >
-                                    <i
-                                            class="fab fa-facebook-f me-2"
-                                    ></i
-                                    >Sign in with facebook
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Header -->
-<header class="p-2 bg-[#003C71] text-white">
-    <div class="max-w-[1200px] mx-auto">
+        />
+    </head>
+    <body>
+        <!-- Modal -->
         <div
-                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+            class="modal fade"
+            id="exampleModal"
+            data-bs-backdrop="static"
+            data-bs-toggle="modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
         >
-            <a
-                    href="/"
-                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
-            >
-                <img
-                        src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
-                />
-            </a>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container h-100">
+                        <div
+                            class="row d-flex justify-content-center align-items-center h-100"
+                        >
+                            <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                            <div class="card shadow-2-strong">
+                                <form action="/doLogin" method="post">
+                                    <div
+                                        class="card-body py-3 px-3 text-center"
+                                    >
+                                        <div class="flex flex-col items-center">
+                                            <img
+                                                class="w-[80px]"
+                                                src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
+                                            />
+                                            <h3 class="mt-2 mb-5">Sign in</h3>
+                                        </div>
 
-            <ul
-                    class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-            >
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Khách sạn</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Tours</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Vé máy bay</a
-                    >
-                </li>
-                <li>
-                    <a
-                            href="/"
-                            class="nav-link px-2 text-white text-[20px]"
-                    >Vé vui chơi</a
-                    >
-                </li>
-            </ul>
-            <div class="text-end">
-                <div sec:authorize="!isAuthenticated()">
-                    <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                            data-mdb-toggle="modal"
-                            data-mdb-target="#exampleModal"
-                    >
-                        Login
-                    </button>
-                    <a th:href="@{/signup}">
-                        <button
-                                type="button"
-                                class="btn btn-warning text-white"
-                                th:src="@{/signup}"
-                        >
-                            Sign-up
-                        </button>
-                    </a>
-                </div>
-                <div sec:authorize="isAuthenticated()">
-                    <div class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >
-                            Tài khoản
-                        </a>
-                        <ul
-                                class="dropdown-menu"
-                                aria-labelledby="navbarDropdown"
-                        >
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        href="/profile"
-                                        sec:authentication="principal.email"
-                                ></a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/profile"
-                                >Hồ sơ của tôi</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/trips"
-                                >Đơn hàng của tôi</a
-                                >
-                            </li>
-                            <li><a class="dropdown-item" href="/backend/user" sec:authorize="hasAnyAuthority('ROLE_1')" th:text="'Cơ sở dữ liệu'"></a></li>
-                            <li><a class="dropdown-item" href="#" th:text="'Đổi mật khẩu'"></a></li>
-                            <li>
-                                <a class="dropdown-item" href="/logout"
-                                >Đăng xuất</a
-                                >
-                            </li>
-                        </ul>
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="email"
+                                                id="typeEmailX-2"
+                                                class="form-control form-control-lg"
+                                                name="email"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typeEmailX-2"
+                                                >Email</label
+                                            >
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="password"
+                                                id="typePasswordX-2"
+                                                class="form-control form-control-lg"
+                                                name="password"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typePasswordX-2"
+                                                >Password</label
+                                            >
+                                        </div>
+
+                                        <!-- Checkbox -->
+                                        <div
+                                            class="form-check d-flex justify-content-start mb-4"
+                                        >
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                value=""
+                                                id="form1Example3"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="form1Example3"
+                                            >
+                                                Remember password
+                                            </label>
+                                        </div>
+
+                                        <button
+                                            class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
+                                            type="submit"
+                                        >
+                                            Login
+                                        </button>
+
+                                        <hr class="my-4" />
+
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary"
+                                            style="background-color: #dd4b39"
+                                            type="submit"
+                                        >
+                                            <i class="fab fa-google me-2"></i>
+                                            Sign in with google
+                                        </button>
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary mb-2"
+                                            style="background-color: #3b5998"
+                                            type="submit"
+                                        >
+                                            <i
+                                                class="fab fa-facebook-f me-2"
+                                            ></i
+                                            >Sign in with facebook
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-
-<!-- Body -->
-<div>
-    <div
-            class="max-w-[1200px] mx-auto grid grid-cols-4 gap-[16px] py-[16px]"
-    >
-        <!-- Left -->
-        <div class="col-start-1 col-end-2">
-            <!--The div element for the Google Map -->
-            <div id="map"></div>
-
-            <!-- Related -->
-            <div class="mt-[30px]">
-                <p class="font-semibold text-[20px] text-[#003C71]">
-                    Khách sạn tương tự
-                </p>
-                <th:block
-                        th:each="resortDto : ${resortList}"
-                        th:object="${resortDto}"
+        <!-- Header -->
+        <header class="p-2 bg-[#003C71] text-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
                 >
-                    <a th:href="@{/resort/} + *{id}">
-                        <div
-                                class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
-                        >
-                            <img
-                                    class="rounded-[6px] w-[80px] h-[80px] object-cover"
-                                    th:src="@{/image/resort/} + *{id} + @{/detail/} + *{resortimageEntityList.get(0).name}"
-                            />
-                            <div>
-                                <p
-                                        class="text-[#23527c] leading-[1.25]"
-                                        th:text="*{name}"
-                                ></p>
-                                <div
-                                        class="flex items-center gap-[2px] mt-[6px]"
+                    <a
+                        href="/"
+                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                    >
+                        <img
+                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                        />
+                    </a>
+
+                    <ul
+                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    >
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Khách sạn</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Tours</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé máy bay</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé vui chơi</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="text-end">
+                        <div sec:authorize="!isAuthenticated()">
+                            <button
+                                type="button"
+                                class="btn me-2 bg-danger text-white"
+                                data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal"
+                            >
+                                Login
+                            </button>
+                            <a th:href="@{/signup}">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
                                 >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
+                                    href="#"
+                                    data-bs-toggle="dropdown"
+                                >
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/profile"
+                                            sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/profile"
+                                            >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                            >Đăng xuất</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div>
+            <div
+                class="max-w-[1200px] mx-auto grid grid-cols-4 gap-[16px] py-[16px]"
+            >
+                <!-- Left -->
+                <div class="col-start-1 col-end-2">
+                    <!--The div element for the Google Map -->
+                    <div id="map"></div>
+
+                    <!-- Related -->
+                    <div class="mt-[30px]">
+                        <p class="font-semibold text-[20px] text-[#003C71]">
+                            Khách sạn tương tự
+                        </p>
+                        <th:block
+                            th:each="resortDto : ${resortList}"
+                            th:object="${resortDto}"
+                        >
+                            <a th:href="@{/resort/} + *{id}">
+                                <div
+                                    class="transition-all duration-[0.15s] hover:bg-[rgba(0,0,0,0.075)] p-[10px] flex gap-[10px]"
+                                >
+                                    <img
+                                        class="rounded-[6px] w-[80px] h-[80px] object-cover"
+                                        th:src="@{/image/resort/} + *{id} + @{/detail/} + *{resortimageEntityList.get(0).name}"
+                                    />
+                                    <div>
+                                        <p
+                                            class="text-[#23527c] leading-[1.25]"
+                                            th:text="*{name}"
+                                        ></p>
+                                        <div
+                                            class="flex items-center gap-[2px] mt-[6px]"
+                                        >
+                                            <i
+                                                th:each="number : ${#numbers.sequence(1, resortDto.point)}"
+                                                class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                            ></i>
+                                        </div>
+                                        <p
+                                            class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
+                                        >
+                                            Tuyệt vời
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </th:block>
+                    </div>
+                </div>
+
+                <!-- Right -->
+                <div class="col-start-2 col-end-5">
+                    <!-- Resort and buy -->
+                    <div class="flex justify-between">
+                        <div>
+                            <p
+                                class="font-bold text-[20px] text-[#003c71]"
+                                th:text="${resortDto.name}"
+                            ></p>
+                            <div class="flex items-center gap-[20px]">
+                                <div class="flex gap-[3px]">
                                     <i
-                                            th:each="number : ${#numbers.sequence(1, resortDto.point)}"
-                                            class="fa-solid fa-star text-[12px] text-[#FDBF65]"
+                                        th:each="number : ${#numbers.sequence(1, resortDto.point)}"
+                                        class="fa-solid fa-star text-[#FDBF65]"
                                     ></i>
                                 </div>
-                                <p
-                                        class="text-[#9fc43a] text-[14px] mt-[6px] font-bold"
-                                >
+                                <p class="text-[#9fc43a] text-[16px] font-bold">
                                     Tuyệt vời
                                 </p>
                             </div>
                         </div>
-                    </a>
-                </th:block>
-            </div>
-        </div>
-
-        <!-- Right -->
-        <div class="col-start-2 col-end-5">
-            <!-- Resort and buy -->
-            <div class="flex justify-between">
-                <div>
-                    <p
-                            class="font-bold text-[20px] text-[#003c71]"
-                            th:text="${resortDto.name}"
-                    ></p>
-                    <div class="flex items-center gap-[20px]">
-                        <div class="flex gap-[3px]">
-                            <i
-                                    th:each="number : ${#numbers.sequence(1, resortDto.point)}"
-                                    class="fa-solid fa-star text-[#FDBF65]"
-                            ></i>
+                        <div>
+                            <p class="text-[#555863] text-[14px]">Giá chỉ từ</p>
+                            <p
+                                class="text-[22px] font-semibold text-[#26bed6]"
+                                th:text="${resortDto.roomEntityList.get(0).price} + ' VND'"
+                            ></p>
+                            <a href="#booking">
+                                <button
+                                    class="mt-[6px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
+                                >
+                                    Đặt ngay
+                                </button>
+                            </a>
                         </div>
-                        <p class="text-[#9fc43a] text-[16px] font-bold">
-                            Tuyệt vời
-                        </p>
                     </div>
-                </div>
-                <div>
-                    <p class="text-[#555863] text-[14px]">Giá chỉ từ</p>
-                    <p
-                            class="text-[22px] font-semibold text-[#26bed6]"
-                            th:text="${resortDto.roomEntityList.get(0).price} + ' VND'"
-                    ></p>
-                    <a href="#booking">
-                        <button
-                                class="mt-[6px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
-                        >
-                            Đặt ngay
-                        </button>
-                    </a>
-                </div>
-            </div>
 
-            <!-- Slider thumb galery -->
-            <swiper-container
-                    style="
+                    <!-- Slider thumb galery -->
+                    <swiper-container
+                        style="
                             --swiper-navigation-color: #fff;
                             --swiper-pagination-color: #fff;
                         "
-                    class="mySwiper mt-[20px]"
-                    thumbs-swiper=".mySwiper2"
-                    loop="true"
-                    space-between="10"
-                    navigation="true"
-            >
-                <th:block
-                        th:each="resortImage : ${resortDto.resortimageEntityList}"
-                        th:object="${resortImage}"
-                >
-                    <swiper-slide>
-                        <img
-                                th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
-                        />
-                    </swiper-slide>
-                </th:block>
-            </swiper-container>
-            <swiper-container
-                    class="mySwiper2"
-                    loop="true"
-                    space-between="10"
-                    slides-per-view="4"
-                    free-mode="true"
-                    watch-slides-progress="true"
-            >
-                <th:block
-                        th:each="resortImage : ${resortDto.resortimageEntityList}"
-                        th:object="${resortImage}"
-                >
-                    <swiper-slide>
-                        <img
-                                th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
-                        />
-                    </swiper-slide>
-                </th:block>
-            </swiper-container>
-
-            <!-- Table -->
-            <table
-                    class="table table-bordered table-hover mt-[30px]"
-                    id="booking"
-            >
-                <thead class="bg-[#E6E7EA]">
-                <th
-                        class="border-none font-bold text-[20px] text-[#003c71]"
-                >
-                    <div class="px-[8px]">Loại phòng</div>
-                </th>
-                <th
-                        class="border-none font-bold text-[20px] text-[#003c71]"
-                >
-                    <div class="px-[8px]">Tổng giá</div>
-                </th>
-                <th
-                        class="border-none font-bold text-[20px] text-[#003c71]"
-                >
-                    <div class="px-[8px]">Giữ phòng</div>
-                </th>
-                </thead>
-                <tbody>
-                <th:block
-                        th:each="roomDto : ${roomDtoList}"
-                        th:object="${roomDto}"
-                >
-                    <tr>
-                        <td class="w-[50%]">
-                            <div class="py-[12px] px-[8px]">
-                                <p
-                                        class="text-[22px] font-bold text-[#26bed6]"
-                                        th:text="*{name}"
-                                ></p>
-                                <img
-                                        class="mt-[8px] w-full h-[310px] object-cover"
-                                        th:src="@{/image/room/} + *{id} + @{/} + *{imageName}"
-                                        src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
-                                />
-                            </div>
-                        </td>
-                        <td class="w-[25%]">
-                            <div class="py-[12px] px-[8px]">
-                                <p
-                                        class="text-[22px] font-semibold text-[#26bed6]"
-                                        th:text="*{price} + ' VND'"
-                                ></p>
-                            </div>
-                        </td>
-                        <td class="w-[25%]">
-                            <div class="py-[12px] px-[8px]">
-                                <div>
-                                    <a
-                                            th:href="@{/booking/} + *{id}"
-                                    >
-                                        <div
-                                                class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
-                                        >
-                                            Đặt ngay
-                                        </div>
-                                    </a>
-
-                                    <div
-                                            class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
-                                    >
-                                        1 villa
-                                    </div>
-                                </div>
-                                <div
-                                        class="flex items-center justify-center mt-[8px]"
-                                >
-                                    <i
-                                            class="fa-sharp fa-solid fa-bolt text-[#F79321]"
-                                    ></i>
-                                    <p class="ml-[4px]">
-                                        Xác nhận ngay
-                                    </p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </th:block>
-                </tbody>
-            </table>
-
-            <!-- Extension -->
-            <div>
-                <p
-                        class="font-semibold text-[20px] text-[#003C71]"
-                        th:text="'Tiện ích của ' + ${resortDto.name}"
-                ></p>
-                <div class="grid grid-cols-3 gap-[8px] mt-[10px]">
-                    <th:block
-                            th:each="extension : ${extensionList}"
-                            th:object="${extension}"
+                        class="mySwiper mt-[20px]"
+                        thumbs-swiper=".mySwiper2"
+                        loop="true"
+                        space-between="10"
+                        navigation="true"
                     >
-                        <div class="flex items-center">
-                            <i
-                                    class="fa-solid fa-circle text-[8px] text-[#26BED6]"
-                            ></i>
-                            <p
-                                    class="ml-[4px] text-[#23527c] leading-[1.25]"
-                                    th:text="*{extensionEntity.name}"
-                            ></p>
-                        </div>
-                    </th:block>
-                </div>
-            </div>
+                        <th:block
+                            th:each="resortImage : ${resortDto.resortimageEntityList}"
+                            th:object="${resortImage}"
+                        >
+                            <swiper-slide>
+                                <img
+                                    th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
+                                />
+                            </swiper-slide>
+                        </th:block>
+                    </swiper-container>
+                    <swiper-container
+                        class="mySwiper2"
+                        loop="true"
+                        space-between="10"
+                        slides-per-view="4"
+                        free-mode="true"
+                        watch-slides-progress="true"
+                    >
+                        <th:block
+                            th:each="resortImage : ${resortDto.resortimageEntityList}"
+                            th:object="${resortImage}"
+                        >
+                            <swiper-slide>
+                                <img
+                                    th:src="@{/image/resort/} + ${resortDto.id} + @{/detail/} + *{name}"
+                                />
+                            </swiper-slide>
+                        </th:block>
+                    </swiper-container>
 
-            <!-- Detail Markdown -->
-            <div class="mt-[46px]">
-                <p
-                        class="font-semibold text-[20px] text-[#003C71]"
-                        th:text="'Thông tin ' + ${resortDto.name}"
-                ></p>
-                <p
-                        class="mt-[10px]"
-                        th:text="${resortDto.infoHTML}"
-                ></p>
+                    <!-- Table -->
+                    <table
+                        class="table table-bordered table-hover mt-[30px]"
+                        id="booking"
+                    >
+                        <thead class="bg-[#E6E7EA]">
+                            <th
+                                class="border-none font-bold text-[20px] text-[#003c71]"
+                            >
+                                <div class="px-[8px]">Loại phòng</div>
+                            </th>
+                            <th
+                                class="border-none font-bold text-[20px] text-[#003c71]"
+                            >
+                                <div class="px-[8px]">Tổng giá</div>
+                            </th>
+                            <th
+                                class="border-none font-bold text-[20px] text-[#003c71]"
+                            >
+                                <div class="px-[8px]">Giữ phòng</div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <th:block
+                                th:each="roomDto : ${roomDtoList}"
+                                th:object="${roomDto}"
+                            >
+                                <tr>
+                                    <td class="w-[50%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <p
+                                                class="text-[22px] font-bold text-[#26bed6]"
+                                                th:text="*{name}"
+                                            ></p>
+                                            <img
+                                                class="mt-[8px] w-full h-[310px] object-cover"
+                                                th:src="@{/image/room/} + *{id} + @{/} + *{imageName}"
+                                                src="https://cdn1.ivivu.com/images/2023/05/23/18/2-2br-lake-view-4-cr-1___6jitcm____horizontal-500x375.webp?o=jpg"
+                                            />
+                                        </div>
+                                    </td>
+                                    <td class="w-[25%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <p
+                                                class="text-[22px] font-semibold text-[#26bed6]"
+                                                th:text="*{price} + ' VND'"
+                                            ></p>
+                                        </div>
+                                    </td>
+                                    <td class="w-[25%]">
+                                        <div class="py-[12px] px-[8px]">
+                                            <div>
+                                                <a
+                                                    th:href="@{/booking/} + *{id}"
+                                                >
+                                                    <div
+                                                        class="rounded-t-[4px] text-center py-[10px] bg-[#F79321] text-white font-semibold"
+                                                    >
+                                                        Đặt ngay
+                                                    </div>
+                                                </a>
+
+                                                <div
+                                                    class="rounded-b-[4px] text-center text-[#F79321] border-[1px] border-[#F79321]"
+                                                >
+                                                    1 villa
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-center mt-[8px]"
+                                            >
+                                                <i
+                                                    class="fa-sharp fa-solid fa-bolt text-[#F79321]"
+                                                ></i>
+                                                <p class="ml-[4px]">
+                                                    Xác nhận ngay
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+
+                    <!-- Extension -->
+                    <div>
+                        <p
+                            class="font-semibold text-[20px] text-[#003C71]"
+                            th:text="'Tiện ích của ' + ${resortDto.name}"
+                        ></p>
+                        <div class="grid grid-cols-3 gap-[8px] mt-[10px]">
+                            <th:block
+                                th:each="extension : ${extensionList}"
+                                th:object="${extension}"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fa-solid fa-circle text-[8px] text-[#26BED6]"
+                                    ></i>
+                                    <p
+                                        class="ml-[4px] text-[#23527c] leading-[1.25]"
+                                        th:text="*{extensionEntity.name}"
+                                    ></p>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+
+                    <!-- Detail Markdown -->
+                    <div class="mt-[46px]">
+                        <p
+                            class="font-semibold text-[20px] text-[#003C71]"
+                            th:text="'Thông tin ' + ${resortDto.name}"
+                        ></p>
+                        <p
+                            class="mt-[10px]"
+                            th:text="${resortDto.infoHTML}"
+                        ></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Footer -->
-<footer
-        class="text-center text-lg-start text-white"
-        style="background-color: #929fba"
->
-    <!-- Grid container -->
-    <div class="max-w-[1200px] mx-auto py-[24px]">
-        <!-- Section: Links -->
-        <section class="">
-            <!--Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Về iVIVU.com
-                    </h6>
-                    <p>
-                        <a class="text-white">Chúng tôi</a>
-                    </p>
-                    <p>
-                        <a class="text-white">iVIVU Blog</a>
-                    </p>
-                    <p>
-                        <a class="text-white">PMS - Miễn phí</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
+        <!-- Footer -->
+        <footer
+            class="text-center text-lg-start text-white"
+            style="background-color: #929fba"
+        >
+            <!-- Grid container -->
+            <div class="max-w-[1200px] mx-auto py-[24px]">
+                <!-- Section: Links -->
+                <section class="">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Về iVIVU.com
+                            </h6>
+                            <p>
+                                <a class="text-white">Chúng tôi</a>
+                            </p>
+                            <p>
+                                <a class="text-white">iVIVU Blog</a>
+                            </p>
+                            <p>
+                                <a class="text-white">PMS - Miễn phí</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
 
-                <hr class="w-100 clearfix d-md-none" />
+                        <hr class="w-100 clearfix d-md-none" />
 
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Thông Tin Cần Biết
-                    </h6>
-                    <p>
-                        <a class="text-white">Điều kiện & Điều khoản</a>
-                    </p>
-                    <p>
-                        <a class="text-white">Quy chế hoạt động</a>
-                    </p>
-                    <p>
-                        <a class="text-white">Câu hỏi thường gặp</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Thông Tin Cần Biết
+                            </h6>
+                            <p>
+                                <a class="text-white">Điều kiện & Điều khoản</a>
+                            </p>
+                            <p>
+                                <a class="text-white">Quy chế hoạt động</a>
+                            </p>
+                            <p>
+                                <a class="text-white">Câu hỏi thường gặp</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
 
-                <hr class="w-100 clearfix d-md-none" />
+                        <hr class="w-100 clearfix d-md-none" />
 
-                <!-- Grid column -->
-                <hr class="w-100 clearfix d-md-none" />
+                        <!-- Grid column -->
+                        <hr class="w-100 clearfix d-md-none" />
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Liên lạc
-                    </h6>
-                    <p>
-                        <i class="fas fa-home mr-3"></i> P308, Tầng 3,
-                        tòa nhà The One, số 2 Chương Dương Độ, P.Chương
-                        Dương, Q.Hoàn Kiếm, Hà Nội
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope mr-3"></i>
-                        ivivu@gmail.com
-                    </p>
-                    <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
-                    <p>
-                        <i class="fas fa-print mr-3"></i> + 01 234 567
-                        89
-                    </p>
-                </div>
-                <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Liên lạc
+                            </h6>
+                            <p>
+                                <i class="fas fa-home mr-3"></i> P308, Tầng 3,
+                                tòa nhà The One, số 2 Chương Dương Độ, P.Chương
+                                Dương, Q.Hoàn Kiếm, Hà Nội
+                            </p>
+                            <p>
+                                <i class="fas fa-envelope mr-3"></i>
+                                ivivu@gmail.com
+                            </p>
+                            <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
+                            <p>
+                                <i class="fas fa-print mr-3"></i> + 01 234 567
+                                89
+                            </p>
+                        </div>
+                        <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        Follow us
-                    </h6>
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">
+                                Follow us
+                            </h6>
 
-                    <!-- Facebook -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #3b5998"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-facebook-f"></i
-                    ></a>
+                            <!-- Facebook -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #3b5998"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
 
-                    <!-- Twitter -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #55acee"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-twitter"></i
-                    ></a>
+                            <!-- Twitter -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #55acee"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
 
-                    <!-- Google -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #dd4b39"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-google"></i
-                    ></a>
+                            <!-- Google -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #dd4b39"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-google"></i
+                            ></a>
 
-                    <!-- Instagram -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #ac2bac"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-instagram"></i
-                    ></a>
+                            <!-- Instagram -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #ac2bac"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
 
-                    <!-- Linkedin -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #0082ca"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-linkedin-in"></i
-                    ></a>
-                    <!-- Github -->
-                    <a
-                            class="btn btn-primary btn-floating m-1"
-                            style="background-color: #333333"
-                            href="/"
-                            role="button"
-                    ><i class="fab fa-github"></i
-                    ></a>
-                </div>
+                            <!-- Linkedin -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #0082ca"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                            <!-- Github -->
+                            <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #333333"
+                                href="/"
+                                role="button"
+                                ><i class="fab fa-github"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+                </section>
+                <!-- Section: Links -->
             </div>
-            <!--Grid row-->
-        </section>
-        <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
+            <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div
-            class="text-center p-3"
-            style="background-color: rgba(0, 0, 0, 0.2)"
-    >
-        © 2023 Copyright:
-        <a class="text-white" href="/">Nhóm 1</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+            <!-- Copyright -->
+            <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+            >
+                © 2023 Copyright:
+                <a class="text-white" href="/">Nhóm 1</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
 
-<script>
-    ((g) => {
-        var h,
-            a,
-            k,
-            p = "The Google Maps JavaScript API",
-            c = "google",
-            l = "importLibrary",
-            q = "__ib__",
-            m = document,
-            b = window;
-        b = b[c] || (b[c] = {});
-        var d = b.maps || (b.maps = {}),
-            r = new Set(),
-            e = new URLSearchParams(),
-            u = () =>
-                h ||
-                (h = new Promise(async (f, n) => {
-                    await (a = m.createElement("script"));
-                    e.set("libraries", [...r] + "");
-                    for (k in g)
-                        e.set(
-                            k.replace(
-                                /[A-Z]/g,
-                                (t) => "_" + t[0].toLowerCase()
-                            ),
-                            g[k]
-                        );
-                    e.set("callback", c + ".maps." + q);
-                    a.src =
-                        `https://maps.${c}apis.com/maps/api/js?` + e;
-                    d[q] = f;
-                    a.onerror = () =>
-                        (h = n(Error(p + " could not load.")));
-                    a.nonce =
-                        m.querySelector("script[nonce]")?.nonce || "";
-                    m.head.append(a);
-                }));
-        d[l]
-            ? console.warn(p + " only loads once. Ignoring:", g)
-            : (d[l] = (f, ...n) =>
-            r.add(f) && u().then(() => d[l](f, ...n)));
-    })({
-        key: "AIzaSyBXjanpJHia5fRHo9WABbvSXYqhtPGuedU",
-        v: "weekly",
-        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-        // Add other bootstrap parameters as needed, using camel case.
-    });
-</script>
-<script>
-    // Initialize and add the map
-    let map;
+        <script>
+            ((g) => {
+                var h,
+                    a,
+                    k,
+                    p = "The Google Maps JavaScript API",
+                    c = "google",
+                    l = "importLibrary",
+                    q = "__ib__",
+                    m = document,
+                    b = window;
+                b = b[c] || (b[c] = {});
+                var d = b.maps || (b.maps = {}),
+                    r = new Set(),
+                    e = new URLSearchParams(),
+                    u = () =>
+                        h ||
+                        (h = new Promise(async (f, n) => {
+                            await (a = m.createElement("script"));
+                            e.set("libraries", [...r] + "");
+                            for (k in g)
+                                e.set(
+                                    k.replace(
+                                        /[A-Z]/g,
+                                        (t) => "_" + t[0].toLowerCase()
+                                    ),
+                                    g[k]
+                                );
+                            e.set("callback", c + ".maps." + q);
+                            a.src =
+                                `https://maps.${c}apis.com/maps/api/js?` + e;
+                            d[q] = f;
+                            a.onerror = () =>
+                                (h = n(Error(p + " could not load.")));
+                            a.nonce =
+                                m.querySelector("script[nonce]")?.nonce || "";
+                            m.head.append(a);
+                        }));
+                d[l]
+                    ? console.warn(p + " only loads once. Ignoring:", g)
+                    : (d[l] = (f, ...n) =>
+                          r.add(f) && u().then(() => d[l](f, ...n)));
+            })({
+                key: "AIzaSyBXjanpJHia5fRHo9WABbvSXYqhtPGuedU",
+                v: "weekly",
+                // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+                // Add other bootstrap parameters as needed, using camel case.
+            });
+        </script>
+        <script>
+            // Initialize and add the map
+            let map;
 
-    async function initMap() {
-        // The location of Uluru
-        const position = { lat: 10.343313, lng: 103.847931 };
-        // Request needed libraries.
-        //@ts-ignore
-        const { Map } = await google.maps.importLibrary("maps");
-        const { AdvancedMarkerElement } =
-            await google.maps.importLibrary("marker");
+            async function initMap() {
+                // The location of Uluru
+                const position = { lat: 10.343313, lng: 103.847931 };
+                // Request needed libraries.
+                //@ts-ignore
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement } =
+                    await google.maps.importLibrary("marker");
 
-        // The map, centered at Uluru
-        map = new Map(document.getElementById("map"), {
-            zoom: 14,
-            center: position,
-            mapId: "DEMO_MAP_ID",
-        });
+                // The map, centered at Uluru
+                map = new Map(document.getElementById("map"), {
+                    zoom: 14,
+                    center: position,
+                    mapId: "DEMO_MAP_ID",
+                });
 
-        // The marker, positioned at Uluru
-        const marker = new AdvancedMarkerElement({
-            map: map,
-            position: position,
-            title: "Uluru",
-        });
-    }
+                // The marker, positioned at Uluru
+                const marker = new AdvancedMarkerElement({
+                    map: map,
+                    position: position,
+                    title: "Uluru",
+                });
+            }
 
-    initMap();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
-</body>
+            initMap();
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+    </body>
 </html>
 <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>

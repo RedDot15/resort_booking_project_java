@@ -16,9 +16,4 @@ public class CustomerController {
     public String profile(Model model) {
         return "frontend/profile.html";
     }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/trips")
-    public String trips(Model model) {
-        return "frontend/trips.html";
-    }
 }
