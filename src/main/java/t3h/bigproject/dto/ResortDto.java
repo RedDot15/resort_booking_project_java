@@ -22,6 +22,9 @@ public class ResortDto {
     private String infoHTML;
     private String infoMarkDown;
     private Integer point;
+    private Float lat;
+    private Float lng;
+
 
     private ArrayList<Long> extensionListId;
 

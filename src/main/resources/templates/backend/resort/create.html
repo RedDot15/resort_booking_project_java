@@ -275,6 +275,20 @@
                   <label th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></label>
                 </div>
                 <div class="row mb-3">
+                  <label for="lat" class="col-sm-2 col-form-label" >Lat</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{lat}" id="lat">
+                  </div>
+                  <label th:if="${#fields.hasErrors('lat')}" class="error" th:errors="*{lat}"></label>
+                </div>
+                <div class="row mb-3">
+                  <label for="lng" class="col-sm-2 col-form-label" >Lng</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{lng}" id="lng">
+                  </div>
+                  <label th:if="${#fields.hasErrors('lng')}" class="error" th:errors="*{lng}"></label>
+                </div>
+                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">City Id</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" th:field="*{cityId}">

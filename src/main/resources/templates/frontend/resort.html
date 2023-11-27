@@ -863,13 +863,13 @@
                 // Add other bootstrap parameters as needed, using camel case.
             });
         </script>
-        <script>
+        <script th:inline="javascript">
             // Initialize and add the map
             let map;
 
             async function initMap() {
                 // The location of Uluru
-                const position = { lat: 10.343313, lng: 103.847931 };
+                const position = {lat: [[${resortDto.lat}]], lng: [[${resortDto.lng}]] };
                 // Request needed libraries.
                 //@ts-ignore
                 const { Map } = await google.maps.importLibrary("maps");
