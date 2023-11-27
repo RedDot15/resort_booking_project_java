@@ -29,6 +29,12 @@ public class ResortEntity {
     @Basic
     @Column(name = "point")
     private Integer point;
+    @Basic
+    @Column(name = "lat")
+    private Float lat;
+    @Basic
+    @Column(name = "lng")
+    private Float lng;
 
     @OneToMany()
     @JoinColumn(name = "resort_id")

@@ -307,6 +307,8 @@
                                             <th>INFO_HTML</th>
                                             <th>INFO_MARKDOWN</th>
                                             <th>POINT</th>
+                                            <th>LAT</th>
+                                            <th>LNG</th>
                                             <th>EDIT</th>
                                         </tr>
                                     </thead>
@@ -322,6 +324,8 @@
                                                     th:text="*{infoMarkDown}"
                                                 ></td>
                                                 <td th:text="*{point}"></td>
+                                                <td th:text="*{lat}"></td>
+                                                <td th:text="*{lng}"></td>
                                                 <td>
                                                     <a th:href="@{/backend/resort/} + *{id}">
                                                         EDIT
