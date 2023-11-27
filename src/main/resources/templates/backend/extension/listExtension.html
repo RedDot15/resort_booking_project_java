@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -118,7 +122,7 @@
                             <li>
                                 <a
                                     class="dropdown-item"
-                                    href="#"
+                                    th:href="@{|~/change-password/${#authentication.principal.id}|}"
                                     th:text="'Đổi mật khẩu'"
                                 ></a>
                             </li>
@@ -315,7 +319,9 @@
                                                 <td th:text="*{id}"></td>
                                                 <td th:text="*{name}"></td>
                                                 <td>
-                                                    <a th:href="@{/backend/extension/} + *{id}">
+                                                    <a
+                                                        th:href="@{/backend/extension/} + *{id}"
+                                                    >
                                                         EDIT
                                                     </a>
                                                 </td>
