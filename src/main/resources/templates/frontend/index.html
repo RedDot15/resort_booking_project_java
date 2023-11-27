@@ -294,7 +294,7 @@
                                     <li>
                                         <a
                                             class="dropdown-item"
-                                            href="#"
+                                            th:href="@{|~/change-password/${#authentication.principal.id}|}"
                                             th:text="'Đổi mật khẩu'"
                                         ></a>
                                     </li>
@@ -561,7 +561,11 @@
                                         class="text-[34px] font-semibold"
                                         th:text="*{name}"
                                     ></p>
-                                    <p>5 khách sạn</p>
+                                    <p
+                                        th:text="${cityDto.resortEntityList.size()} + ' khách sạn'"
+                                    >
+                                        5 khách sạn
+                                    </p>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -605,7 +609,11 @@
                                         class="text-[34px] font-semibold"
                                         th:text="*{name}"
                                     ></p>
-                                    <p>5 khách sạn</p>
+                                    <p
+                                        th:text="${cityDto.resortEntityList.size()} + ' khách sạn'"
+                                    >
+                                        5 khách sạn
+                                    </p>
                                 </div>
                             </div>
                         </swiper-slide>
