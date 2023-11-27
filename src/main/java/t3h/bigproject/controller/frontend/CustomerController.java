@@ -38,9 +38,11 @@ public class CustomerController {
         return "frontend/profile.html";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/trips")
-    public String trips(Model model) {
-        return "frontend/trips.html";
+    @RequestMapping(method = RequestMethod.GET, value = "/change-password/{id}")
+    public String changePassword(@PathVariable Long id, Model model) {
+        UserDto s = userService.getDetail(id);
+        model.addAttribute("userDto", s);
+        return "frontend/changePassword.html";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/infoChange", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
