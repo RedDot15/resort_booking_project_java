@@ -136,7 +136,7 @@ public class HomeController {
             return "redirect:/signup";
         }
         redirectAttributes.addFlashAttribute("message", msg + " tài khoản " + id + " thành công");
-        return "redirect:/signup";
+        return "redirect:/login";
     }
 
     @RequestMapping("/403")
