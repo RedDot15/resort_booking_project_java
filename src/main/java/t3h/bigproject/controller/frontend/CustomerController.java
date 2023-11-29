@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,9 @@ public class CustomerController {
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @RequestMapping(method = RequestMethod.GET, value = "/profile/{id}")
     public String profile(@PathVariable Long id, Model model) {
         UserDto s = userService.getDetail(id);
@@ -52,7 +56,7 @@ public class CustomerController {
         Object result = null;
         String msg = "";
         if (bindingResult.hasErrors())
-            return "/backend/signup.html";
+            return "/frontend/profile.html";
         Long id = userDto.getId();
 
         // LƯU TÊN ẢNH
@@ -74,5 +78,35 @@ public class CustomerController {
         }
         redirectAttributes.addFlashAttribute("message", "cập nhật tài khoản thành công");
         return "redirect:/profile/" + userDto.getId();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/passwordChange", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    String changingPasswordHandle(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
+                          Model model,
+                          RedirectAttributes redirectAttributes) throws IOException {
+        Object result = null;
+        String msg = "";
+        if (!Objects.equals(userDto.getNewPassword(), userDto.getRePassword())) {
+            bindingResult.rejectValue("rePassword", "error.userDto", "Mật khẩu không trùng khớp");
+        }
+        if (bindingResult.hasErrors())
+            return "/frontend/changePassword.html";
+        Long id = userDto.getId();
+        if (passwordEncoder.matches(userDto.getOldPassword(),userDto.getPassword())){
+            userDto.setPassword(userDto.getNewPassword());
+            result = userService.updateUser(userDto);
+        }
+        else{
+            redirectAttributes.addFlashAttribute("message", "Mật khẩu gốc không đúng");
+            return "redirect:/change-password/" + userDto.getId();
+        }
+        msg = "Cập nhật";
+        if (Objects.equals(result, null)){
+            redirectAttributes.addFlashAttribute("message", msg + " fail");
+            return "redirect:/change-password/" + userDto.getId();
+
+        }
+        redirectAttributes.addFlashAttribute("message", "cập nhật tài khoản thành công");
+        return "redirect:/change-password/" + userDto.getId();
     }
 }

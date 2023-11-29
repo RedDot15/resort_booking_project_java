@@ -26,7 +26,10 @@ public class UserDto {
     private Long roleId;
     private Long genderId;
 
+    private String oldPassword;
+    private String newPassword;
     private String rePassword;
+
 
     MultipartFile fileImage;
 }
