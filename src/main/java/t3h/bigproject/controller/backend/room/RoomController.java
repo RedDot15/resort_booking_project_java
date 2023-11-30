@@ -38,6 +38,13 @@ public class RoomController {
         return"/backend/room/listRoom.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        roomService.delete(id);
+        return "redirect:/backend/room/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = roomService.getDetailById(id);

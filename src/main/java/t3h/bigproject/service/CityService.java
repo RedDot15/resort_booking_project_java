@@ -36,9 +36,6 @@ public class CityService {
     @Autowired
     ResortExtensionRepository resortExtensionRepository;
 
-    // @Autowired
-    // ProductImagesRepository productImagesRepository;
-
     public List<CityDto> getAll(String name) {
         List<CityDto> cityDtoList = new ArrayList<>();
         List<CityEntity> cityEntityList;
@@ -134,18 +131,6 @@ public class CityService {
         // LƯU TÊN ẢNH
         // lưu ảnh main
         cityEntity.setImageName(cityDto.getImageName());
-        // Lưu mhiều ảnh
-        // if (!CollectionUtils.isEmpty(cityDto.getProductImagesDtos())) {
-        //// List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-        // for (ProductImagesDto productImagesDto: cityDto.getProductImagesDtos()
-        // ) {
-        // ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-        // BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-        //// productImagesEntities.add(productImagesEntity);
-        // productImagesRepository.save(productImagesEntity);
-        // }
-        //// productImagesRepository.saveAll(productImagesEntities);
-        // }
         return cityDto;
     }
 
@@ -155,8 +140,6 @@ public class CityService {
         cityRepository.save(cityEntity);
 
         fileUtils.cleanDir("city\\" + cityDto.getId());// xóa ảnh trong thư mục
-        // productImagesRepository.deleteAllByProductId(cityDto.getId());// xóa nhiều
-        // ảnh trong database
         try {
             saveFile(cityDto);
         } catch (IOException e) {
@@ -164,19 +147,13 @@ public class CityService {
         }
         // lưu ảnh main
         cityEntity.setImageName(cityDto.getImageName());
-        // Lưu nhiều ảnh
-        // if (!CollectionUtils.isEmpty(cityDto.getProductImagesDtos())) {
-        // List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-        // for (ProductImagesDto productImagesDto: cityDto.getProductImagesDtos()
-        // ) {
-        // ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-        // BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-        // productImagesEntities.add(productImagesEntity);
-        // }
-        // productImagesRepository.saveAll(productImagesEntities);
-        // }
         return cityDto;
     }
+
+    public void delete(Long id) {
+       cityRepository.deleteCityEntityById(id);
+    }
+
 
     void saveFile(CityDto cityDto) throws IOException {
         if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {// Lưu 1 file ảnh chính
@@ -184,21 +161,5 @@ public class CityService {
                     fileUtils.saveFile(cityDto.getFileImage(), "city\\" + cityDto.getId() + "\\"));
         }
 
-        // if (!CollectionUtils.isEmpty(cityDto.getMultipartFileList())) {//Lưu các file
-        // ảnh phụ
-        // List<ProductImagesDto> productImagesDtos = new ArrayList<>();
-        // for (MultipartFile multipartFile: cityDto.getMultipartFileList()
-        // ) {
-        // if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
-        // ProductImagesDto productImagesDto = new ProductImagesDto();
-        // productImagesDto.setName(
-        // fileUtils.saveFile(cityDto.getFileImage(), "products\\" + cityDto.getId() +
-        // "\\detail\\"));
-        // productImagesDto.setProductId(cityDto.getId());
-        // productImagesDtos.add(productImagesDto);
-        // }
-        // }
-        // cityDto.setProductImagesDtos(productImagesDtos);
-        // }
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import t3h.bigproject.dto.ResortDto;
@@ -25,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
+@Transactional
 public class ResortExtensionService {
 
     @Autowired

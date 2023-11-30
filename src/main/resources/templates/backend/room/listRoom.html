@@ -312,6 +312,7 @@
                                             <th>RESORT_ID</th>
                                             <th>STATUS</th>
                                             <th>EDIT</th>
+                                            <th>DELETE</th>
 
                                         </tr>
                                     </thead>
@@ -335,6 +336,13 @@
                                                         th:href="@{/backend/room/} + *{id}"
                                                     >
                                                         EDIT
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        th:href="@{/backend/room/delete/} + *{id}"
+                                                    >
+                                                        DELETE
                                                     </a>
                                                 </td>
                                             </tr>

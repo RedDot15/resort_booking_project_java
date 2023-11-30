@@ -34,6 +34,13 @@ public class CountryController {
         return"/backend/country/listCountry.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        countryService.delete(id);
+        return "redirect:/backend/country/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = countryService.getDetailById(id);

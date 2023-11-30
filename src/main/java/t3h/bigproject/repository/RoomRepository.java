@@ -1,6 +1,7 @@
 package t3h.bigproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import t3h.bigproject.entities.RoomEntity;
 import t3h.bigproject.entities.RoomEntity;
 
@@ -13,5 +14,6 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 
     RoomEntity findFirstById(Long id);
 
-
+    @Modifying
+    void deleteRoomEntityById(Long id);
 }

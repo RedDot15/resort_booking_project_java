@@ -43,6 +43,13 @@ public class ResortController {
         return"/backend/resort/listResort.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        resortService.delete(id);
+        return "redirect:/backend/resort/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = resortService.getDetailById(id);

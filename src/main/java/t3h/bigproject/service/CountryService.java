@@ -59,78 +59,17 @@ public class CountryService {
         // Lưu vào bảng product để Lấy thông tin primarykey (ID)
         countryRepository.save(countryEntity);
         countryDto.setId(countryEntity.getId());
-
-        //LƯU ẢNH
-//        try {
-//            saveFile(countryDto);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Tạo mới lỗi");
-//        }
-
-        //LƯU TÊN ẢNH
-        // lưu ảnh main
-//        countryEntity.setImageName(countryDto.getImageName());
-        // Lưu mhiều ảnh
-//        if (!CollectionUtils.isEmpty(countryDto.getProductImagesDtos())) {
-////            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: countryDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-////                productImagesEntities.add(productImagesEntity);
-//                productImagesRepository.save(productImagesEntity);
-//            }
-////            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return countryDto;
     }
     public CountryDto update(CountryDto countryDto){
         CountryEntity countryEntity = countryRepository.findById(countryDto.getId()).get();
         BeanUtils.copyProperties(countryDto, countryEntity);
         countryRepository.save(countryEntity);
-
-//        fileUtils.cleanDir("products\\" + countryDto.getId());// xóa ảnh trong thư mục
-////        productImagesRepository.deleteAllByProductId(countryDto.getId());// xóa nhiều ảnh trong database
-//        try {
-//            saveFile(countryDto);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Tạo mới lỗi");
-//        }
-        // lưu ảnh main
-//        countryEntity.setImageName(countryDto.getImageName());
-        // Lưu nhiều ảnh
-//        if (!CollectionUtils.isEmpty(countryDto.getProductImagesDtos())) {
-//            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: countryDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-//                productImagesEntities.add(productImagesEntity);
-//            }
-//            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return countryDto;
     }
 
-//    void saveFile(CountryDto countryDto) throws IOException {
-//        if (countryDto.getFileImage() != null && !countryDto.getFileImage().isEmpty()) {//Lưu 1 file ảnh chính
-//            countryDto.setImageName(
-//                    fileUtils.saveFile(countryDto.getFileImage(), "city\\" + countryDto.getId() + "\\"));
-//        }
-//
-////        if (!CollectionUtils.isEmpty(countryDto.getMultipartFileList())) {//Lưu các file ảnh phụ
-////            List<ProductImagesDto> productImagesDtos = new ArrayList<>();
-////            for (MultipartFile multipartFile: countryDto.getMultipartFileList()
-////            ) {
-////                if (countryDto.getFileImage() != null && !countryDto.getFileImage().isEmpty()) {
-////                    ProductImagesDto productImagesDto = new ProductImagesDto();
-////                    productImagesDto.setName(
-////                            fileUtils.saveFile(countryDto.getFileImage(), "products\\" + countryDto.getId() + "\\detail\\"));
-////                    productImagesDto.setProductId(countryDto.getId());
-////                    productImagesDtos.add(productImagesDto);
-////                }
-////            }
-////            countryDto.setProductImagesDtos(productImagesDtos);
-////        }
-//    }
+    public void delete(Long id) {
+        countryRepository.deleteCountryEntityById(id);
+    }
+
 }

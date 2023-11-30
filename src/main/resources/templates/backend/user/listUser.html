@@ -255,6 +255,7 @@
                     <th>ROLE ID</th>
                     <th>GENDER ID</th>
                     <th>EDIT</th>
+                    <th>DELETE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -273,6 +274,11 @@
                     <td>
                       <a th:href="@{/backend/user/} + *{id}">
                         EDIT
+                      </a>
+                    </td>
+                    <td>
+                      <a th:href="@{/backend/user/delete/} + *{id}">
+                        DELETE
                       </a>
                     </td>
 

@@ -310,6 +310,7 @@
                                             <th>NAME</th>
                                             <th>IMAGE_NAME</th>
                                             <th>EDIT</th>
+                                            <th>DELETE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -334,6 +335,13 @@
                                                         th:href="@{/backend/city/} + *{id}"
                                                     >
                                                         EDIT
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a
+                                                            th:href="@{/backend/city/delete/} + *{id}"
+                                                    >
+                                                        DELETE
                                                     </a>
                                                 </td>
                                             </tr>

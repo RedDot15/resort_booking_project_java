@@ -1,6 +1,7 @@
 package t3h.bigproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import t3h.bigproject.entities.CityEntity;
 
 import java.util.List;
@@ -14,5 +15,6 @@ public interface CityRepository extends JpaRepository<CityEntity, Long> {
 
     CityEntity findFirstById(Long id);
 
-
+    @Modifying
+    void deleteCityEntityById(Long id);
 }

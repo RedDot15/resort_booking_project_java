@@ -24,9 +24,6 @@ public class ExtensionService {
     @Autowired
     FileUtils fileUtils;
 
-//    @Autowired
-//    ProductImagesRepository productImagesRepository;
-
     public List<ExtensionDto> getAll(String name){
         List<ExtensionDto> extensionDtoList = new ArrayList<>();
         List<ExtensionEntity> extensionEntityList;
@@ -61,28 +58,6 @@ public class ExtensionService {
         extensionRepository.save(extensionEntity);
         extensionDto.setId(extensionEntity.getId());
 
-        //LƯU ẢNH
-//        try {
-//            saveFile(extensionDto);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Tạo mới lỗi");
-//        }
-
-        //LƯU TÊN ẢNH
-        // lưu ảnh main
-//        extensionEntity.setImageName(extensionDto.getImageName());
-        // Lưu mhiều ảnh
-//        if (!CollectionUtils.isEmpty(extensionDto.getProductImagesDtos())) {
-////            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: extensionDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-////                productImagesEntities.add(productImagesEntity);
-//                productImagesRepository.save(productImagesEntity);
-//            }
-////            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return extensionDto;
     }
     public ExtensionDto update(ExtensionDto extensionDto){
@@ -90,48 +65,10 @@ public class ExtensionService {
         BeanUtils.copyProperties(extensionDto, extensionEntity);
         extensionRepository.save(extensionEntity);
 
-//        fileUtils.cleanDir("products\\" + extensionDto.getId());// xóa ảnh trong thư mục
-////        productImagesRepository.deleteAllByProductId(extensionDto.getId());// xóa nhiều ảnh trong database
-//        try {
-//            saveFile(extensionDto);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Tạo mới lỗi");
-//        }
-        // lưu ảnh main
-//        extensionEntity.setImageName(extensionDto.getImageName());
-        // Lưu nhiều ảnh
-//        if (!CollectionUtils.isEmpty(extensionDto.getProductImagesDtos())) {
-//            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: extensionDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-//                productImagesEntities.add(productImagesEntity);
-//            }
-//            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return extensionDto;
     }
 
-//    void saveFile(ExtensionDto extensionDto) throws IOException {
-//        if (extensionDto.getFileImage() != null && !extensionDto.getFileImage().isEmpty()) {//Lưu 1 file ảnh chính
-//            extensionDto.setImageName(
-//                    fileUtils.saveFile(extensionDto.getFileImage(), "city\\" + extensionDto.getId() + "\\"));
-//        }
-//
-////        if (!CollectionUtils.isEmpty(extensionDto.getMultipartFileList())) {//Lưu các file ảnh phụ
-////            List<ProductImagesDto> productImagesDtos = new ArrayList<>();
-////            for (MultipartFile multipartFile: extensionDto.getMultipartFileList()
-////            ) {
-////                if (extensionDto.getFileImage() != null && !extensionDto.getFileImage().isEmpty()) {
-////                    ProductImagesDto productImagesDto = new ProductImagesDto();
-////                    productImagesDto.setName(
-////                            fileUtils.saveFile(extensionDto.getFileImage(), "products\\" + extensionDto.getId() + "\\detail\\"));
-////                    productImagesDto.setProductId(extensionDto.getId());
-////                    productImagesDtos.add(productImagesDto);
-////                }
-////            }
-////            extensionDto.setProductImagesDtos(productImagesDtos);
-////        }
-//    }
+    public void delete(Long id) {
+        extensionRepository.deleteExtensionEntityById(id);
+    }
 }
