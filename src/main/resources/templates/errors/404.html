@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>404 Not Found</title>
+
+        <link
+            rel="shortcut icon"
+            href="https://cdn-icons-png.flaticon.com/512/284/284270.png"
+            type="image/x-icon"
+        />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+
+        <style></style>
+
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="p-2 bg-[#003C71] text-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+                >
+                    <a
+                        href="/"
+                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                    >
+                        <img
+                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                        />
+                    </a>
+
+                    <ul
+                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    >
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Khách sạn</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Tours</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé máy bay</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé vui chơi</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="text-end">
+                        <div sec:authorize="!isAuthenticated()">
+                            <button
+                                type="button"
+                                class="btn me-2 bg-danger text-white"
+                                data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal"
+                            >
+                                Login
+                            </button>
+                            <a th:href="@{/signup}">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
+                                >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
+                                    href="#"
+                                    data-bs-toggle="dropdown"
+                                >
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/change-password/${#authentication.principal.id}|}"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                            >Đăng xuất</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div
+            class="max-w-[1200px] w-[50%] mx-auto mt-[50px] flex flex-col items-center"
+        >
+            <div>
+                <img
+                    src="https://static-00.iconduck.com/assets.00/404-page-not-found-illustration-2048x998-yjzeuy4v.png"
+                />
+            </div>
+
+            <h1 class="text-[30px]">404 Not Found.</h1>
+            <p>Xin lỗi. Chúng tôi không thể tìm được trang web của bạn!</p>
+            <a
+                href="/"
+                class="flex items-center justify-center mt-[30px] h-[40px] w-[184px] bg-[#F79321] text-white rounded-[4px] font-semibold"
+            >
+                Quay lại trang chủ
+            </a>
+        </div>
+    </body>
+</html>
