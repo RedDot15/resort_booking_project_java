@@ -347,8 +347,19 @@
                     <label class="col-sm-2 col-form-label">Extension</label>
                     <th:block th:each="extension : ${extensionList}">
                       <div class="form-check" >
-                        <input class="form-check-input" type="checkbox" th:field="${resortDto.extensionListId}"
-                               th:value="${extension.id}" th:text="${extension.name}">
+                        <input 
+                          th:id="'checkbox-' + ${extension.id}" 
+                          class="form-check-input" 
+                          type="checkbox" 
+                          th:field="${resortDto.extensionListId}"
+                          th:value="${extension.id}"
+                        >
+                        <label
+                          th:for="'checkbox-' + ${extension.id}"
+                          class="pl-[6px] cursor-pointer"
+                          th:text="${extension.name}"
+                        >
+                        </label>
                       </div>
                     </th:block>
                   </div>
