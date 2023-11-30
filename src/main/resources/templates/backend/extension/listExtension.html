@@ -308,6 +308,7 @@
                                             <th>ID</th>
                                             <th>NAME</th>
                                             <th>EDIT</th>
+                                            <th>DELETE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -323,6 +324,13 @@
                                                         th:href="@{/backend/extension/} + *{id}"
                                                     >
                                                         EDIT
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        th:href="@{/backend/extension/delete/} + *{id}"
+                                                    >
+                                                        DELETE
                                                     </a>
                                                 </td>
                                             </tr>

@@ -314,6 +314,7 @@
                                             <th>LAT</th>
                                             <th>LNG</th>
                                             <th>EDIT</th>
+                                            <th>DELETE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -335,6 +336,13 @@
                                                         th:href="@{/backend/resort/} + *{id}"
                                                     >
                                                         EDIT
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        th:href="@{/backend/resort/delete/} + *{id}"
+                                                    >
+                                                        DELETE
                                                     </a>
                                                 </td>
                                             </tr>

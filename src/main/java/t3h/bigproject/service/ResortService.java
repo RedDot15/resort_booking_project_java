@@ -39,9 +39,6 @@ public class ResortService {
     @Autowired
     FileUtils fileUtils;
 
-    // @Autowired
-    // ProductImagesRepository productImagesRepository;
-
     public List<ResortDto> getAll(String name) {
         List<ResortDto> resortDtoList = new ArrayList<>();
         List<ResortEntity> resortEntityList;
@@ -124,13 +121,6 @@ public class ResortService {
             resortExtensionRepository.save(resortExtensionEntity);
         }
 
-        // LƯU ẢNH
-        // try {
-        // saveFile(resortDto);
-        // } catch (IOException e) {
-        // throw new RuntimeException("Tạo mới lỗi");
-        // }
-
         // LƯU TÊN ẢNH
         // Lưu mhiều ảnh
         if (!CollectionUtils.isEmpty(resortDto.getMultipartFileList())) {
@@ -160,12 +150,6 @@ public class ResortService {
             resortExtensionRepository.save(resortExtensionEntity);
         }
 
-        // try {
-        // saveFile(resortDto);
-        // } catch (IOException e) {
-        // throw new RuntimeException("Tạo mới lỗi");
-        // }
-
         fileUtils.cleanDir("resort\\" + resortDto.getId() + "\\detail\\");// xóa ảnh trong thư mục
         resortImageRepository.deleteAllByResortId(resortDto.getId());// xóa nhiều ảnh trong database
 
@@ -182,29 +166,7 @@ public class ResortService {
         return resortDto;
     }
 
-    // void saveFile(ResortDto resortDto) throws IOException {
-    //// if (resortDto.getFileImage() != null &&
-    // !resortDto.getFileImage().isEmpty()) {//Lưu 1 file ảnh chính
-    //// resortDto.setImageName(
-    //// fileUtils.saveFile(resortDto.getFileImage(), "city\\" + resortDto.getId() +
-    // "\\"));
-    //// }
-    //
-    // if (!CollectionUtils.isEmpty(resortDto.getMultipartFileList())) {//Lưu các
-    // file ảnh phụ
-    // List<ResortImageDto> resortImageDtos = new ArrayList<>();
-    // for (MultipartFile multipartFile: resortDto.getMultipartFileList()
-    // ) {
-    // if (multipartFile != null && !multipartFile.isEmpty()) {
-    // ResortImageDto resortImageDto = new ResortImageDto();
-    // resortImageDto.setName(
-    // fileUtils.saveFile(multipartFile, "products\\" + resortDto.getId() +
-    // "\\detail\\"));
-    // resortImageDto.setResortId(resortDto.getId());
-    // resortImageDtos.add(resortImageDto);
-    // }
-    // }
-    // resortDto.setResortImageDtos(resortImageDtos);
-    // }
-    // }
+    public void delete(Long id) {
+        resortRepository.deleteResortEntityById(id);
+    }
 }

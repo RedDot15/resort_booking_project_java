@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import t3h.bigproject.dto.UserDto;
 import t3h.bigproject.dto.UserDto;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -85,5 +87,9 @@ public class UserService {
         BeanUtils.copyProperties(userDto, userEntity);
         userRepository.save(userEntity);
         return userDto;
+    }
+
+    public void delete(Long id) {
+        userRepository.deleteUserEntityById(id);
     }
 }

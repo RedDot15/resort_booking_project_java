@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.UserDto;
+import t3h.bigproject.repository.UserRepository;
 import t3h.bigproject.service.UserService;
 import t3h.bigproject.utils.FileUtils;
 
@@ -26,6 +27,11 @@ public class UserController {
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    UserRepository userRepository;
+
+
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String listUser(@RequestParam(required = false) String email,
             Model model) {
@@ -34,6 +40,13 @@ public class UserController {
         model.addAttribute("list", danhsach);
         return "/backend/user/listUser.html";
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        userService.delete(id);
+        return "redirect:/backend/user" ;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")

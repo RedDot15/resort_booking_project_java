@@ -34,6 +34,13 @@ public class RoleController {
         return"/backend/role/listRole.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        roleService.delete(id);
+        return "redirect:/backend/role/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = roleService.getDetailById(id);

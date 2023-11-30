@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.CityDto;
+import t3h.bigproject.repository.CityRepository;
 import t3h.bigproject.service.CityService;
 import t3h.bigproject.service.CountryService;
 import t3h.bigproject.utils.FileUtils;
@@ -28,12 +29,22 @@ public class CityController {
     @Autowired
     CountryService countryService;
 
+    @Autowired
+    CityRepository cityRepository;
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
             Model model) {
         Object danhsach = cityService.getAll(name);
         model.addAttribute("list", danhsach);
         return "/backend/city/listCity.html";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        cityService.delete(id);
+        return "redirect:/backend/city/";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")

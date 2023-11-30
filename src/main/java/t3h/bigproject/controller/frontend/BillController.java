@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.frontend;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortImageDto;
 import t3h.bigproject.dto.RoomDto;
 import t3h.bigproject.entities.BillEntity;
+import t3h.bigproject.entities.RoomEntity;
 import t3h.bigproject.entities.VerificationTokenEntity;
 import t3h.bigproject.event.OnRegistrationSuccessEvent;
 import t3h.bigproject.repository.BillRepository;
+import t3h.bigproject.repository.RoomRepository;
 import t3h.bigproject.service.BillService;
 import t3h.bigproject.service.ResortImageService;
 import t3h.bigproject.service.ResortService;
@@ -41,6 +44,9 @@ public class BillController {
 
     @Autowired
     BillRepository billRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;
@@ -112,6 +118,11 @@ public class BillController {
             return "errors/404.html";
         }
         billEntity.setStatusId((long)2);
+        RoomDto roomDto = roomService.getDetailById(billEntity.getRoomId());
+        RoomEntity roomEntity = new RoomEntity();
+        BeanUtils.copyProperties(roomDto,roomEntity);
+        roomEntity.setStatus("busy");
+        roomRepository.save(roomEntity);
         billRepository.save(billEntity);
         model.addAttribute("message", "Bạn đã đăng ký giữ phòng thành công");
         return "errors/404.html";
