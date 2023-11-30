@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Successfully!</title>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+
+        <style>
+            #card {
+                position: relative;
+                width: 320px;
+                display: block;
+                margin: 40px auto;
+                text-align: center;
+                font-family: "Source Sans Pro", sans-serif;
+                --tw-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+                --tw-shadow-colored: 0 3px 15px var(--tw-shadow-color);
+                box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+                    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            }
+
+            #upper-side {
+                padding: 2em;
+                background-color: #8bc34a;
+                display: block;
+                color: #fff;
+                border-top-right-radius: 8px;
+                border-top-left-radius: 8px;
+            }
+
+            #checkmark {
+                font-weight: lighter;
+                fill: #fff;
+                margin: -3.5em auto auto 20px;
+            }
+
+            #status {
+                font-weight: lighter;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-size: 1em;
+                margin-top: -0.2em;
+                margin-bottom: 0;
+            }
+
+            #lower-side {
+                padding: 2em 2em 5em 2em;
+                background: #fff;
+                display: block;
+                border-bottom-right-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
+
+            #message {
+                margin-top: -0.5em;
+                color: #757575;
+                letter-spacing: 1px;
+            }
+
+            #contBtn {
+                position: relative;
+                top: 1.5em;
+                text-decoration: none;
+                background: #8bc34a;
+                color: #fff;
+                margin: auto;
+                padding: 0.8em 3em;
+                -webkit-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+                -moz-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+                box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+                border-radius: 25px;
+                -webkit-transition: all 0.4s ease;
+                -moz-transition: all 0.4s ease;
+                -o-transition: all 0.4s ease;
+                transition: all 0.4s ease;
+            }
+
+            #contBtn:hover {
+                -webkit-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+                -moz-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+                box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.41);
+                -webkit-transition: all 0.4s ease;
+                -moz-transition: all 0.4s ease;
+                -o-transition: all 0.4s ease;
+                transition: all 0.4s ease;
+            }
+        </style>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-[#e5e5e5]">
+        <!-- Header -->
+        <header class="p-2 bg-[#003C71] text-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+                >
+                    <a
+                        href="/"
+                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                    >
+                        <img
+                            src="https://res.ivivu.com/hotel/img/logo-2023n.svg"
+                        />
+                    </a>
+
+                    <ul
+                        class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+                    >
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Khách sạn</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Tours</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé máy bay</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
+                                >Vé vui chơi</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="text-end">
+                        <div sec:authorize="!isAuthenticated()">
+                            <button
+                                type="button"
+                                class="btn me-2 bg-danger text-white"
+                                data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal"
+                            >
+                                Login
+                            </button>
+                            <a th:href="@{/signup}">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
+                                >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
+                                    href="#"
+                                    data-bs-toggle="dropdown"
+                                >
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/change-password/${#authentication.principal.id}|}"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                            >Đăng xuất</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="Scriptcontent">
+            <div id="card" class="animated fadeIn">
+                <div id="upper-side">
+                    <svg
+                        version="1.1"
+                        id="checkmark"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        xml:space="preserve"
+                    >
+                        <path
+                            d="M131.583,92.152l-0.026-0.041c-0.713-1.118-2.197-1.447-3.316-0.734l-31.782,20.257l-4.74-12.65
+                c-0.483-1.29-1.882-1.958-3.124-1.493l-0.045,0.017c-1.242,0.465-1.857,1.888-1.374,3.178l5.763,15.382
+                c0.131,0.351,0.334,0.65,0.579,0.898c0.028,0.029,0.06,0.052,0.089,0.08c0.08,0.073,0.159,0.147,0.246,0.209
+                c0.071,0.051,0.147,0.091,0.222,0.133c0.058,0.033,0.115,0.069,0.175,0.097c0.081,0.037,0.165,0.063,0.249,0.091
+                c0.065,0.022,0.128,0.047,0.195,0.063c0.079,0.019,0.159,0.026,0.239,0.037c0.074,0.01,0.147,0.024,0.221,0.027
+                c0.097,0.004,0.194-0.006,0.292-0.014c0.055-0.005,0.109-0.003,0.163-0.012c0.323-0.048,0.641-0.16,0.933-0.346l34.305-21.865
+                C131.967,94.755,132.296,93.271,131.583,92.152z"
+                        ></path>
+                        <circle
+                            fill="none"
+                            stroke="#ffffff"
+                            stroke-width="5"
+                            stroke-miterlimit="10"
+                            cx="109.486"
+                            cy="104.353"
+                            r="32.53"
+                        ></circle>
+                    </svg>
+                    <h3 id="status">Success</h3>
+                </div>
+                <div id="lower-side">
+                    <p id="message">Bạn đã đăng ký giữ phòng thành công!</p>
+                    <a href="/" id="contBtn">Quay lại trang chủ</a>
+                </div>
+            </div>
+            <!-- partial -->
+        </div>
+    </body>
+</html>
