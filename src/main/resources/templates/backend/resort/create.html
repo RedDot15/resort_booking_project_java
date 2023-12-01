@@ -345,7 +345,7 @@
 
                   <div class="col">
                     <label class="col-sm-2 col-form-label">Extension</label>
-                    <th:block th:each="extension, extensionIndex : ${extensionList}">
+                    <th:block th:each="extension : ${extensionList}">
                       <div class="form-check">
                         <input 
                           th:id="'checkbox-' + ${extension.id}"
