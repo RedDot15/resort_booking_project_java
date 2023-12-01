@@ -489,7 +489,7 @@
                                         class="w-[20%] flex items-center justify-center text-[22px] font-semibold text-[#26bed6]"
                                     >
                                         <p
-                                            th:text="*{roomEntityList.get(0).price} + ' VND'"
+                                            th:text="*{#numbers.formatDecimal(roomEntityList.get(0).price,3,'POINT',0,'COMMA')} + ' VND'"
                                         ></p>
                                     </div>
                                 </div>
