@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.UserDto;
+import t3h.bigproject.repository.UserRepository;
 import t3h.bigproject.service.UserService;
 import t3h.bigproject.utils.FileUtils;
 
@@ -18,7 +19,6 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/backend/user")
-@PreAuthorize("hasAnyAuthority('ROLE_1')")
 public class UserController {
 
     @Autowired
@@ -27,15 +27,27 @@ public class UserController {
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    UserRepository userRepository;
+
+
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String listUser(@RequestParam(required = false) String email,
-                    Model model) {
+            Model model) {
+        // Object user = userService.get
         Object danhsach = userService.getAll(email);
         model.addAttribute("list", danhsach);
         return "/backend/user/listUser.html";
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        userService.delete(id);
+        return "redirect:/backend/user" ;
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     String newPage(Model model) {
@@ -44,7 +56,6 @@ public class UserController {
         return "/backend/user/create.html";
     }
 
-
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detailUser(@PathVariable Long id, Model model) {
         Object u = userService.getDetail(id);
@@ -52,39 +63,34 @@ public class UserController {
         return "/backend/user/create.html";
     }
 
-    // Bài tập: Validate mật khẩu và nhập lại mật khẩu trùng nhau?
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String addUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
-                   Model model,
-                   RedirectAttributes redirectAttributes) throws IOException {
+            Model model,
+            RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
-        if (!Objects.equals(userDto.getPassword(), userDto.getRePassword())){
+        if (!Objects.equals(userDto.getPassword(), userDto.getRePassword())) {
             bindingResult.rejectValue("rePassword", "error.userDto", "Mật khẩu không trùng khớp");
         }
-        if (bindingResult.hasErrors())  return "/backend/user/create.html";
+        if (bindingResult.hasErrors())
+            return "/backend/user/create.html";
         Long id = userDto.getId();
 
-        //LƯU TÊN ẢNH
+        // LƯU TÊN ẢNH
         if (userDto.getFileImage() != null && !userDto.getFileImage().isEmpty()) {
-            userDto.setAvatarImg(fileUtils.saveFile(userDto.getFileImage(),"user\\"));
+            userDto.setAvatarImg(fileUtils.saveFile(userDto.getFileImage(), "user\\"));
         }
 
         if (userDto.getId() == null) {
-            UserDto u = userService.getDetailByPhone(userDto.getPhone());
-            if (u != null) {
-                model.addAttribute("message", "Số điện thoại đã tồn tại");
-                return "/backend/user/create.html";
-            }
             userService.addUser(userDto);
             id = userDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = userService.updateUser(userDto);
             msg = "Cập nhật";
         }
         if (Objects.equals(result, 0)) {
-            model.addAttribute("message", msg + " fail");
+            model.addAttribute("message", msg + " thất bại");
             return "/backend/user/create.html";
         }
         redirectAttributes.addFlashAttribute("message", msg + " tài khoản " + id + " thành công");

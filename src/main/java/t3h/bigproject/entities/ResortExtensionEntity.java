@@ -16,9 +16,16 @@ public class ResortExtensionEntity {
     @Basic
     @Column(name = "resort_id")
     private Long resortId;
-    @Basic
-    @Column(name = "extension_id")
-    private Long extensionId;
+//    @Basic
+//    @Column(name = "extension_id")
+//    private Long extensionId;
 
+    @ManyToOne
+    @JoinColumn(name = "extension_id")
+    ExtensionEntity extensionEntity;
 
+    public void setExtensionEntityId(Long id){
+        extensionEntity = new ExtensionEntity();
+        extensionEntity.setId(id);
+    }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import t3h.bigproject.entities.GenderEntity;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class UserDto {
     private Long id;
+    private String name;
     @Email(message = "Không đúng định dạng email")
     private String email;
     @NotBlank(message = "Mật khẩu là bắt buộc")
@@ -23,9 +25,11 @@ public class UserDto {
     private String phone;
     private Long roleId;
     private Long genderId;
-    private String usercol;
 
+    private String oldPassword;
+    private String newPassword;
     private String rePassword;
+
 
     MultipartFile fileImage;
 }

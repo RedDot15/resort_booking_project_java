@@ -45,6 +45,23 @@ public class RoomService {
         return roomDtoList;
     }
 
+    public List<RoomDto> getAllByResortId(Long id){
+        List<RoomDto> roomDtoList = new ArrayList<>();
+        List<RoomEntity> roomEntityList;
+        if(StringUtils.isEmpty(id)){
+            roomEntityList = roomRepository.findAllByResortId(null);
+        }
+        else{
+            roomEntityList = roomRepository.findAllByResortId(id);
+        }
+        for (RoomEntity roomEntity : roomEntityList){
+            RoomDto roomDto = new RoomDto();
+            BeanUtils.copyProperties(roomEntity,roomDto);
+            roomDtoList.add(roomDto);
+        }
+        return roomDtoList;
+    }
+
     public RoomDto getDetailById(Long id){
         RoomDto roomDto =  new RoomDto();
         RoomEntity roomEntity = roomRepository.findFirstById(id);
@@ -72,18 +89,6 @@ public class RoomService {
         //LƯU TÊN ẢNH
         // lưu ảnh main
         roomEntity.setImageName(roomDto.getImageName());
-        // Lưu mhiều ảnh
-//        if (!CollectionUtils.isEmpty(roomDto.getProductImagesDtos())) {
-////            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: roomDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-////                productImagesEntities.add(productImagesEntity);
-//                productImagesRepository.save(productImagesEntity);
-//            }
-////            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return roomDto;
     }
     public RoomDto update(RoomDto roomDto){
@@ -92,7 +97,6 @@ public class RoomService {
         roomRepository.save(roomEntity);
 
         fileUtils.cleanDir("room\\" + roomDto.getId());// xóa ảnh trong thư mục
-//        productImagesRepository.deleteAllByProductId(roomDto.getId());// xóa nhiều ảnh trong database
         try {
             saveFile(roomDto);
         } catch (IOException e) {
@@ -100,17 +104,6 @@ public class RoomService {
         }
         // lưu ảnh main
         roomEntity.setImageName(roomDto.getImageName());
-        // Lưu nhiều ảnh
-//        if (!CollectionUtils.isEmpty(roomDto.getProductImagesDtos())) {
-//            List<ProductImagesEntity> productImagesEntities = new ArrayList<>();
-//            for (ProductImagesDto productImagesDto: roomDto.getProductImagesDtos()
-//            ) {
-//                ProductImagesEntity productImagesEntity = new ProductImagesEntity();
-//                BeanUtils.copyProperties(productImagesDto, productImagesEntity);
-//                productImagesEntities.add(productImagesEntity);
-//            }
-//            productImagesRepository.saveAll(productImagesEntities);
-//        }
         return roomDto;
     }
 
@@ -119,20 +112,9 @@ public class RoomService {
             roomDto.setImageName(
                     fileUtils.saveFile(roomDto.getFileImage(), "room\\" + roomDto.getId() + "\\"));
         }
+    }
 
-//        if (!CollectionUtils.isEmpty(roomDto.getMultipartFileList())) {//Lưu các file ảnh phụ
-//            List<ProductImagesDto> productImagesDtos = new ArrayList<>();
-//            for (MultipartFile multipartFile: roomDto.getMultipartFileList()
-//            ) {
-//                if (roomDto.getFileImage() != null && !roomDto.getFileImage().isEmpty()) {
-//                    ProductImagesDto productImagesDto = new ProductImagesDto();
-//                    productImagesDto.setName(
-//                            fileUtils.saveFile(roomDto.getFileImage(), "products\\" + roomDto.getId() + "\\detail\\"));
-//                    productImagesDto.setProductId(roomDto.getId());
-//                    productImagesDtos.add(productImagesDto);
-//                }
-//            }
-//            roomDto.setProductImagesDtos(productImagesDtos);
-//        }
+    public void delete(Long id) {
+        roomRepository.deleteRoomEntityById(id);
     }
 }

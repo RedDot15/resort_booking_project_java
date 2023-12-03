@@ -2,6 +2,8 @@ package t3h.bigproject.entities;
 
 import lombok.Data;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,4 +24,7 @@ public class CityEntity {
     @Column(name = "image_name")
     private String imageName;
 
+    @OneToMany()
+    @JoinColumn(name = "city_id")
+    List<ResortEntity> resortEntityList;
 }

@@ -14,8 +14,8 @@ public class BillEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Basic
-    @Column(name = "gender_id")
-    private Long genderId;
+    @Column(name = "gender")
+    private String gender;
     @Basic
     @Column(name = "name")
     private String name;
@@ -26,7 +26,12 @@ public class BillEntity {
     @Column(name = "email")
     private String email;
     @Basic
+    @Column(name = "info")
+    private String info;
+    @Basic
     @Column(name = "status_id")
     private Long statusId;
-
+    @Basic
+    @Column(name = "room_id")
+    private Long roomId;
 }

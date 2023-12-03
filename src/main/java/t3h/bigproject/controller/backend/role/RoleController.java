@@ -34,6 +34,13 @@ public class RoleController {
         return"/backend/role/listRole.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        roleService.delete(id);
+        return "redirect:/backend/role/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = roleService.getDetailById(id);
@@ -60,14 +67,9 @@ public class RoleController {
         Long id = roleDto.getId();
 
         if (roleDto.getId() == null) {
-//            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
-//            if (produceDto != null) {
-//                model.addAttribute("message", "đã tồn tại");
-//                return "/products/create.html";
-//            }
             roleService.add(roleDto);
             id = roleDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = roleService.update(roleDto);
             msg = "Cập nhật";

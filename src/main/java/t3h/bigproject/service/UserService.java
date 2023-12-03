@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import t3h.bigproject.dto.UserDto;
 import t3h.bigproject.dto.UserDto;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -64,6 +66,9 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDto, userEntity);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        if (userEntity.getRoleId() == null || userEntity.getRoleId().equals("")){
+            userEntity.setRoleId((long) 2);
+        }
         userRepository.save(userEntity);
         userDto.setId(userEntity.getId());
         return userDto;
@@ -75,5 +80,16 @@ public class UserService {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userRepository.save(userEntity);
         return userDto;
+    }
+
+    public UserDto updateUserWithoutEncode(UserDto userDto) {
+        UserEntity userEntity = userRepository.findById(userDto.getId()).get();
+        BeanUtils.copyProperties(userDto, userEntity);
+        userRepository.save(userEntity);
+        return userDto;
+    }
+
+    public void delete(Long id) {
+        userRepository.deleteUserEntityById(id);
     }
 }

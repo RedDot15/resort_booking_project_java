@@ -25,6 +25,9 @@ public class RoomEntity {
     @Basic
     @Column(name = "resort_id")
     private Long resortId;
+    @Basic
+    @Column(name = "status")
+    private String status;
 
 
 }

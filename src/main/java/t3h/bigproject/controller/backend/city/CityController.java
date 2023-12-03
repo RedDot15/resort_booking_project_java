@@ -8,7 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.CityDto;
+import t3h.bigproject.repository.CityRepository;
 import t3h.bigproject.service.CityService;
+import t3h.bigproject.service.CountryService;
 import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
@@ -18,12 +20,17 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/backend/city")
 public class CityController {
-    // I love you quang minh
     @Autowired
     CityService cityService;
 
     @Autowired
     FileUtils fileUtils;
+
+    @Autowired
+    CountryService countryService;
+
+    @Autowired
+    CityRepository cityRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
@@ -33,10 +40,19 @@ public class CityController {
         return "/backend/city/listCity.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        cityService.delete(id);
+        return "redirect:/backend/city/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = cityService.getDetailById(id);
         model.addAttribute("cityDto", p);
+        Object danhsach = countryService.getAll(null);
+        model.addAttribute("listCountry", danhsach);
         return "/backend/city/create.html";
     }
 
@@ -44,6 +60,8 @@ public class CityController {
     String add(Model model) {
         CityDto b = new CityDto();
         model.addAttribute("cityDto", b);
+        Object danhsach = countryService.getAll(null);
+        model.addAttribute("listCountry", danhsach);
         return "/backend/city/create.html";
     }
 
@@ -59,9 +77,9 @@ public class CityController {
         Long id = cityDto.getId();
 
         // LƯU TÊN ẢNH
-        if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
-            cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(), "city\\"));
-        }
+        // if (cityDto.getFileImage() != null && !cityDto.getFileImage().isEmpty()) {
+        // cityDto.setImageName(fileUtils.saveFile(cityDto.getFileImage(), "city\\"));
+        // }
 
         if (cityDto.getId() == null) {
             // ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
@@ -71,7 +89,7 @@ public class CityController {
             // }
             cityService.add(cityDto);
             id = cityDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = cityService.update(cityDto);
             msg = "Cập nhật";

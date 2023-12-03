@@ -21,6 +21,9 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
     @Column(name = "email")
     private String email;
     @Basic
@@ -38,9 +41,6 @@ public class UserEntity implements UserDetails {
     @Basic
     @Column(name = "gender_id")
     private Long genderId;
-    @Basic
-    @Column(name = "usercol")
-    private String usercol;
 
 
     @Override
@@ -54,7 +54,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.phone;
+        return this.email;
     }
 
     @Override

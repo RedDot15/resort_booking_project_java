@@ -35,6 +35,13 @@ public class ExtensionController {
         return"/backend/extension/listExtension.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
+    String delete(@PathVariable Long id,
+                  Model model, RedirectAttributes redirectAttributes) {
+        extensionService.delete(id);
+        return "redirect:/backend/extension/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
         Object p = extensionService.getDetailById(id);
@@ -68,7 +75,7 @@ public class ExtensionController {
 //            }
             extensionService.add(extensionDto);
             id = extensionDto.getId();
-            msg = " tao moi";
+            msg = "Tạo mới";
         } else {
             result = extensionService.update(extensionDto);
             msg = "Cập nhật";

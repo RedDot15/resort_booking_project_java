@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Đặt phòng khách sạn trực tuyến giá rẻ</title>
+        <link
+            rel="shortcut icon"
+            href="https://i.pinimg.com/originals/88/17/30/8817305f0f48040fe272be2cffdc677f.png"
+            type="image/x-icon"
+        />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -37,8 +46,134 @@
                 background-color: azure;
             }
         </style>
+        <!-- Font Awesome -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+            rel="stylesheet"
+        />
     </head>
     <body>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="exampleModal"
+            data-bs-backdrop="static"
+            data-bs-toggle="modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container h-100">
+                        <div
+                            class="row d-flex justify-content-center align-items-center h-100"
+                        >
+                            <!--                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+                            <div class="card shadow-2-strong">
+                                <form action="/doLogin" method="post">
+                                    <div
+                                        class="card-body py-3 px-3 text-center"
+                                    >
+                                        <div class="flex flex-col items-center">
+                                            <img
+                                                class="w-[80px]"
+                                                src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png"
+                                            />
+                                            <h3 class="mt-2 mb-5">Sign in</h3>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="email"
+                                                id="typeEmailX-2"
+                                                class="form-control form-control-lg"
+                                                name="email"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typeEmailX-2"
+                                                >Email</label
+                                            >
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input
+                                                type="password"
+                                                id="typePasswordX-2"
+                                                class="form-control form-control-lg"
+                                                name="password"
+                                            />
+                                            <label
+                                                class="form-label"
+                                                for="typePasswordX-2"
+                                                >Password</label
+                                            >
+                                        </div>
+
+                                        <!-- Checkbox -->
+                                        <div
+                                            class="form-check d-flex justify-content-start mb-4"
+                                        >
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                value=""
+                                                id="form1Example3"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="form1Example3"
+                                            >
+                                                Remember password
+                                            </label>
+                                        </div>
+
+                                        <button
+                                            class="btn btn-primary btn-lg btn-block bg-[#3b5998]"
+                                            type="submit"
+                                        >
+                                            Login
+                                        </button>
+
+                                        <hr class="my-4" />
+
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary"
+                                            style="background-color: #dd4b39"
+                                            type="submit"
+                                        >
+                                            <i class="fab fa-google me-2"></i>
+                                            Sign in with google
+                                        </button>
+                                        <button
+                                            class="btn btn-lg btn-block btn-primary mb-2"
+                                            style="background-color: #3b5998"
+                                            type="submit"
+                                        >
+                                            <i
+                                                class="fab fa-facebook-f me-2"
+                                            ></i
+                                            >Sign in with facebook
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Header -->
         <header class="p-2 bg-[#003C71] text-white">
             <div class="max-w-[1200px] mx-auto">
@@ -58,39 +193,119 @@
                         class="ml-[15px] nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
                     >
                         <li>
-                            <a href="/" class="nav-link px-2 text-secondary"
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
                                 >Khách sạn</a
                             >
                         </li>
                         <li>
-                            <a href="/" class="nav-link px-2 text-white"
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
                                 >Tours</a
                             >
                         </li>
                         <li>
-                            <a href="/" class="nav-link px-2 text-white"
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
                                 >Vé máy bay</a
                             >
                         </li>
                         <li>
-                            <a href="/" class="nav-link px-2 text-white"
+                            <a
+                                href="/"
+                                class="nav-link px-2 text-white text-[20px]"
                                 >Vé vui chơi</a
                             >
                         </li>
                     </ul>
                     <div class="text-end">
-                        <button
-                            type="button"
-                            class="btn me-2 bg-danger text-white"
-                        >
-                            Login
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-warning text-white"
-                        >
-                            Sign-up
-                        </button>
+                        <div sec:authorize="!isAuthenticated()">
+                            <button
+                                type="button"
+                                class="btn me-2 bg-danger text-white"
+                                data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal"
+                            >
+                                Login
+                            </button>
+                            <a th:href="@{/signup}">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning text-white"
+                                    th:src="@{/signup}"
+                                >
+                                    Sign-up
+                                </button>
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="nav-item dropdown">
+                                <a
+                                    class="nav-link nav-profile d-flex align-items-center pe-0"
+                                    href="#"
+                                    data-bs-toggle="dropdown"
+                                >
+                                    <img
+                                        onerror="this.src='https://www.seekpng.com/png/full/73-730482_existing-user-default-avatar.png'"
+                                        th:src="@{|~/image/user/${#authentication.principal.avatarImg}/|}"
+                                        style="
+                                            width: 34px;
+                                            height: 34px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                        "
+                                        alt=""
+                                    />
+                                    <span
+                                        sec:authentication="principal.email"
+                                        class="d-none d-md-block dropdown-toggle ps-2"
+                                        >Tài khoản</span
+                                    >
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            sec:authentication="principal.email"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/profile/${#authentication.principal.id}|}"
+                                            >Hồ sơ của tôi</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="/backend/user"
+                                            sec:authorize="hasAnyAuthority('ROLE_1')"
+                                            th:text="'Cơ sở dữ liệu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            th:href="@{|~/change-password/${#authentication.principal.id}|}"
+                                            th:text="'Đổi mật khẩu'"
+                                        ></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/logout"
+                                            >Đăng xuất</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +315,7 @@
             <!-- Banner -->
             <div class="relative">
                 <img
-                    src="https://cdn1.ivivu.com/images/2023/08/17/13/anlam_nvb-t_mptfzq_horizontal.webp"
+                    src="https://cdn1.ivivu.com/images/2023/08/18/11/vinoasis-t_s39l4g_horizontal.webp"
                     class="h-[493px] object-cover"
                 />
                 <div class="absolute top-0 left-0 right-0">
@@ -118,15 +333,58 @@
                             Combo khách sạn - vé máy bay - đưa đón sân bay giá
                             tốt nhất
                         </p>
+                        <!-- Search -->
                         <form
                             class="mt-4 p-[15px] w-[60%] flex gap-[16px]"
                             style="background: rgba(0, 0, 0, 0.3)"
                         >
-                            <input
-                                type="text"
-                                class="form-control h-[60px]"
-                                placeholder="Bạn muốn đi đâu?"
-                            />
+                            <div
+                                id="search-container"
+                                class="w-[calc(100%-90px)] relative z-[5]"
+                            >
+                                <input
+                                    id="search-input"
+                                    type="text"
+                                    class="form-control h-[60px]"
+                                    placeholder="Bạn muốn đi đâu?"
+                                />
+                                <div
+                                    id="search-result"
+                                    class="hidden absolute top-[100%] left-0 right-0 bg-white shadow-[-1px_-1px_5px_0px_rgba(0,0,0,0.75)] rounded-[4px]"
+                                >
+                                    <p
+                                        class="py-[10px] px-[16px] border-b-[1px] font-bold"
+                                    >
+                                        Địa điểm đang HOT nhất
+                                    </p>
+                                    <div
+                                        class="grid grid-cols-3"
+                                        id="result-list"
+                                    >
+                                        <th:block
+                                            th:each="cityDto : ${listCityVietNam}"
+                                            th:object="${cityDto}"
+                                        >
+                                            <a th:href="@{'/city/' + *{id}}">
+                                                <div
+                                                    class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
+                                                >
+                                                    <img
+                                                        class="rounded-[4px] w-[60px] h-[60px] object-cover"
+                                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                                    />
+                                                    <div>
+                                                        <p
+                                                            th:text="*{name}"
+                                                        ></p>
+                                                        <p>5 KS</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
                             <button
                                 class="bg-[#F79321] text-white w-[90px] rounded-[4px] font-semibold"
                             >
@@ -283,128 +541,35 @@
                     slides-per-view="4"
                     centered-slides="false"
                 >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phuquoc-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Phú Quốc
-                                </p>
-                                <p>398 khách sạn</p>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/dalat-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Đà Lạt</p>
-                                <p>509 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
+                    <th:block
+                        th:each="cityDto : ${listCityVietNam}"
+                        th:object="${cityDto}"
                     >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/quynhon-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Quy Nhơn
-                                </p>
-                                <p>118 khách sạn</p>
+                        <swiper-slide>
+                            <div class="relative">
+                                <a th:href="@{/city/} + *{id}">
+                                    <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
+                                <div
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
+                                    <p
+                                        th:text="${cityDto.resortEntityList.size()} + ' khách sạn'"
+                                    >
+                                        5 khách sạn
+                                    </p>
+                                </div>
                             </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/vungtau-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Vũng Tàu
-                                </p>
-                                <p>192 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/nhatrang-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Nha Trang
-                                </p>
-                                <p>428 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/danang-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Đà Nẵng</p>
-                                <p>647 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phanthiet-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">
-                                    Phan Thiết
-                                </p>
-                                <p>120 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
-                    <swiper-slide>
-                        <div class="relative">
-                            <img
-                                class="h-[296px] object-cover object-center brightness-[0.8]"
-                                src="https://cdn1.ivivu.com/iVivu/2023/03/02/10/phuyen-show.webp"
-                            />
-                            <div
-                                class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                            >
-                                <p class="text-[34px] font-semibold">Phú Yên</p>
-                                <p>13 khách sạn</p>
-                            </div>
-                        </div></swiper-slide
-                    >
+                        </swiper-slide>
+                    </th:block>
                 </swiper-container>
             </div>
 
@@ -414,72 +579,46 @@
                     Điểm đến yêu thích nước ngoài
                 </h1>
                 <p class="text-[20px]">Bao la thế giới. Bốn bể là nhà</p>
-                <div class="mt-[10px] grid grid-cols-3 gap-[16px]">
-                    <div class="relative col-start-1 col-end-3">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/04/17/11/kl-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">
-                                Kuala Lumpur
-                            </p>
-                            <p>1033 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/cruise-terminal-banner-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Singapore</p>
-                            <p>540 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/image-62d0243c31a586-52735367-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">
-                                San Francisco
-                            </p>
-                            <p>382 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/07/11/18/photo-1624138784614-87fd1b6528f8-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Sydney</p>
-                            <p>290 khách sạn</p>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img
-                            class="h-[190px] w-full object-cover object-center brightness-[0.8] rounded-[4px]"
-                            src="https://cdn1.ivivu.com/iVivu/2023/02/13/17/maldives-cr.webp"
-                        />
-                        <div
-                            class="absolute text-white bottom-0 px-[15px] py-[15px]"
-                        >
-                            <p class="text-[34px] font-semibold">Maldives</p>
-                            <p>614 khách sạn</p>
-                        </div>
-                    </div>
-                </div>
+                <swiper-container
+                    class="mt-[10px]"
+                    pagination="true"
+                    pagination-clickable="true"
+                    space-between="16"
+                    autoplay-delay="2500"
+                    autoplay-disable-on-interaction="false"
+                    slides-per-view="4"
+                    centered-slides="false"
+                >
+                    <th:block
+                        th:each="cityDto : ${listCityQuocTe}"
+                        th:object="${cityDto}"
+                    >
+                        <swiper-slide>
+                            <div class="relative">
+                                <a th:href="@{/city/} + *{id}">
+                                    <img
+                                        class="h-[296px] object-cover object-center brightness-[0.8]"
+                                        th:src="@{/image/city/} + *{id} + @{/} + *{imageName}"
+                                    />
+                                </a>
+
+                                <div
+                                    class="absolute text-white bottom-0 px-[15px] py-[15px]"
+                                >
+                                    <p
+                                        class="text-[34px] font-semibold"
+                                        th:text="*{name}"
+                                    ></p>
+                                    <p
+                                        th:text="${cityDto.resortEntityList.size()} + ' khách sạn'"
+                                    >
+                                        5 khách sạn
+                                    </p>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </th:block>
+                </swiper-container>
             </div>
         </div>
 
@@ -497,12 +636,16 @@
                         <!-- Grid column -->
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Company name
+                                Về iVIVU.com
                             </h6>
                             <p>
-                                Here you can use rows and columns to organize
-                                your footer content. Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit.
+                                <a class="text-white">Chúng tôi</a>
+                            </p>
+                            <p>
+                                <a class="text-white">iVIVU Blog</a>
+                            </p>
+                            <p>
+                                <a class="text-white">PMS - Miễn phí</a>
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -512,19 +655,16 @@
                         <!-- Grid column -->
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Products
+                                Thông Tin Cần Biết
                             </h6>
                             <p>
-                                <a class="text-white">MDBootstrap</a>
+                                <a class="text-white">Điều kiện & Điều khoản</a>
                             </p>
                             <p>
-                                <a class="text-white">MDWordPress</a>
+                                <a class="text-white">Quy chế hoạt động</a>
                             </p>
                             <p>
-                                <a class="text-white">BrandFlow</a>
-                            </p>
-                            <p>
-                                <a class="text-white">Bootstrap Angular</a>
+                                <a class="text-white">Câu hỏi thường gặp</a>
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -537,20 +677,18 @@
                         <!-- Grid column -->
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">
-                                Contact
+                                Liên lạc
                             </h6>
                             <p>
-                                <i class="fas fa-home mr-3"></i> New York, NY
-                                10012, US
+                                <i class="fas fa-home mr-3"></i> P308, Tầng 3,
+                                tòa nhà The One, số 2 Chương Dương Độ, P.Chương
+                                Dương, Q.Hoàn Kiếm, Hà Nội
                             </p>
                             <p>
                                 <i class="fas fa-envelope mr-3"></i>
-                                info@gmail.com
+                                ivivu@gmail.com
                             </p>
-                            <p>
-                                <i class="fas fa-phone mr-3"></i> + 01 234 567
-                                88
-                            </p>
+                            <p><i class="fas fa-phone mr-3"></i> 1900 2045</p>
                             <p>
                                 <i class="fas fa-print mr-3"></i> + 01 234 567
                                 89
@@ -568,7 +706,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #3b5998"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-facebook-f"></i
                             ></a>
@@ -577,7 +715,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #55acee"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-twitter"></i
                             ></a>
@@ -586,7 +724,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #dd4b39"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-google"></i
                             ></a>
@@ -595,7 +733,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #ac2bac"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-instagram"></i
                             ></a>
@@ -604,7 +742,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #0082ca"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-linkedin-in"></i
                             ></a>
@@ -612,7 +750,7 @@
                             <a
                                 class="btn btn-primary btn-floating m-1"
                                 style="background-color: #333333"
-                                href="#!"
+                                href="/"
                                 role="button"
                                 ><i class="fab fa-github"></i
                             ></a>
@@ -629,10 +767,8 @@
                 class="text-center p-3"
                 style="background-color: rgba(0, 0, 0, 0.2)"
             >
-                © 2020 Copyright:
-                <a class="text-white" href="https://mdbootstrap.com/"
-                    >MDBootstrap.com</a
-                >
+                © 2023 Copyright:
+                <a class="text-white" href="/">Nhóm 1</a>
             </div>
             <!-- Copyright -->
         </footer>
@@ -641,3 +777,85 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
     </body>
 </html>
+<script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+></script>
+<script th:inline="javascript">
+    // Hello
+    let searchContainer = document.getElementById("search-container");
+    let searchInput = document.getElementById("search-input");
+    let searchResult = document.getElementById("search-result");
+    let resultList = document.getElementById("result-list");
+    let html = "";
+
+    searchInput.onfocus = (e) => {
+        searchResult.style.display = "block";
+    };
+
+    searchInput.onkeyup = (e) => {
+        let keyword = searchInput.value;
+        if (keyword) {
+            let url = `http://localhost:8888/city/search/${keyword}`;
+            fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    renderSearchResults(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            let url = `http://localhost:8888/city/search`;
+            fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    renderSearchResults(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
+    let renderSearchResults = (data) => {
+        clearDataSearchResults();
+
+        let html = "";
+        html = Array.from(data)
+            .map((item, index) => {
+                return `
+                    <a href="/city/${item.id}">
+                        <div
+                            class="hover:bg-[#F3F3F3] transition-all duration-100 py-[10px] px-[16px] flex items-center gap-[8px]"
+                        >
+                            <img
+                                class="rounded-[4px] w-[60px] h-[60px] object-cover"
+                                src="/image/city/${item.id}/${item.imageName}"
+                            />
+                            <div>
+                                <p>${item.name}</p>
+                                <p>${item.resortEntityList.length} KS</p>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+        resultList.innerHTML = html;
+    };
+
+    let clearDataSearchResults = () => {
+        resultList.innerHTML = html;
+    };
+
+    document.body.onclick = (e) => {
+        if (!searchContainer.contains(e.target)) {
+            searchResult.style.display = "none";
+        }
+    };
+</script>
