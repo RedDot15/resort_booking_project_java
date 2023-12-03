@@ -463,7 +463,7 @@
                             <p class="text-[#555863] text-[14px]">Giá chỉ từ</p>
                             <p
                                 class="text-[22px] font-semibold text-[#26bed6]"
-                                th:text="${resortDto.roomEntityList.get(0).price} + ' VND'"
+                                th:text="${#numbers.formatDecimal(resortDto.roomEntityList.get(0).price,3,'POINT',0,'COMMA')} + ' VND'"
                             ></p>
                             <a href="#booking">
                                 <button
@@ -563,7 +563,8 @@
                                         <div class="py-[12px] px-[8px]">
                                             <p
                                                 class="text-[22px] font-semibold text-[#26bed6]"
-                                                th:text="*{price} + ' VND'"
+                                                th:text="*{#numbers.formatDecimal(price,3,'POINT',0,'COMMA')} + ' VND'"
+
                                             ></p>
                                         </div>
                                     </td>
