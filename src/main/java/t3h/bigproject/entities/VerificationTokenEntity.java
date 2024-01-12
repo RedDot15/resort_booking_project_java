@@ -1,5 +1,6 @@
 package t3h.bigproject.entities;
 
+import org.apache.catalina.User;
 import t3h.bigproject.dto.BillDto;
 
 import javax.persistence.*;
@@ -20,9 +21,9 @@ public class VerificationTokenEntity {
 	@Column(name="token")
 	private String token;
 
-	@OneToOne(targetEntity = BillEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "bill_id", nullable = false, referencedColumnName = "id")
-	private BillEntity billEntity;
+	@OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
+	private UserEntity userEntity;
 
 	@Column(name="created_date")
 	private Date createdDate;
@@ -41,12 +42,12 @@ public class VerificationTokenEntity {
 		this.expiryDate = calculateExpiryDate(EXPIRATION);
 	}
 
-	public VerificationTokenEntity(final String token, final BillEntity billEntity) {
+	public VerificationTokenEntity(final String token, final UserEntity userEntity) {
 		super();
 		Calendar calendar = Calendar.getInstance();
 		
 		this.token = token;
-		this.billEntity = billEntity;
+		this.userEntity = userEntity;
 		this.createdDate = new Date(calendar.getTime().getTime());
 		this.expiryDate = calculateExpiryDate(EXPIRATION);
 	}
@@ -67,12 +68,12 @@ public class VerificationTokenEntity {
 		this.token = token;
 	}
 
-	public BillEntity getBillEntity() {
-		return billEntity;
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
 
-	public void setBillEntity(final BillEntity billEntity) {
-		this.billEntity = billEntity;
+	public void setUserEntity(final UserEntity userEntity) {
+		this.userEntity = userEntity;
 	}
 
 	public Date getCreatedDate() {

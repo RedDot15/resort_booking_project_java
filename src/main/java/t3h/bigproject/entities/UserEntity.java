@@ -41,6 +41,9 @@ public class UserEntity implements UserDetails {
     @Basic
     @Column(name = "gender_id")
     private Long genderId;
+    @Basic
+    @Column(name = "status")
+    private Long status;
 
 
     @Override
@@ -74,6 +77,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        if (status == 1) return true;
+        return false;
     }
 }

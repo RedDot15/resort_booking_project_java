@@ -1,6 +1,9 @@
 package t3h.bigproject.controller.frontend;
 
+import org.apache.catalina.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,11 +14,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.*;
+import t3h.bigproject.entities.BillEntity;
+import t3h.bigproject.entities.RoomEntity;
+import t3h.bigproject.entities.UserEntity;
+import t3h.bigproject.entities.VerificationTokenEntity;
+import t3h.bigproject.event.OnRegistrationSuccessEvent;
+import t3h.bigproject.repository.UserRepository;
 import t3h.bigproject.service.*;
 import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +58,12 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     @GetMapping(value = { "home", "/" })
     public String home(Model model) {
@@ -107,9 +123,9 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/registerHandle", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String registerHandle(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
+            WebRequest request,
             Model model,
             RedirectAttributes redirectAttributes) throws IOException {
-        Object result = null;
         String msg = "";
         if (!Objects.equals(userDto.getPassword(), userDto.getRePassword())) {
             bindingResult.rejectValue("rePassword", "error.userDto", "Mật khẩu không trùng khớp");
@@ -123,16 +139,23 @@ public class HomeController {
             return "redirect:/signup";
         }
 
+        UserEntity userEntity = new UserEntity();
+
         if (userDto.getId() == null) {
-            result = userService.addUser(userDto);
+            userEntity = userService.addUser(userDto);
             id = userDto.getId();
             msg = "Tạo mới";
         }
-        if (Objects.equals(result, null)) {
-            redirectAttributes.addFlashAttribute("message", msg + " fail");
-            return "redirect:/signup";
+
+        try {
+            String appUrl = request.getContextPath();
+            eventPublisher.publishEvent(new OnRegistrationSuccessEvent(userEntity, appUrl));
+        } catch (Exception re) {
+            re.printStackTrace();
+            // throw new Exception("Error while sending confirmation email");
         }
-        redirectAttributes.addFlashAttribute("message", msg + " tài khoản " + id + " thành công");
+
+        redirectAttributes.addFlashAttribute("message", "Vui lòng xác nhận email để có thể đăng nhập");
         return "redirect:/login";
     }
 
@@ -140,5 +163,27 @@ public class HomeController {
     public String accessDenied(Model model) {
         model.addAttribute("message", "Bạn không có quyền truy cập");
         return "errors/pages-error-403.html";
+    }
+
+    @GetMapping("/confirmRegistration")
+    public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
+        VerificationTokenEntity verificationTokenEntity = userService.getVerificationToken(token);
+        if (verificationTokenEntity == null) {
+            String message = "Truy cập bị hạn chế";
+            model.addAttribute("message", message);
+            return "errors/404.html";
+        }
+        UserEntity userEntity = verificationTokenEntity.getUserEntity();
+        Calendar calendar = Calendar.getInstance();
+        if ((verificationTokenEntity.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
+            String message = "Link xác nhận hết hạn";
+            model.addAttribute("message", message);
+            return "errors/404.html";
+        }
+        userEntity.setStatus((long) 1);
+
+        userRepository.save(userEntity);
+        model.addAttribute("message", "Tài khoản đã được kích hoạt");
+        return "success/successful.html";
     }
 }

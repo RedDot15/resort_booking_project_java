@@ -92,39 +92,9 @@ public class BillController {
             return "frontend/booking.html";
         }
         BillEntity billEntity = billService.add(billDto);
-        try {
-            String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegistrationSuccessEvent(billEntity, appUrl));
-        } catch (Exception re) {
-            re.printStackTrace();
-            // throw new Exception("Error while sending confirmation email");
-        }
+
         return "frontend/thankyou.html";
     }
 
-    @GetMapping("/confirmRegistration")
-    public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
-        VerificationTokenEntity verificationTokenEntity = billService.getVerificationToken(token);
-        if (verificationTokenEntity == null) {
-            String message = "Truy cập bị hạn chế";
-            model.addAttribute("message", message);
-            return "errors/404.html";
-        }
-        BillEntity billEntity = verificationTokenEntity.getBillEntity();
-        Calendar calendar = Calendar.getInstance();
-        if ((verificationTokenEntity.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
-            String message = "Link xác nhận hết hạn";
-            model.addAttribute("message", message);
-            return "errors/404.html";
-        }
-        billEntity.setStatusId((long) 2);
-        RoomDto roomDto = roomService.getDetailById(billEntity.getRoomId());
-        RoomEntity roomEntity = new RoomEntity();
-        BeanUtils.copyProperties(roomDto, roomEntity);
-        roomEntity.setStatus("busy");
-        roomRepository.save(roomEntity);
-        billRepository.save(billEntity);
-        model.addAttribute("message", "Bạn đã đăng ký giữ phòng thành công");
-        return "success/successful.html";
-    }
+
 }

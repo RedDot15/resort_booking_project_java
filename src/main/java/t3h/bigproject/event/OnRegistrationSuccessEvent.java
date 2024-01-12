@@ -1,16 +1,18 @@
 package t3h.bigproject.event;
 
+import org.apache.catalina.User;
 import org.springframework.context.ApplicationEvent;
 import t3h.bigproject.dto.BillDto;
 import t3h.bigproject.entities.BillEntity;
+import t3h.bigproject.entities.UserEntity;
 
 public class OnRegistrationSuccessEvent extends ApplicationEvent {
     private String appUrl;
-    private BillEntity billEntity;
+    private UserEntity userEntity;
 
-    public OnRegistrationSuccessEvent(BillEntity billEntity, String appUrl) {
-        super(billEntity);
-        this.billEntity = billEntity;
+    public OnRegistrationSuccessEvent(UserEntity userEntity, String appUrl) {
+        super(userEntity);
+        this.userEntity = userEntity;
         this.appUrl = appUrl;
     }
 
@@ -20,10 +22,10 @@ public class OnRegistrationSuccessEvent extends ApplicationEvent {
     public void setAppUrl(String appUrl) {
         this.appUrl = appUrl;
     }
-    public BillEntity getBillEntity() {
-        return billEntity;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
-    public void setBillEntity(BillEntity billEntity) {
-        this.billEntity = billEntity;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
