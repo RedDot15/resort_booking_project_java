@@ -118,21 +118,18 @@ public class HomeController {
             return "/backend/signup.html";
         Long id = userDto.getId();
 
-        // LƯU TÊN ẢNH
-        if (userDto.getFileImage() != null && !userDto.getFileImage().isEmpty()) {
-            userDto.setAvatarImg(fileUtils.saveFile(userDto.getFileImage(), "user\\"));
+        if (!Objects.equals(userService.getDetailByEmail(userDto.getEmail()),null)) {
+            redirectAttributes.addFlashAttribute("message", "Tài khoản đã tồn tại");
+            return "redirect:/signup";
         }
 
         if (userDto.getId() == null) {
-            userService.addUser(userDto);
+            result = userService.addUser(userDto);
             id = userDto.getId();
             msg = "Tạo mới";
-        } else {
-            result = userService.updateUser(userDto);
-            msg = "Cập nhật";
         }
-        if (Objects.equals(result, 0)) {
-            model.addAttribute("message", msg + " fail");
+        if (Objects.equals(result, null)) {
+            redirectAttributes.addFlashAttribute("message", msg + " fail");
             return "redirect:/signup";
         }
         redirectAttributes.addFlashAttribute("message", msg + " tài khoản " + id + " thành công");
