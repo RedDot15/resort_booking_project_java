@@ -52,6 +52,16 @@ public class UserService {
         return userDto;
     }
 
+    public UserDto getDetailByEmail(String email) {
+        UserDto userDto = new UserDto();
+        UserEntity userEntity = userRepository.findFirstByEmail(email);
+        if (userEntity != null)
+            BeanUtils.copyProperties(userEntity, userDto);
+        else
+            return null;
+        return userDto;
+    }
+
     public UserDto getDetail(Long id) {
         UserDto userDto = new UserDto();
         UserEntity userEntity = userRepository.findById(id).get();
