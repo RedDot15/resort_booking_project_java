@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import t3h.bigproject.dto.UserDto;
 import t3h.bigproject.dto.UserDto;
+import t3h.bigproject.entities.BillEntity;
 import t3h.bigproject.entities.UserEntity;
 import t3h.bigproject.entities.UserEntity;
+import t3h.bigproject.entities.VerificationTokenEntity;
 import t3h.bigproject.repository.UserRepository;
+import t3h.bigproject.repository.VerificationTokenRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ public class UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    VerificationTokenRepository verificationTokenRepository;
 
     public List<UserDto> getAll(String email){
         List<UserDto> userDtoList = new ArrayList<>();
@@ -72,16 +78,19 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto addUser(UserDto userDto) {
+    public UserEntity addUser(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDto, userEntity);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         if (userEntity.getRoleId() == null || userEntity.getRoleId().equals("")){
             userEntity.setRoleId((long) 2);
         }
+        if (userEntity.getStatus() == null){
+            userEntity.setStatus((long) 0);
+        }
         userRepository.save(userEntity);
         userDto.setId(userEntity.getId());
-        return userDto;
+        return userEntity;
     }
 
     public UserDto updateUser(UserDto userDto) {
@@ -101,5 +110,18 @@ public class UserService {
 
     public void delete(Long id) {
         userRepository.deleteUserEntityById(id);
+    }
+
+    public void createVerificationToken(UserEntity userEntity, String token) {
+        VerificationTokenEntity newToken = new VerificationTokenEntity(token, userEntity);
+        verificationTokenRepository.save(newToken);
+    }
+
+    public VerificationTokenEntity getVerificationToken(String verificationToken) {
+        return verificationTokenRepository.findVerificationTokenEntityByToken(verificationToken);
+    }
+
+    public List<VerificationTokenEntity> getAllVerificationToken(){
+        return verificationTokenRepository.findAll();
     }
 }

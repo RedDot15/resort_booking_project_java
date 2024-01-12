@@ -1,5 +1,6 @@
 package t3h.bigproject.event;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.mail.MailSender;
 import t3h.bigproject.dto.BillDto;
 import t3h.bigproject.entities.BillEntity;
+import t3h.bigproject.entities.UserEntity;
 import t3h.bigproject.service.BillService;
 import t3h.bigproject.service.UserService;
 
@@ -16,7 +18,7 @@ import java.util.UUID;
 @Component
 public class RegistrationEmailListener implements ApplicationListener<OnRegistrationSuccessEvent> {
     @Autowired
-    private BillService billService;
+    private UserService userService;
 
     @Autowired
     private MailSender mailSender;
@@ -27,11 +29,11 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
     }
 
     private void confirmRegistration(OnRegistrationSuccessEvent event) {
-        BillEntity billEntity = event.getBillEntity();
+        UserEntity userEntity = event.getUserEntity();
         String token = UUID.randomUUID().toString();
-        billService.createVerificationToken(billEntity,token);
+        userService.createVerificationToken(userEntity,token);
 
-        String recipient = billEntity.getEmail();
+        String recipient = userEntity.getEmail();
         String subject = "Registration Confirmation";
         String url
                 = event.getAppUrl() + "/confirmRegistration?token=" + token;

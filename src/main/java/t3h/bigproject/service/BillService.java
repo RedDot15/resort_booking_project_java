@@ -48,16 +48,4 @@ public class BillService {
         return billEntity;
     }
 
-    public void createVerificationToken(BillEntity billEntity, String token) {
-        VerificationTokenEntity newToken = new VerificationTokenEntity(token, billEntity);
-        verificationTokenRepository.save(newToken);
-    }
-
-    public VerificationTokenEntity getVerificationToken(String verificationToken) {
-        return verificationTokenRepository.findVerificationTokenEntityByToken(verificationToken);
-    }
-
-    public List<VerificationTokenEntity> getAllVerificationToken(){
-        return verificationTokenRepository.findAll();
-    }
 }
