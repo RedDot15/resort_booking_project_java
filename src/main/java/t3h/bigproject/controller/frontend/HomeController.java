@@ -109,6 +109,13 @@ public class HomeController {
         return "frontend/thankyou.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/sorry")
+    public String sory(Model model) {
+        return "frontend/sorry.html";
+    }
+
+
+
     @GetMapping(value = { "login" })
     public String login(Model model) {
         return "backend/login.html";

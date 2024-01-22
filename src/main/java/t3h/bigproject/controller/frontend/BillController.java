@@ -80,7 +80,7 @@ public class BillController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/booking/{roomid}")
     public String booking(@Valid @ModelAttribute("billDto") BillDto billDto, BindingResult result,
-            WebRequest request, Model model, @PathVariable Long roomid) {
+            WebRequest request, Model model, @PathVariable Long roomid, RedirectAttributes redirectAttributes) {
         // RoomDto roomDto = roomService.getDetailById(id);
         // model.addAttribute("roomDto",roomDto);
         // ResortDto resortDto = resortService.getDetailById(roomDto.getResortId());
@@ -91,9 +91,14 @@ public class BillController {
         if (result.hasErrors()) {
             return "frontend/booking.html";
         }
-        BillEntity billEntity = billService.add(billDto);
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setId(roomid);
+        billDto.setRoomEntity(roomEntity);
+        billService.add(billDto);
+        BillEntity billEntity = billRepository.getBillEntityById(billDto.getId());
 
-        return "frontend/thankyou.html";
+        RoomDto roomDto = roomService.getDetailById(roomid);
+        return "redirect:/api/v1/pay" + "?price=" + roomDto.getPrice() + "&billId=" + billEntity.getId();
     }
 
 

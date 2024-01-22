@@ -112,7 +112,7 @@
                             <li>
                                 <a
                                     class="dropdown-item"
-                                    href="/backend/user"
+                                    href="/home"
                                     sec:authorize="hasAnyAuthority('ROLE_1')"
                                     th:text="'Quay lại trang chủ'"
                                 ></a>
@@ -328,7 +328,7 @@
                                                 <td th:text="*{email}"></td>
                                                 <td th:text="*{info}"></td>
                                                 <td th:text="*{statusId}"></td>
-                                                <td th:text="*{roomId}"></td>
+                                                <td th:text="*{roomEntity.id}"></td>
                                                 <td>
                                                     <span
                                                         th:if="*{statusId == 2}"

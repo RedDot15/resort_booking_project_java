@@ -3,6 +3,7 @@ package t3h.bigproject.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import t3h.bigproject.entities.RoomEntity;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,5 +28,5 @@ public class BillDto {
     private String info;
     private Long statusId = (long)1;
 
-    private Long roomId;
+    private RoomEntity roomEntity;
 }

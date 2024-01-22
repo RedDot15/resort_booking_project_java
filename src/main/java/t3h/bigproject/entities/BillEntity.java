@@ -3,6 +3,7 @@ package t3h.bigproject.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,7 +32,7 @@ public class BillEntity {
     @Basic
     @Column(name = "status_id")
     private Long statusId;
-    @Basic
-    @Column(name = "room_id")
-    private Long roomId;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private RoomEntity roomEntity;
 }
