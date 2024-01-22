@@ -33,7 +33,7 @@ public class BillService {
 
     public void updateBill(Long id){
         BillEntity billEntity = billRepository.getBillEntityById(id);
-        RoomEntity roomEntity = roomRepository.findFirstById(billEntity.getRoomId());
+        RoomEntity roomEntity = roomRepository.findFirstById(billEntity.getRoomEntity().getId());
         roomEntity.setStatus("free");
         roomRepository.save(roomEntity);
         billEntity.setStatusId((long) 3);

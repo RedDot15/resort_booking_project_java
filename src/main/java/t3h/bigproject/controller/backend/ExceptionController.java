@@ -12,6 +12,6 @@ public class ExceptionController {
             = {ForbiddenException.class, IllegalStateException.class})
     protected String forbiddenException(
             RuntimeException ex, WebRequest request) {
-        return "/backend/403.html";
+        return "errors/pages-error-403.html";
     }
 }
