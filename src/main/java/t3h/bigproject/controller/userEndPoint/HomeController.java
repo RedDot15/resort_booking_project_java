@@ -1,12 +1,9 @@
-package t3h.bigproject.controller.frontend;
+package t3h.bigproject.controller.userEndPoint;
 
-import org.apache.catalina.User;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.*;
-import t3h.bigproject.entities.BillEntity;
-import t3h.bigproject.entities.RoomEntity;
 import t3h.bigproject.entities.UserEntity;
 import t3h.bigproject.entities.VerificationTokenEntity;
 import t3h.bigproject.event.OnRegistrationSuccessEvent;

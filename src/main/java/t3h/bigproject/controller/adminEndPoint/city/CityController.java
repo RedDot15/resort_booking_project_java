@@ -1,4 +1,4 @@
-package t3h.bigproject.controller.backend.city;
+package t3h.bigproject.controller.adminEndPoint.city;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

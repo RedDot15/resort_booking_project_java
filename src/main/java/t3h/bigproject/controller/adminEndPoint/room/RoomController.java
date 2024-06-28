@@ -1,4 +1,4 @@
-package t3h.bigproject.controller.backend.country;
+package t3h.bigproject.controller.adminEndPoint.room;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import t3h.bigproject.dto.CountryDto;
-import t3h.bigproject.dto.CountryDto;
-import t3h.bigproject.service.CountryService;
+import t3h.bigproject.dto.RoomDto;
+import t3h.bigproject.service.ResortService;
+import t3h.bigproject.service.RoomService;
 import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
@@ -17,75 +17,82 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/backend/country")
-public class CountryController {
-    // hello
+@RequestMapping("/backend/room")
+public class RoomController {
+
     @Autowired
-    CountryService countryService;
+    RoomService roomService;
 
     @Autowired
     FileUtils fileUtils;
 
+    @Autowired
+    ResortService resortService;
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     String list(@RequestParam(required = false) String name,
                 Model model){
-        Object danhsach = countryService.getAll(name);
+        Object danhsach = roomService.getAll(name);
         model.addAttribute("list", danhsach);
-        return"/backend/country/listCountry.html";
+        return"/backend/room/listRoom.html";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
     String delete(@PathVariable Long id,
                   Model model, RedirectAttributes redirectAttributes) {
-        countryService.delete(id);
-        return "redirect:/backend/country/";
+        roomService.delete(id);
+        return "redirect:/backend/room/";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     String detail(@PathVariable Long id, Model model) {
-        Object p = countryService.getDetailById(id);
-        model.addAttribute("countryDto", p);
-        return "/backend/country/create.html";
+        Object p = roomService.getDetailById(id);
+        model.addAttribute("roomDto", p);
+        Object danhsach = resortService.getAll(null);
+        model.addAttribute("listResort", danhsach);
+        return "/backend/room/create.html";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     String add(Model model) {
-        CountryDto b = new CountryDto();
-        model.addAttribute("countryDto", b);
-        return "/backend/country/create.html";
+        RoomDto b = new RoomDto();
+        model.addAttribute("roomDto", b);
+        Object danhsach = resortService.getAll(null);
+        model.addAttribute("listResort", danhsach);
+        return "/backend/room/create.html";
     }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    String save(@Valid @ModelAttribute CountryDto countryDto, BindingResult bindingResult,
+    String save(@Valid @ModelAttribute RoomDto roomDto, BindingResult bindingResult,
                 Model model,
                 RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
-         
 
+        if (bindingResult.hasErrors()) return "/backend/room/create.html";
+        Long id = roomDto.getId();
 
-        if (bindingResult.hasErrors()) return "/backend/country/create.html";
-        Long id = countryDto.getId();
-
-        if (countryDto.getId() == null) {
+        
+        if (roomDto.getId() == null) {
 //            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
 //            if (produceDto != null) {
 //                model.addAttribute("message", "đã tồn tại");
 //                return "/products/create.html";
 //            }
-            countryService.add(countryDto);
-            id = countryDto.getId();
+            roomService.add(roomDto);
+            id = roomDto.getId();
             msg = "Tạo mới";
         } else {
-            result = countryService.update(countryDto);
+            result = roomService.update(roomDto);
             msg = "Cập nhật";
         }
+
         if (Objects.equals(result, 0)) {
             model.addAttribute("message", msg + " fail");
-            return "/backend/country/create.html";
+            return "/backend/room/create.html";
         }
-        redirectAttributes.addFlashAttribute("message", msg + " country " + id + " thành công");
-        return "redirect:/backend/country/" + id;
+        redirectAttributes.addFlashAttribute("message", msg + " room " + id + " thành công");
+        return "redirect:/backend/room/" + id;
     }
 }

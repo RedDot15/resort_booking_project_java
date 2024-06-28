@@ -1,4 +1,4 @@
-package t3h.bigproject.controller.backend.resort;
+package t3h.bigproject.controller.adminEndPoint.resort;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import t3h.bigproject.dto.ExtensionDto;
-import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.dto.ResortDto;
 import t3h.bigproject.service.CityService;
 import t3h.bigproject.service.ExtensionService;

@@ -1,4 +1,4 @@
-package t3h.bigproject.controller.backend;
+package t3h.bigproject.controller.adminEndPoint;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,6 +1,5 @@
-package t3h.bigproject.controller.frontend;
+package t3h.bigproject.controller.userEndPoint;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,6 @@ import t3h.bigproject.dto.ResortImageDto;
 import t3h.bigproject.dto.RoomDto;
 import t3h.bigproject.entities.BillEntity;
 import t3h.bigproject.entities.RoomEntity;
-import t3h.bigproject.entities.VerificationTokenEntity;
-import t3h.bigproject.event.OnRegistrationSuccessEvent;
 import t3h.bigproject.repository.BillRepository;
 import t3h.bigproject.repository.RoomRepository;
 import t3h.bigproject.service.BillService;
@@ -25,7 +22,6 @@ import t3h.bigproject.service.ResortService;
 import t3h.bigproject.service.RoomService;
 
 import javax.validation.Valid;
-import java.util.Calendar;
 
 @Controller
 public class BillController {
