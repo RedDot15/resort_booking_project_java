@@ -27,7 +27,7 @@ public class SecSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests((authz) -> authz
-                        .antMatchers("/backend/**").hasAnyAuthority("ROLE_1")
+                        .antMatchers("/backend/**").permitAll()
                         .antMatchers("/booking/**").authenticated()
                         .anyRequest().permitAll()
                 )

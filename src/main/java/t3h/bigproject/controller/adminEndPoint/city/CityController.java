@@ -1,7 +1,11 @@
 package t3h.bigproject.controller.adminEndPoint.city;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +19,7 @@ import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -33,18 +38,27 @@ public class CityController {
     CityRepository cityRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
-    String list(@RequestParam(required = false) String name,
-            Model model) {
-        Object danhsach = cityService.getAll(name);
-        model.addAttribute("list", danhsach);
-        return "/backend/city/listCity.html";
+    ResponseEntity<String> list(@RequestParam(required = false) String name,
+                        Model model) {
+        List<CityDto> danhsach = cityService.getAll(name);
+        JSONArray jsonArray = new JSONArray();
+        for (CityDto cityDto : danhsach){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", cityDto.getId());
+            jsonObject.put("countryId", cityDto.getCountryId());
+            jsonObject.put("name", cityDto.getName());
+            jsonObject.put("imageName", cityDto.getImageName());
+            jsonArray.add(jsonObject);
+        }
+        return ResponseEntity.ok()
+                .body(JSONValue.toJSONString(jsonArray));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
-    String delete(@PathVariable Long id,
+    ResponseEntity<String> delete(@PathVariable Long id,
                   Model model, RedirectAttributes redirectAttributes) {
         cityService.delete(id);
-        return "redirect:/backend/city/";
+        return ResponseEntity.ok("Delete Success!");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
