@@ -2,6 +2,8 @@ package t3h.bigproject.controller.userEndPoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import t3h.bigproject.service.ResortService;
 import t3h.bigproject.service.RoomService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class BillController {
@@ -48,53 +51,52 @@ public class BillController {
     private ApplicationEventPublisher eventPublisher;
 
     @RequestMapping(method = RequestMethod.GET, value = "/backend/bill")
-    String list(Model model) {
-        Object danhsach = billService.getAll();
-        model.addAttribute("list", danhsach);
-        return "/backend/bill/listBill.html";
+    ResponseEntity<?> list(Model model) {
+        List<BillEntity> billEntityList = billService.getAll();
+        return new ResponseEntity<>(billEntityList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/backend/updateBill/{id}")
-    String updateBill(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    ResponseEntity<?> updateBill(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         billService.updateBill(id);
-        return "redirect:/backend/bill";
+        return new ResponseEntity<>("Update Success!", HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/booking/{roomid}")
-    public String showFormBooking(@PathVariable Long roomid, Model model) {
-        BillDto billDto = new BillDto();
-        model.addAttribute("roomid", roomid);
-        model.addAttribute("billDto", billDto);
-        RoomDto roomDto = roomService.getDetailById(roomid);
-        model.addAttribute("roomDto", roomDto);
-        ResortDto resortDto = resortService.getDetailById(roomDto.getResortId());
-        model.addAttribute("resortDto", resortDto);
-        ResortImageDto resortImageDto = resortImageService.getFirstByResortId(roomDto.getResortId());
-        model.addAttribute("resortImageDto", resortImageDto);
-        return "frontend/booking.html";
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/booking/{roomid}")
+//    public String showFormBooking(@PathVariable Long roomid, Model model) {
+//        BillDto billDto = new BillDto();
+//        model.addAttribute("roomid", roomid);
+//        model.addAttribute("billDto", billDto);
+//        RoomDto roomDto = roomService.getDetailById(roomid);
+//        model.addAttribute("roomDto", roomDto);
+//        ResortDto resortDto = resortService.getDetailById(roomDto.getResortId());
+//        model.addAttribute("resortDto", resortDto);
+//        ResortImageDto resortImageDto = resortImageService.getFirstByResortId(roomDto.getResortId());
+//        model.addAttribute("resortImageDto", resortImageDto);
+//        return "frontend/booking.html";
+//    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/booking/{roomid}")
-    public String booking(@Valid @ModelAttribute("billDto") BillDto billDto, BindingResult result,
-            WebRequest request, Model model, @PathVariable Long roomid, RedirectAttributes redirectAttributes) {
-        // RoomDto roomDto = roomService.getDetailById(id);
-        // model.addAttribute("roomDto",roomDto);
-        // ResortDto resortDto = resortService.getDetailById(roomDto.getResortId());
-        // model.addAttribute("resortDto",resortDto);
-        // ResortImageDto resortImageDto =
-        // resortImageService.getFirstByResortId(roomDto.getResortId());
-        // model.addAttribute("resortImageDto",resortImageDto);
+    public ResponseEntity<?> booking(/*@Valid @ModelAttribute("billDto")*/ @RequestBody BillDto billDto,
+                          BindingResult result,
+                          WebRequest request,
+                          Model model,
+                          @PathVariable Long roomid,
+                          RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "frontend/booking.html";
+            return new ResponseEntity<String>("Binding Error!", HttpStatus.BAD_REQUEST);
         }
+
         RoomEntity roomEntity = new RoomEntity();
         roomEntity.setId(roomid);
         billDto.setRoomEntity(roomEntity);
         billService.add(billDto);
         BillEntity billEntity = billRepository.getBillEntityById(billDto.getId());
 
-        RoomDto roomDto = roomService.getDetailById(roomid);
-        return "redirect:/api/v1/pay" + "?price=" + roomDto.getPrice() + "&billId=" + billEntity.getId();
+//        RoomDto roomDto = roomService.getDetailById(roomid);
+//        return "redirect:/api/v1/pay" + "?price=" + roomDto.getPrice() + "&billId=" + billEntity.getId();
+
+        return new ResponseEntity<>(billDto, HttpStatus.OK);
     }
 
 

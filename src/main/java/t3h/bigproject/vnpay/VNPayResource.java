@@ -1,13 +1,17 @@
 package t3h.bigproject.vnpay;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import t3h.bigproject.dto.CityDto;
 import t3h.bigproject.entities.BillEntity;
 import t3h.bigproject.repository.BillRepository;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import javax.xml.ws.Response;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -105,7 +109,7 @@ public class VNPayResource {
     }
 
     @GetMapping("pay")
-    public String getPay(@PathParam("price") long price, @PathParam("id") Integer billId) throws UnsupportedEncodingException {
+    public ResponseEntity<?> getPay(@PathParam("price") long price, @PathParam("id") Integer billId) throws UnsupportedEncodingException {
 
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
@@ -171,6 +175,6 @@ public class VNPayResource {
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
 
-        return "redirect:" + paymentUrl;
+        return new ResponseEntity<>(paymentUrl, HttpStatus.OK);
     }
 }
