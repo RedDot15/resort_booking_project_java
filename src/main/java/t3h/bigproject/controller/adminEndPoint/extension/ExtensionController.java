@@ -1,18 +1,26 @@
 package t3h.bigproject.controller.adminEndPoint.extension;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import t3h.bigproject.dto.CityDto;
+import t3h.bigproject.dto.CountryDto;
 import t3h.bigproject.dto.ExtensionDto;
 import t3h.bigproject.service.ExtensionService;
 import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -26,63 +34,69 @@ public class ExtensionController {
     FileUtils fileUtils;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
-    String list(@RequestParam(required = false) String name,
-                Model model){
-        Object danhsach = extensionService.getAll(name);
-        model.addAttribute("list", danhsach);
-        return"/backend/extension/listExtension.html";
+    ResponseEntity<?> list(@RequestParam(required = false) String name,
+                        Model model){
+        List<ExtensionDto> extensionDtoList = extensionService.getAll(name);
+        return new ResponseEntity<>(extensionDtoList, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
-    String delete(@PathVariable Long id,
-                  Model model, RedirectAttributes redirectAttributes) {
-        extensionService.delete(id);
-        return "redirect:/backend/extension/";
-    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    String detail(@PathVariable Long id, Model model) {
-        Object p = extensionService.getDetailById(id);
-        model.addAttribute("extensionDto", p);
-        return "/backend/extension/create.html";
+    ResponseEntity<?> detail(@PathVariable Long id, Model model) {
+        ExtensionDto extensionDto = extensionService.getDetailById(id);
+        if (extensionDto == null){
+            String apiErr = "Not Found Extention ID: " + id;
+            return new ResponseEntity<>(apiErr, HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(extensionDto, HttpStatus.OK);
+        }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/new")
-    String add(Model model) {
-        ExtensionDto b = new ExtensionDto();
-        model.addAttribute("extensionDto", b);
-        return "/backend/extension/create.html";
-    }
-
+//    @RequestMapping(method = RequestMethod.GET, value = "/new")
+//    String add(Model model) {
+//        ExtensionDto b = new ExtensionDto();
+//        model.addAttribute("extensionDto", b);
+//        return "/backend/extension/create.html";
+//    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    String save(@Valid @ModelAttribute ExtensionDto extensionDto, BindingResult bindingResult,
-                Model model,
-                RedirectAttributes redirectAttributes) throws IOException {
+    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @RequestBody ExtensionDto extensionDto,
+                                                             BindingResult bindingResult,
+                                                             Model model,
+                                                             RedirectAttributes redirectAttributes) throws IOException {
         Object result = null;
         String msg = "";
 
-        if (bindingResult.hasErrors()) return "/backend/extension/create.html";
+        if (bindingResult.hasErrors()) return new ResponseEntity<>("Binding Error!", HttpStatus.BAD_REQUEST);
         Long id = extensionDto.getId();
 
         if (extensionDto.getId() == null) {
-//            ProductsDto produceDto = productsService.getDetailById(productsDto.getId());
-//            if (produceDto != null) {
-//                model.addAttribute("message", "đã tồn tại");
-//                return "/products/create.html";
-//            }
-            extensionService.add(extensionDto);
-            id = extensionDto.getId();
-            msg = "Tạo mới";
+            result = extensionService.add(extensionDto);
+            msg = "Create";
         } else {
             result = extensionService.update(extensionDto);
-            msg = "Cập nhật";
+            msg = "Update";
         }
-        if (Objects.equals(result, 0)) {
-            model.addAttribute("message", msg + " fail");
-            return "/backend/extension/create.html";
+
+        if (result == null) {
+            return new ResponseEntity<>(msg + " Extension Fail!", HttpStatus.BAD_REQUEST);
         }
-        redirectAttributes.addFlashAttribute("message", msg + " extension " + id + " thành công");
-        return "redirect:/backend/extension/" + id;
+
+        return new ResponseEntity<>(extensionDto, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
+    ResponseEntity<String> delete(@PathVariable Long id,
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
+        ExtensionDto extensionDto = extensionService.getDetailById(id);
+        if (extensionDto == null){
+            return new ResponseEntity<>("Not Found Extension ID: " + id, HttpStatus.NOT_FOUND);
+        } else{
+            extensionService.delete(id);
+            return new ResponseEntity<>("Delete Extension ID: " + id + " Success!", HttpStatus.OK);
+        }
+    }
+
 }

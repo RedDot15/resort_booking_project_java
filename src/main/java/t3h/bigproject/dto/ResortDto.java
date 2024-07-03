@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import t3h.bigproject.entities.ResortExtensionEntity;
 import t3h.bigproject.entities.ResortimageEntity;
 import t3h.bigproject.entities.RoomEntity;
 
@@ -33,4 +34,6 @@ public class ResortDto {
     List<ResortimageEntity> resortimageEntityList;
 
     List<RoomEntity> roomEntityList;
+
+    List<ResortExtensionEntity> resortExtensionEntityList;
 }
