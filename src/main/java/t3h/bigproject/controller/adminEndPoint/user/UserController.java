@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.user;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.catalina.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/user")
 public class UserController {
 
@@ -38,6 +39,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Operation(summary = "List all user available or by Email")
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<?> listUser(@RequestParam(required = false) String email,
                                     Model model) {
@@ -52,6 +54,7 @@ public class UserController {
 //        return "/backend/user/create.html";
 //    }
 
+    @Operation(summary = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detailUser(@PathVariable Long id, Model model) {
         UserDto userDto = userService.getDetail(id);
@@ -65,8 +68,9 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Create/Update")
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> addUser(/*@Valid @ModelAttribute*/ @RequestBody UserDto userDto,
+    ResponseEntity<?> addUser(/*@Valid @ModelAttribute*/ @ModelAttribute UserDto userDto,
                                                               BindingResult bindingResult,
                                                               Model model,
                                                               RedirectAttributes redirectAttributes) throws IOException {
@@ -99,6 +103,7 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID")
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id,
                           Model model,

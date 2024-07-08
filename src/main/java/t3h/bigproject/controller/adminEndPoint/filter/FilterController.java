@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.filter;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public class FilterController {
     @Autowired
     ResortExtensionService resortExtensionService;
 
+    @Operation(summary = "Get all resort by City ID, extension ID, starCount ID (Filter function)")
     @PostMapping("/resort/filter")
     public ResponseEntity<?> getAllResortByEntensionIdAndCityId(
             @RequestBody ExtensionCityParam extensionCity) {

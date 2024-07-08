@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.room;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/room")
 public class RoomController {
 
@@ -38,6 +39,7 @@ public class RoomController {
     @Autowired
     ResortService resortService;
 
+    @Operation(summary = "List all room available")
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<?> list(@RequestParam(required = false) String name,
                            Model model){
@@ -45,7 +47,7 @@ public class RoomController {
         return new ResponseEntity<>(roomDtoList, HttpStatus.OK);
     }
 
-
+    @Operation(summary = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detail(@PathVariable Long id, Model model) {
         RoomDto roomDto = roomService.getDetailById(id);
@@ -67,8 +69,9 @@ public class RoomController {
 //        return "/backend/room/create.html";
 //    }
 
+    @Operation(summary = "Create/Update")
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> save(/*@Valid @ModelAttribute*/ @RequestBody RoomDto roomDto,
+    ResponseEntity<?> save(/*@Valid @ModelAttribute*/ @ModelAttribute RoomDto roomDto,
                                                            BindingResult bindingResult,
                                                            Model model,
                                                            RedirectAttributes redirectAttributes) throws IOException {
@@ -93,6 +96,7 @@ public class RoomController {
         return new ResponseEntity<>(roomDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id,
                              Model model,

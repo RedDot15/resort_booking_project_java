@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.resort;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -27,7 +28,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/resort")
 public class ResortController {
     @Autowired
@@ -42,6 +43,7 @@ public class ResortController {
     @Autowired
     CityService cityService;
 
+    @Operation(summary = "List all resort available")
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<?> list(@RequestParam(required = false) String name,
                                 Model model){
@@ -49,6 +51,7 @@ public class ResortController {
         return new ResponseEntity<>(resortDtoList, HttpStatus.OK);
     }
 
+    @Operation(summary = "List all resort by City ID, Except 1 resort by Resort ID")
     @RequestMapping(method = RequestMethod.GET, value = "/filter/except-resort/{resortId}/in/{cityId}")
     ResponseEntity<?> listAllByCityIdExceptResortId(@PathVariable Long resortId,
                                                     @PathVariable Long cityId,
@@ -60,6 +63,7 @@ public class ResortController {
         return new ResponseEntity<>(resortDtoList, HttpStatus.OK);
     }
 
+    @Operation(summary = "List all resort by City ID and Name Containing")
     @RequestMapping(method = RequestMethod.GET, value = "/filter/city/{cityId}")
     ResponseEntity<?> allResortByCityIdAndNameContaining(@PathVariable Long cityId,
                                                          @RequestParam(required = true) String name,
@@ -68,6 +72,7 @@ public class ResortController {
         return new ResponseEntity<>(resortDtoList, HttpStatus.OK);
     }
 
+    @Operation(summary = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detail(@PathVariable Long id, Model model) {
         ResortDto resortDto = resortService.getDetailById(id);
@@ -91,9 +96,9 @@ public class ResortController {
 //        return "/backend/resort/create.html";
 //    }
 
-
+    @Operation(summary = "Create/Update")
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @RequestBody ResortDto resortDto,
+    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @ModelAttribute ResortDto resortDto,
                                                              BindingResult bindingResult,
                                                              Model model,
                                                              RedirectAttributes redirectAttributes) throws IOException {
@@ -117,6 +122,7 @@ public class ResortController {
         return new ResponseEntity<>(resortDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id,
                              Model model,

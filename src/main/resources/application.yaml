@@ -1,0 +1,41 @@
+server:
+  port: 8888
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+
+folder:
+  storage:
+    file: D:\\opt\\image\\bigproject\\
+
+spring:
+  servlet:
+    multipart:
+      # Maximum file size
+      max-file-size: 1GB
+      # Maximum request size
+      max-request-size: 1GB
+  profiles:
+    active: dev
+  config:
+    import: env.properties
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${DB_DATABASE_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: fakedb
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}

@@ -3,6 +3,7 @@ package t3h.bigproject.controller.userEndPoint;
 import java.io.IOException;
 import java.util.Objects;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +22,7 @@ import t3h.bigproject.utils.FileUtils;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 public class CustomerController {
 
     @Autowired
@@ -47,6 +48,7 @@ public class CustomerController {
 //        return "frontend/changePassword.html";
 //    }
 
+    @Operation(summary = "Update information")
     @RequestMapping(method = RequestMethod.POST, value = "/infoChange", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<?> registerHandle(/*@Valid @ModelAttribute*/ @RequestBody UserDto userDto,
                                                                 BindingResult bindingResult,
@@ -78,6 +80,7 @@ public class CustomerController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update information")
     @RequestMapping(method = RequestMethod.POST, value = "/passwordChange", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<?> changingPasswordHandle(/*@Valid @ModelAttribute*/ UserDto userDto, BindingResult bindingResult,
                           Model model,

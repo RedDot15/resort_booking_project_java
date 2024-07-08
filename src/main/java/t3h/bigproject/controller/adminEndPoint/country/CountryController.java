@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.country;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/country")
 public class CountryController {
     // hello
@@ -32,6 +33,8 @@ public class CountryController {
     @Autowired
     FileUtils fileUtils;
 
+    @Operation(summary = "List all country available",
+            description = "List all country available.")
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<?> list(@RequestParam(required = false) String name,
                         Model model){
@@ -39,6 +42,8 @@ public class CountryController {
         return new ResponseEntity<>(countryDtoList, HttpStatus.OK);
     }
 
+    @Operation(summary = "Find by ID",
+            description = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detail(@PathVariable Long id, Model model) {
         CountryDto countryDto = countryService.getDetailById(id);
@@ -58,8 +63,10 @@ public class CountryController {
 //        return "/backend/country/create.html";
 //    }
 
+    @Operation(summary = "Create/Update",
+            description = "Create/Update")
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @RequestBody CountryDto countryDto,
+    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @ModelAttribute CountryDto countryDto,
                                                              BindingResult bindingResult,
                                                              Model model,
                                                              RedirectAttributes redirectAttributes) throws IOException {
@@ -85,6 +92,8 @@ public class CountryController {
         return new ResponseEntity<>(countryDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID",
+            description = "Delete by ID")
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id,
                              Model model,

@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.userEndPoint;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -29,7 +30,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 public class HomeController {
 
     @Autowired
@@ -147,6 +148,7 @@ public class HomeController {
 //        return "backend/signup.html";
 //    }
 
+    @Operation(summary = "Register new user")
     @RequestMapping(method = RequestMethod.POST, value = "/registerHandle", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<?> registerHandle(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult,
                                      WebRequest request,
@@ -185,6 +187,7 @@ public class HomeController {
 //        return "errors/pages-error-403.html";
 //    }
 
+    @Operation(summary = "Comfirming registration token, validate account")
     @GetMapping("/confirmRegistration")
     public ResponseEntity<?> confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
         VerificationTokenEntity verificationTokenEntity = userService.getVerificationToken(token);

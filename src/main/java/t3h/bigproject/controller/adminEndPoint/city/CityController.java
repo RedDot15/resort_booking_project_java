@@ -1,5 +1,8 @@
 package t3h.bigproject.controller.adminEndPoint.city;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,7 +29,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/city")
 public class CityController {
     @Autowired
@@ -41,24 +44,37 @@ public class CityController {
     @Autowired
     CityRepository cityRepository;
 
+    @Operation(summary = "List all city available",
+            description = "List all city available.")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "201", description = "Book listed"),
+//            @ApiResponse(responseCode = "400", description = "Bad request"),
+//            @ApiResponse(responseCode = "500", description = "Server Error")
+//    })
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<List<CityDto>> allCityList(@RequestParam(required = false) String name, Model model) {
         List<CityDto> danhsach = cityService.getAll(name);
         return new ResponseEntity<>(danhsach, HttpStatus.OK);
     }
 
+    @Operation(summary = "List all Viet Nam city available",
+            description = "List all Viet Nam city available.")
     @RequestMapping(method = RequestMethod.GET, value = "/vn")
     ResponseEntity<List<CityDto>> allVNCitylist( Model model) {
         List<CityDto> vnCityList = cityService.getAllByCountryId((long) 1);
         return new ResponseEntity<>(vnCityList, HttpStatus.OK);
     }
 
+    @Operation(summary = "List all foreign city available",
+            description = "List all foreign city available.")
     @RequestMapping(method = RequestMethod.GET, value = "/qt")
     ResponseEntity<List<CityDto>> allQTCitylist( Model model) {
         List<CityDto> qtCityList = cityService.getAllByCountryIdIsNot((long) 1);
         return new ResponseEntity<>(qtCityList, HttpStatus.OK);
     }
 
+    @Operation(summary = "Find by ID",
+            description = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detail(@PathVariable Long id, Model model) {
         CityDto cityDto = cityService.getDetailById(id);
@@ -80,8 +96,13 @@ public class CityController {
 //        return "/backend/city/create.html";
 //    }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @RequestBody CityDto cityDto,
+    @Operation(summary = "Create/Update",
+            description = "Create/Update")
+    @RequestMapping(value = "/save",
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @ModelAttribute CityDto cityDto,
                                                         BindingResult bindingResult,
                                                         Model model,
                                                         RedirectAttributes redirectAttributes) throws IOException {
@@ -104,9 +125,11 @@ public class CityController {
         }
 
 
-        return new ResponseEntity<CityDto>(cityDto, HttpStatus.OK);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID",
+            description = "Delete by ID")
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
         CityDto cityDto = cityService.getDetailById(id);

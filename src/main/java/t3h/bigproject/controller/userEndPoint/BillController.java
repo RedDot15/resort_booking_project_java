@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.userEndPoint;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ import t3h.bigproject.service.RoomService;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 public class BillController {
 
     @Autowired
@@ -50,12 +51,14 @@ public class BillController {
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
+    @Operation(summary = "List all bill available")
     @RequestMapping(method = RequestMethod.GET, value = "/backend/bill")
     ResponseEntity<?> list(Model model) {
         List<BillEntity> billEntityList = billService.getAll();
         return new ResponseEntity<>(billEntityList, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update bill status to 3 (complete)")
     @RequestMapping(method = RequestMethod.GET, value = "/backend/updateBill/{id}")
     ResponseEntity<?> updateBill(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         billService.updateBill(id);
@@ -76,6 +79,7 @@ public class BillController {
 //        return "frontend/booking.html";
 //    }
 
+    @Operation(summary = "Create bill")
     @RequestMapping(method = RequestMethod.POST, value = "/booking/{roomid}")
     public ResponseEntity<?> booking(/*@Valid @ModelAttribute("billDto")*/ @RequestBody BillDto billDto,
                           BindingResult result,

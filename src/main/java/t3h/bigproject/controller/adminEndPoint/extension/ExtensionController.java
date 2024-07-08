@@ -1,5 +1,6 @@
 package t3h.bigproject.controller.adminEndPoint.extension;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/backend/extension")
 public class ExtensionController {
 
@@ -33,6 +34,8 @@ public class ExtensionController {
     @Autowired
     FileUtils fileUtils;
 
+    @Operation(summary = "List all extension available",
+            description = "List all extension available.")
     @RequestMapping(method = RequestMethod.GET, value = "")
     ResponseEntity<?> list(@RequestParam(required = false) String name,
                         Model model){
@@ -40,7 +43,8 @@ public class ExtensionController {
         return new ResponseEntity<>(extensionDtoList, HttpStatus.OK);
     }
 
-
+    @Operation(summary = "Find by ID",
+            description = "Find by ID")
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<?> detail(@PathVariable Long id, Model model) {
         ExtensionDto extensionDto = extensionService.getDetailById(id);
@@ -60,8 +64,10 @@ public class ExtensionController {
 //        return "/backend/extension/create.html";
 //    }
 
+    @Operation(summary = "Create/Update",
+            description = "Create/Update")
     @RequestMapping(method = RequestMethod.POST, value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @RequestBody ExtensionDto extensionDto,
+    ResponseEntity<?> save(/* @Valid @ModelAttribute */ @ModelAttribute ExtensionDto extensionDto,
                                                              BindingResult bindingResult,
                                                              Model model,
                                                              RedirectAttributes redirectAttributes) throws IOException {
@@ -86,6 +92,8 @@ public class ExtensionController {
         return new ResponseEntity<>(extensionDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete by ID",
+            description = "Delete by ID")
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{id}")
     ResponseEntity<String> delete(@PathVariable Long id,
                                   Model model,
